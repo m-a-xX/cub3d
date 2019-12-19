@@ -6,7 +6,7 @@
 /*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/17 03:10:23 by mavileo           #+#    #+#             */
-/*   Updated: 2019/12/19 02:21:59 by mavileo          ###   ########.fr       */
+/*   Updated: 2019/12/19 07:54:06 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <string.h>
 # include <stdio.h>
 # include <fcntl.h>
+# include <mlx.h>
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42
@@ -26,14 +27,17 @@
 typedef struct	s_stru
 {
 	char	**map;
+	char	dep_pos;
+	int		dep_x;
+	int		dep_y;
 	int		res_x;
 	int		res_y;
 	int		r_sol;
 	int		g_sol;
 	int		b_sol;
-	int		r_plafond;
-	int		g_plafond;
-	int		b_plafond;
+	int		r_plaf;
+	int		g_plaf;
+	int		b_plaf;
 	char	*path_nord;
 	char	*path_est;
 	char	*path_sud;
@@ -94,5 +98,8 @@ int		parse_cub(int fd, t_stru *stru);
 int		check_errors(t_stru *stru);
 void	init_stru(t_stru *stru);
 char	*strjoin_free_nl(char *s1, char *s2);
+int		ft_recursive_power(int nb, int power);
+void	res(int i, t_stru *stru, char *line);
+int		analyse_line(char *line, t_stru *stru, int i);
 
 #endif
