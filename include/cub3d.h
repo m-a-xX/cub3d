@@ -6,7 +6,7 @@
 /*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/17 03:10:23 by mavileo           #+#    #+#             */
-/*   Updated: 2019/12/19 07:54:06 by mavileo          ###   ########.fr       */
+/*   Updated: 2020/01/01 01:28:25 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <string.h>
 # include <stdio.h>
 # include <fcntl.h>
+# include <math.h>
 # include <mlx.h>
 
 # ifndef BUFFER_SIZE
@@ -101,5 +102,12 @@ char	*strjoin_free_nl(char *s1, char *s2);
 int		ft_recursive_power(int nb, int power);
 void	res(int i, t_stru *stru, char *line);
 int		analyse_line(char *line, t_stru *stru, int i);
+double	deg_to_rad(double deg);
+double	cos_deg(double deg);
+double	sin_deg(double deg);
+double	tan_deg(double deg);
+t_stru	create_struct(void);
+t_stru	*malloc_struct(void);
+void	free_struct(t_stru *to_free);
 
 #endif
