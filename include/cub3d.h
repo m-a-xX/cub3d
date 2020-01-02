@@ -6,7 +6,7 @@
 /*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/17 03:10:23 by mavileo           #+#    #+#             */
-/*   Updated: 2020/01/02 15:46:45 by mavileo          ###   ########.fr       */
+/*   Updated: 2020/01/02 17:09:40 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,5 +148,8 @@ void	draw_rectangle(t_stru *stru, t_rect rect, t_color color);
 t_rect	create_rect(int x, int y, int vect_x, int vect_y);
 int		cub3d(t_stru *stru);
 t_coord	create_coord(int x, int y);
+int		check_map(t_stru *stru);
+int		check_dep(t_stru *stru);
+int		tab_to_matrix(t_stru *stru, char *map);
 
 #endif
