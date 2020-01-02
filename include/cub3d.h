@@ -6,7 +6,7 @@
 /*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/17 03:10:23 by mavileo           #+#    #+#             */
-/*   Updated: 2020/01/01 01:28:25 by mavileo          ###   ########.fr       */
+/*   Updated: 2020/01/02 11:09:55 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,17 @@
 #  define BUFFER_SIZE 42
 # endif
 
+# define RED_VALUE 2
+# define GREEN_VALUE 1
+# define BLUE_VALUE 0
+# define POV 60
+
 typedef struct	s_stru
 {
 	char	**map;
 	char	dep_pos;
-	int		dep_x;
-	int		dep_y;
+	int		pos_x;
+	int		pos_y;
 	int		res_x;
 	int		res_y;
 	int		r_sol;
@@ -44,7 +49,32 @@ typedef struct	s_stru
 	char	*path_sud;
 	char	*path_ouest;
 	char	*path_sprite;
+	void	*mlx_ptr;
+	void	*img_ptr;
+	void	*win_ptr;
+	char	*pixels;
+	int		bpp;
+	int		sizeline;
+	int		endian;
+	int		dist_screen;
+	int		center_x;
+	int		center_y;
 }				t_stru;
+
+typedef struct	s_color
+{
+	int r;
+	int g;
+	int b;
+}				t_color;
+
+typedef struct	s_rect
+{
+	int x;
+	int y;
+	int vect_x;
+	int vect_y;
+}				t_rect;
 
 /* GNL */
 int		get_next_line(int fd, char **line);
@@ -109,5 +139,11 @@ double	tan_deg(double deg);
 t_stru	create_struct(void);
 t_stru	*malloc_struct(void);
 void	free_struct(t_stru *to_free);
+int		convert_colors(int r, int b, int g);
+t_color	create_color(int r, int b, int g);
+void	put_pixel(t_stru *stru, t_color color, int x, int y);
+void	draw_rectangle(t_stru *stru, t_rect rect, t_color color);
+t_rect	create_rect(int x, int y, int vect_x, int vect_y);
+int		cub3d(t_stru *stru);
 
 #endif

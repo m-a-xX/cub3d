@@ -6,7 +6,7 @@
 /*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 00:49:17 by mavileo           #+#    #+#             */
-/*   Updated: 2019/11/17 18:01:30 by mavileo          ###   ########.fr       */
+/*   Updated: 2020/01/01 21:18:38 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ typedef	struct	s_list
 }				t_list;
 
 int				ft_atoi(const char *nb);
-void			*ft_calloc(size_t nb, size_t size);
 size_t			ft_strlen(const char *s);
 int				ft_isalnum(int c);
 int				ft_isascii(int c);

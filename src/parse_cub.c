@@ -6,7 +6,7 @@
 /*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/17 03:09:19 by mavileo           #+#    #+#             */
-/*   Updated: 2020/01/01 01:09:44 by mavileo          ###   ########.fr       */
+/*   Updated: 2020/01/01 02:04:40 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int		alloc_matrix(char *map, t_stru *stru)
 			y++;
 		i++;
 	}
-	if (!(stru->map = malloc(sizeof(char *) * y)))
+	if (!(stru->map = malloc(sizeof(char *) * (y + 1))))
 		return (1);
 	while (map[x] && map[x] != '\n')
 		x++;
@@ -37,6 +37,7 @@ int		alloc_matrix(char *map, t_stru *stru)
 	while (i < y)
 		if (!(stru->map[i++] = malloc(sizeof(char) * (x + 1))))
 			return (1);
+	stru->map[i] = NULL;
 	return (0);
 }
 
@@ -59,8 +60,8 @@ void	fill_map(t_stru *stru, char *map, int i)
 		{
 			if (map[i] == 'N' || map[i] == 'E' || map[i] == 'W' || map[i] == 'S')
 			{
-				stru->dep_x = x;
-				stru->dep_y = y;
+				stru->pos_x = x;
+				stru->pos_y = y;
 				stru->dep_pos = map[i];
 			}
 			stru->map[y][x++] = map[i];

@@ -6,7 +6,7 @@
 /*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/01 01:12:49 by mavileo           #+#    #+#             */
-/*   Updated: 2020/01/01 01:26:47 by mavileo          ###   ########.fr       */
+/*   Updated: 2020/01/01 21:55:30 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ t_stru	create_struct(void)
 
 	to_create.map = NULL;
 	to_create.dep_pos = 0;
-	to_create.dep_x = 0;
-	to_create.dep_y = 0;
+	to_create.pos_x = 0;
+	to_create.pos_y = 0;
 	to_create.res_x = 0;
 	to_create.res_y = 0;
 	to_create.r_sol = 0;
@@ -33,6 +33,10 @@ t_stru	create_struct(void)
 	to_create.path_sud = NULL;
 	to_create.path_ouest = NULL;
 	to_create.path_sprite = NULL;
+	to_create.mlx_ptr = NULL;
+	to_create.img_ptr = NULL;
+	to_create.win_ptr = NULL;
+	to_create.pixels = NULL;
 	return (to_create);
 }
 
@@ -61,4 +65,25 @@ void	free_struct(t_stru *to_free)
 	if (to_free->path_sprite)
 		free(to_free->path_sprite);
 	free(to_free);
+}
+
+t_color	create_color(int r, int b, int g)
+{
+	t_color color;
+
+	color.r = r;
+	color.g = g;
+	color.b = b;
+	return (color);
+}
+
+t_rect	create_rect(int x, int y, int vect_x, int vect_y)
+{
+	t_rect rect;
+
+	rect.x = x;
+	rect.y = y;
+	rect.vect_x = vect_x;
+	rect.vect_y = vect_y;
+	return (rect);
 }
