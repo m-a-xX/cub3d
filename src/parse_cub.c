@@ -6,7 +6,7 @@
 /*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/17 03:09:19 by mavileo           #+#    #+#             */
-/*   Updated: 2020/01/01 02:04:40 by mavileo          ###   ########.fr       */
+/*   Updated: 2020/01/02 15:56:20 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,28 @@ int		tab_to_matrix(t_stru *stru, char *map)
 	return (0);
 }
 
+int		check_map(t_stru *stru)
+{
+	int i;
+	int j;
+	int dep;
+	
+	i = 0;
+	j = 0;
+	while (stru->map[0][i])
+		if (stru->map[0][i++] != '1')
+			return (1);
+	i--;
+	while (stru->map[j])
+		if (stru->map[j][0] != '1' || stru->map[j++][i] != '1')
+			return (1);
+	j--;
+	while (stru->map[j][i])
+		if (stru->map[j][i++] != '1')
+			return (1);
+	return (0);
+}
+
 int		parse_cub(int fd, t_stru *stru)
 {
 	char	*line;
@@ -106,9 +128,9 @@ int		parse_cub(int fd, t_stru *stru)
 		map = strjoin_free_nl(map, line);
 	if ((tab_to_matrix(stru, map)))
 		return (1);
-	if (check_errors(stru))
+	if (check_stru(stru))
 		ft_putstr_fd("Error\n", 1);
-	if (check_errors(stru))
+	if (check_stru(stru) || check_map(stru))
 		return (1);
 	return (0);
 }

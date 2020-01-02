@@ -6,7 +6,7 @@
 /*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/01 01:12:49 by mavileo           #+#    #+#             */
-/*   Updated: 2020/01/01 21:55:30 by mavileo          ###   ########.fr       */
+/*   Updated: 2020/01/02 15:33:38 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,6 @@ t_stru	create_struct(void)
 	to_create.pos_y = 0;
 	to_create.res_x = 0;
 	to_create.res_y = 0;
-	to_create.r_sol = 0;
-	to_create.g_sol = 0;
-	to_create.b_sol = 0;
-	to_create.r_plaf = 0;
-	to_create.g_plaf = 0;
-	to_create.b_plaf = 0;
 	to_create.path_nord = NULL;
 	to_create.path_est = NULL;
 	to_create.path_sud = NULL;
@@ -65,25 +59,4 @@ void	free_struct(t_stru *to_free)
 	if (to_free->path_sprite)
 		free(to_free->path_sprite);
 	free(to_free);
-}
-
-t_color	create_color(int r, int b, int g)
-{
-	t_color color;
-
-	color.r = r;
-	color.g = g;
-	color.b = b;
-	return (color);
-}
-
-t_rect	create_rect(int x, int y, int vect_x, int vect_y)
-{
-	t_rect rect;
-
-	rect.x = x;
-	rect.y = y;
-	rect.vect_x = vect_x;
-	rect.vect_y = vect_y;
-	return (rect);
 }

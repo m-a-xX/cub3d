@@ -6,7 +6,7 @@
 /*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/17 07:36:11 by mavileo           #+#    #+#             */
-/*   Updated: 2020/01/01 01:09:44 by mavileo          ###   ########.fr       */
+/*   Updated: 2020/01/02 15:46:45 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,52 +19,42 @@ char	*get_path(char *line, int i)
 	return (ft_substr(line, i, ft_strlen(line) - i));
 }
 
-void	get_rgb(char *line, int i, t_stru *stru, int sol)
+t_color	get_rgb(char *line, int i)
 {
+	t_color color;
+
 	i++;
 	while (line[i] && line[i] == ' ')
 		i++;
-	if (sol)
-	{
-		stru->r_sol = ft_atoi(line + i);
-		while (line[i] && (ft_isdigit(line[i])))
-			i++;
-		i++;
-		stru->g_sol = ft_atoi(line + i);
-		while (line[i] && (ft_isdigit(line[i])))
-			i++;
-		i++;
-		stru->b_sol = ft_atoi(line + i);
-		return ;
-	}
-	stru->r_plaf = ft_atoi(line + i);
+	color.r = ft_atoi(line + i);
 	while (line[i] && (ft_isdigit(line[i])))
 		i++;
 	i++;
-	stru->g_plaf = ft_atoi(line + i);
+	color.g = ft_atoi(line + i);
 	while (line[i] && (ft_isdigit(line[i])))
 		i++;
 	i++;
-	stru->b_plaf = ft_atoi(line + i);
+	color.b = ft_atoi(line + i);
+	return (color);
 }
 
-int		check_errors(t_stru *stru)
+int		check_stru(t_stru *stru)
 {
-	if (stru->r_plaf > 255 || stru->r_plaf < 0)
+	if (stru->rgb_sol.r > 255 || stru->rgb_sol.r < 0)
 		return (1);
-	if (stru->g_plaf > 255 || stru->g_plaf < 0)
+	if (stru->rgb_sol.g > 255 || stru->rgb_sol.g < 0)
 		return (1);
-	if (stru->b_plaf > 255 || stru->b_plaf < 0)
+	if (stru->rgb_sol.b > 255 || stru->rgb_sol.b < 0)
 		return (1);
-	if (stru->r_sol > 255 || stru->r_sol < 0)
+	if (stru->rgb_plafond.r > 255 || stru->rgb_plafond.r < 0)
 		return (1);
-	if (stru->g_sol > 255 || stru->g_sol < 0)
+	if (stru->rgb_plafond.g > 255 || stru->rgb_plafond.g < 0)
 		return (1);
-	if (stru->b_sol > 255 || stru->b_sol < 0)
+	if (stru->rgb_plafond.b > 255 || stru->rgb_plafond.b < 0)
 		return (1);
 	if (!stru->map)
 		return (1);
-	if (!stru->res_x || !stru->res_x)
+	if (stru->res_x < 1 || stru->res_y < 1)
 		return (1);
 	if (!stru->path_nord)
 		return (1);
@@ -104,9 +94,9 @@ int		analyse_line(char *line, t_stru *stru, int i)
 	if (line[i] == 'S' && count++ >= 0)
 		stru->path_sprite = get_path(line, i + 1);
 	if (line[i] == 'F' && count++ >= 0)
-		get_rgb(line, i, stru, 1);
+		stru->rgb_sol = get_rgb(line, i);
 	if (line[i] == 'C' && count++ >= 0)
-		get_rgb(line, i, stru, 0);
+		stru->rgb_plafond = get_rgb(line, i);
 	if (line[i] == 'R' && count++ >= 0)
 		res(i, stru, line);
 	return (count);

@@ -1,35 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   calculs.c                                          :+:      :+:    :+:   */
+/*   other_structs_funcs.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/01 01:27:35 by mavileo           #+#    #+#             */
-/*   Updated: 2020/01/02 15:33:09 by mavileo          ###   ########.fr       */
+/*   Created: 2020/01/01 01:12:49 by mavileo           #+#    #+#             */
+/*   Updated: 2020/01/02 15:33:28 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-void	calcul_dist_screen(t_stru *stru)
+t_color	create_color(int r, int b, int g)
 {
-	stru->dist_screen = stru->res_x / tan_deg(30);
+	t_color color;
+
+	color.r = r;
+	color.g = g;
+	color.b = b;
+	return (color);
 }
 
-void	calcul_center(t_stru *stru)
+t_rect	create_rect(int x, int y, int vect_x, int vect_y)
 {
-	stru->center_y = stru->res_x / 2;
-	stru->center_y = stru->res_y / 2;
-}
-/* 
-t_coord	horizontal_intersect(t_stru *stru)
-{
-	t_coord inter;
+	t_rect rect;
 
-	if (rayon haut)
-	{
-		inter.y = (int)((stru->pos_y / 64) * 64 - 1);
-		inter.x = (int)(stru->pos_x + (stru->pos_y / 64) * 64 - 1);
-	}
-} */
+	rect.x = x;
+	rect.y = y;
+	rect.vect_x = vect_x;
+	rect.vect_y = vect_y;
+	return (rect);
+}
+
+t_coord	create_coord(int x, int y)
+{
+	t_coord coord;
+
+	coord.x = x;
+	coord.y = y;
+	return (coord);
+}
