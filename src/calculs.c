@@ -6,7 +6,7 @@
 /*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/01 01:27:35 by mavileo           #+#    #+#             */
-/*   Updated: 2020/01/02 15:33:09 by mavileo          ###   ########.fr       */
+/*   Updated: 2020/01/04 04:34:39 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,40 @@
 
 void	calcul_dist_screen(t_stru *stru)
 {
-	stru->dist_screen = stru->res_x / tan_deg(30);
+	stru->dist_screen = stru->res.x / tan_deg(POV / 2);
 }
 
-void	calcul_center(t_stru *stru)
+void	calcul_map_size(t_stru *stru)
 {
-	stru->center_y = stru->res_x / 2;
-	stru->center_y = stru->res_y / 2;
-}
-/* 
-t_coord	horizontal_intersect(t_stru *stru)
-{
-	t_coord inter;
+	int y;
 
-	if (rayon haut)
-	{
-		inter.y = (int)((stru->pos_y / 64) * 64 - 1);
-		inter.x = (int)(stru->pos_x + (stru->pos_y / 64) * 64 - 1);
-	}
-} */
+	y = 0;
+	while (stru->map[y])
+		y++;
+	stru->map_size.x = ft_strlen(stru->map[0]);
+	stru->map_size.y = y;
+}
+
+void	calcul_sprite_len(t_stru *stru)
+{
+	stru->len_sprite.x = stru->res.x / (stru->map_size.x);
+	stru->len_sprite.y = stru->res.y / (stru->map_size.y);
+}
+
+void	calcul_res_rep(t_stru *stru)
+{
+	stru->res_rep.x = stru->map_size.x * 64;
+	stru->res_rep.y = stru->map_size.y * 64;
+}
+
+int		absolute(int n)
+{
+	if (n < 0)
+		return (-n);
+	return (n);
+}
+
+double	d_pythagore(t_vect a, t_vect b)
+{
+	return (sqrt(pow((double)(b.x - a.x), 2) + pow((double)(b.y - a.y), 2)));
+}

@@ -6,7 +6,7 @@
 /*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/02 15:58:55 by mavileo           #+#    #+#             */
-/*   Updated: 2020/01/02 17:10:42 by mavileo          ###   ########.fr       */
+/*   Updated: 2020/01/04 02:59:30 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,18 @@ int		alloc_matrix(char *map, t_stru *stru)
 	return (0);
 }
 
+void	departure_angle(t_stru *stru, char *map, int i)
+{
+	if (map[i] == 'N')
+		stru->angle = 90;
+	if (map[i] == 'S')
+		stru->angle = 270;
+	if (map[i] == 'E')
+		stru->angle = 0;
+	if (map[i] == 'W')
+		stru->angle = 180;
+}
+
 void	fill_map(t_stru *stru, char *map, int i)
 {
 	int x;
@@ -60,28 +72,14 @@ void	fill_map(t_stru *stru, char *map, int i)
 		{
 			if (map[i] == 'N' || map[i] == 'E' || map[i] == 'W' || map[i] == 'S')
 			{
-				stru->pos_x = x;
-				stru->pos_y = y;
-				stru->dep_pos = map[i];
+				stru->pos.x = x;
+				stru->pos.y = y;
+				departure_angle(stru, map, i);
 			}
 			stru->map[y][x++] = map[i];
 		}
 		i++;
 	}
-}
-
-int		tab_to_matrix(t_stru *stru, char *map)
-{
-	int i;
-
-	if (!map || !*map)
-		stru->map = NULL;
-	if (!map || !*map)
-		return (1);
-	if ((i = alloc_matrix(map, stru)))
-		return (1);
-	fill_map(stru, map, i);
-	return (0);
 }
 
 int		check_dep(t_stru *stru)

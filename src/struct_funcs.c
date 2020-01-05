@@ -6,7 +6,7 @@
 /*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/01 01:12:49 by mavileo           #+#    #+#             */
-/*   Updated: 2020/01/02 15:33:38 by mavileo          ###   ########.fr       */
+/*   Updated: 2020/01/04 03:00:38 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,10 @@ t_stru	create_struct(void)
 	t_stru to_create;
 
 	to_create.map = NULL;
-	to_create.dep_pos = 0;
-	to_create.pos_x = 0;
-	to_create.pos_y = 0;
-	to_create.res_x = 0;
-	to_create.res_y = 0;
+	to_create.pos.x = 0;
+	to_create.pos.y = 0;
+	to_create.res.x = 0;
+	to_create.res.y = 0;
 	to_create.path_nord = NULL;
 	to_create.path_est = NULL;
 	to_create.path_sud = NULL;

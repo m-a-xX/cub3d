@@ -6,7 +6,7 @@
 /*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/01 01:12:49 by mavileo           #+#    #+#             */
-/*   Updated: 2020/01/02 15:33:28 by mavileo          ###   ########.fr       */
+/*   Updated: 2020/01/02 23:35:45 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,22 +22,35 @@ t_color	create_color(int r, int b, int g)
 	return (color);
 }
 
+t_vect	create_vect(int x, int y)
+{
+	t_vect vect;
+
+	vect.x = x;
+	vect.y = y;
+	return (vect);
+}
+
 t_rect	create_rect(int x, int y, int vect_x, int vect_y)
 {
 	t_rect rect;
 
-	rect.x = x;
-	rect.y = y;
-	rect.vect_x = vect_x;
-	rect.vect_y = vect_y;
+	rect.dep.x = x;
+	rect.dep.y = y;
+	rect.end.x = vect_x;
+	rect.end.y = vect_y;
 	return (rect);
 }
 
-t_coord	create_coord(int x, int y)
+t_tri	create_triangle(t_vect a, t_vect b, t_vect c)
 {
-	t_coord coord;
+	t_tri tri;
 
-	coord.x = x;
-	coord.y = y;
-	return (coord);
+	tri.a.x = a.x;
+	tri.a.y = a.y;
+	tri.b.x = b.x;
+	tri.b.y = b.y;
+	tri.c.x = c.x;
+	tri.c.y = c.y;
+	return (tri);
 }

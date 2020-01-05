@@ -6,7 +6,7 @@
 /*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/17 07:36:11 by mavileo           #+#    #+#             */
-/*   Updated: 2020/01/02 15:46:45 by mavileo          ###   ########.fr       */
+/*   Updated: 2020/01/04 03:01:15 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int		check_stru(t_stru *stru)
 		return (1);
 	if (!stru->map)
 		return (1);
-	if (stru->res_x < 1 || stru->res_y < 1)
+	if (stru->res.x < 1 || stru->res.y < 1)
 		return (1);
 	if (!stru->path_nord)
 		return (1);
@@ -69,12 +69,12 @@ int		check_stru(t_stru *stru)
 
 void	res(int i, t_stru *stru, char *line)
 {
-	stru->res_x = ft_atoi(line + i + 1);
+	stru->res.x = ft_atoi(line + i + 1);
 	while (line[i] && (line[i] == 'R' || line[i] == ' '))
 		i++;
 	while (line[i] && ft_isdigit(line[i]))
 		i++;
-	stru->res_y = ft_atoi(line + i);
+	stru->res.y = ft_atoi(line + i);
 }
 
 int		analyse_line(char *line, t_stru *stru, int i)

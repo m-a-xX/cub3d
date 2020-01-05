@@ -6,7 +6,7 @@
 /*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/17 03:09:19 by mavileo           #+#    #+#             */
-/*   Updated: 2020/01/02 17:17:21 by mavileo          ###   ########.fr       */
+/*   Updated: 2020/01/04 00:25:46 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,20 @@ int		error_parsing(void)
 	ft_putstr_fd("Error\nUn problème est survenu lors du parsing.\n\
 Merci de vérifier la validité du ficher .cub", 1);
 	return (1);
+}
+
+int		tab_to_matrix(t_stru *stru, char *map)
+{
+	int i;
+
+	if (!map || !*map)
+		stru->map = NULL;
+	if (!map || !*map)
+		return (1);
+	if ((i = alloc_matrix(map, stru)))
+		return (1);
+	fill_map(stru, map, i);
+	return (0);
 }
 
 int		parse_cub(int fd, t_stru *stru)

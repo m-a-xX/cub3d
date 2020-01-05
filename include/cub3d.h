@@ -6,7 +6,7 @@
 /*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/17 03:10:23 by mavileo           #+#    #+#             */
-/*   Updated: 2020/01/02 17:09:40 by mavileo          ###   ########.fr       */
+/*   Updated: 2020/01/05 20:04:06 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,9 @@
 # define GREEN_VALUE 1
 # define BLUE_VALUE 0
 # define POV 60
+# define RAY_LEN 200
+# define SPEED_MOOVE 200
+# define ANGLE_MOOVE 100
 
 typedef struct	s_color
 {
@@ -37,28 +40,30 @@ typedef struct	s_color
 	int b;
 }				t_color;
 
-typedef struct	s_coord
+typedef struct	s_vect
 {
 	int x;
 	int y;
-}				t_coord;
+}				t_vect;
 
 typedef struct	s_rect
 {
-	int x;
-	int y;
-	int vect_x;
-	int vect_y;
+	t_vect dep;
+	t_vect end;
 }				t_rect;
+
+typedef struct	s_tri
+{
+	t_vect a;
+	t_vect b;
+	t_vect c;
+}				t_tri;
 
 typedef struct	s_stru
 {
 	char	**map;
-	char	dep_pos;
-	int		pos_x;
-	int		pos_y;
-	int		res_x;
-	int		res_y;
+	t_vect	pos;
+	t_vect	res;
 	t_color	rgb_sol;
 	t_color	rgb_plafond;
 	char	*path_nord;
@@ -74,8 +79,11 @@ typedef struct	s_stru
 	int		sizeline;
 	int		endian;
 	int		dist_screen;
-	int		center_x;
-	int		center_y;
+	t_vect	len_sprite;
+	float	angle;
+	int		key_hook;
+	t_vect	res_rep;
+	t_vect	map_size;
 }				t_stru;
 
 /* GNL */
@@ -141,15 +149,32 @@ double	tan_deg(double deg);
 t_stru	create_struct(void);
 t_stru	*malloc_struct(void);
 void	free_struct(t_stru *to_free);
-int		convert_colors(int r, int b, int g);
+int		convert_colors(t_color color);
 t_color	create_color(int r, int b, int g);
 void	put_pixel(t_stru *stru, t_color color, int x, int y);
 void	draw_rectangle(t_stru *stru, t_rect rect, t_color color);
 t_rect	create_rect(int x, int y, int vect_x, int vect_y);
 int		cub3d(t_stru *stru);
-t_coord	create_coord(int x, int y);
+t_vect	create_vect(int x, int y);
 int		check_map(t_stru *stru);
 int		check_dep(t_stru *stru);
 int		tab_to_matrix(t_stru *stru, char *map);
+void	draw_line(t_stru *stru, t_vect pos1, t_vect pos2, t_color color);
+t_tri	create_triangle(t_vect a, t_vect b, t_vect c);
+void	draw_triangle(t_stru *stru, t_tri tri, t_color color);
+void	fill_map(t_stru *stru, char *map, int i);
+int		alloc_matrix(char *map, t_stru *stru);
+void	departure_angle(t_stru *stru, char *map, int i);
+int		error_parsing(void);
+void	draw_circle(t_stru *stru, t_vect coord, t_color color, int radius);
+int		absolute(int n);
+float	calc_distance_vector(t_vect a, t_vect b);
+void	save_image(void);
+void	calcul_dist_screen(t_stru *stru);
+void	calcul_map_size(t_stru *stru);
+void	calcul_sprite_len(t_stru *stru);
+void	calcul_res_rep(t_stru *stru);
+double	d_pythagore(t_vect a, t_vect b);
+char	*ft_itoa_base(long nb, char *base);
 
 #endif
