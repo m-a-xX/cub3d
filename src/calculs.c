@@ -6,7 +6,7 @@
 /*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/01 01:27:35 by mavileo           #+#    #+#             */
-/*   Updated: 2020/01/04 04:34:39 by mavileo          ###   ########.fr       */
+/*   Updated: 2020/01/05 21:17:39 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,31 @@ int		absolute(int n)
 double	d_pythagore(t_vect a, t_vect b)
 {
 	return (sqrt(pow((double)(b.x - a.x), 2) + pow((double)(b.y - a.y), 2)));
+}
+
+t_vect	mult_vect(t_vect v1, t_vect mult)
+{
+	t_vect res;
+
+	res.x = v1.x * mult.x;
+	res.y = v1.y * mult.y;
+	return (res);
+}
+
+t_vect	div_vect(t_vect v1, t_vect div)
+{
+	t_vect res;
+
+	res.x = v1.x * div.x;
+	res.y = v1.y * div.y;
+	return (res);
+}
+
+t_vect	adapt_to_res(t_vect original, t_vect len_sprite)
+{
+	t_vect result;
+
+	result.x = original.x / 64 * len_sprite.x;
+	result.y = original.y / 64 * len_sprite.y;
+	return (result);
 }

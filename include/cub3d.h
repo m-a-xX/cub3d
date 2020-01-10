@@ -6,7 +6,7 @@
 /*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/17 03:10:23 by mavileo           #+#    #+#             */
-/*   Updated: 2020/01/05 20:04:06 by mavileo          ###   ########.fr       */
+/*   Updated: 2020/01/09 22:53:22 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ typedef struct	s_stru
 {
 	char	**map;
 	t_vect	pos;
+	t_vect	pixel_pos;
 	t_vect	res;
 	t_color	rgb_sol;
 	t_color	rgb_plafond;
@@ -176,5 +177,8 @@ void	calcul_sprite_len(t_stru *stru);
 void	calcul_res_rep(t_stru *stru);
 double	d_pythagore(t_vect a, t_vect b);
 char	*ft_itoa_base(long nb, char *base);
+t_vect	mult_vect(t_vect v1, t_vect mult);
+t_vect	div_vect(t_vect v1, t_vect div);
+t_vect	adapt_to_res(t_vect original, t_vect len_sprite);
 
 #endif
