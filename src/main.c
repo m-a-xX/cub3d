@@ -6,7 +6,7 @@
 /*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/17 05:25:28 by mavileo           #+#    #+#             */
-/*   Updated: 2020/01/04 04:50:40 by mavileo          ###   ########.fr       */
+/*   Updated: 2020/01/11 18:18:35 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,3 +35,4 @@ int		main(int ac, char **av)
 	free_struct(stru);
 	return (0);
 }
+//GERER SI IL MANQUE UN CHIFFRE POUR LES RGB

@@ -6,7 +6,7 @@
 /*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/01 01:27:35 by mavileo           #+#    #+#             */
-/*   Updated: 2020/01/05 21:17:39 by mavileo          ###   ########.fr       */
+/*   Updated: 2020/01/11 15:25:49 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ double	d_pythagore(t_vect a, t_vect b)
 	return (sqrt(pow((double)(b.x - a.x), 2) + pow((double)(b.y - a.y), 2)));
 }
 
-t_vect	mult_vect(t_vect v1, t_vect mult)
+t_vect	mult_vects(t_vect v1, t_vect mult)
 {
 	t_vect res;
 
@@ -61,20 +61,29 @@ t_vect	mult_vect(t_vect v1, t_vect mult)
 	return (res);
 }
 
-t_vect	div_vect(t_vect v1, t_vect div)
+t_vect	div_vects(t_vect v1, t_vect div)
 {
 	t_vect res;
 
-	res.x = v1.x * div.x;
-	res.y = v1.y * div.y;
+	res.x = v1.x / div.x;
+	res.y = v1.y / div.y;
 	return (res);
 }
 
-t_vect	adapt_to_res(t_vect original, t_vect len_sprite)
+t_vect	add_vects(t_vect v1, t_vect v2)
+{
+	t_vect res;
+
+	res.x = v1.x + v2.x;
+	res.y = v1.y + v2.y;
+	return (res);
+}
+
+t_vect	adapt_to_res(t_vect pos, t_vect len_sprite)
 {
 	t_vect result;
 
-	result.x = original.x / 64 * len_sprite.x;
-	result.y = original.y / 64 * len_sprite.y;
+	result.x = pos.x / 64 * len_sprite.x;
+	result.y = pos.y / 64 * len_sprite.y;
 	return (result);
 }

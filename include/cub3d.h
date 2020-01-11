@@ -6,7 +6,7 @@
 /*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/17 03:10:23 by mavileo           #+#    #+#             */
-/*   Updated: 2020/01/09 22:53:22 by mavileo          ###   ########.fr       */
+/*   Updated: 2020/01/11 20:30:06 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,12 @@ typedef struct	s_color
 	int b;
 }				t_color;
 
+typedef struct	s_vecf
+{
+	float x;
+	float y;
+}				t_vecf;
+
 typedef struct	s_vect
 {
 	int x;
@@ -63,6 +69,8 @@ typedef struct	s_stru
 {
 	char	**map;
 	t_vect	pos;
+	t_vect	direction;
+	t_vect	stock_dir;
 	t_vect	pixel_pos;
 	t_vect	res;
 	t_color	rgb_sol;
@@ -177,8 +185,17 @@ void	calcul_sprite_len(t_stru *stru);
 void	calcul_res_rep(t_stru *stru);
 double	d_pythagore(t_vect a, t_vect b);
 char	*ft_itoa_base(long nb, char *base);
-t_vect	mult_vect(t_vect v1, t_vect mult);
-t_vect	div_vect(t_vect v1, t_vect div);
+t_vect	mult_vects(t_vect v1, t_vect mult);
+t_vect	div_vects(t_vect v1, t_vect div);
 t_vect	adapt_to_res(t_vect original, t_vect len_sprite);
+t_vect	add_vects(t_vect v1, t_vect v2);
+int		draw_vect(t_stru *stru, t_vect vect, int len);
+int		key_hook(int keyhook, t_stru *stru);
+int		actualise_pos(t_stru *stru);
+int		draw_vect(t_stru *stru, t_vect vect, int len);
+int		expose_hook(t_stru *stru);
+int		loop_hook(t_stru *stru);
+int		exit_hook(t_stru *stru);
+int		init_mlx(t_stru *stru);
 
 #endif

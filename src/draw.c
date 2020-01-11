@@ -6,7 +6,7 @@
 /*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/01 20:42:46 by mavileo           #+#    #+#             */
-/*   Updated: 2020/01/05 01:19:50 by mavileo          ###   ########.fr       */
+/*   Updated: 2020/01/11 18:45:28 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,23 +54,31 @@ void	draw_line(t_stru *stru, t_vect pos1, t_vect pos2, t_color color)
 			pos1.y--;
 	}
 }
- */
 
+*/
 void	draw_line(t_stru *stru, t_vect pos1, t_vect pos2, t_color color)
-{	int rapport;
+{	t_vect	d;
+	t_vect	s;
+	int		err;
+	int		e2;
 
-	rapport = absolute((pos1.x - pos2.x) / (pos1.y - pos2.y));
-	while (pos1.x != pos2.x || pos1.y != pos2.y)
+	d.x = abs(pos2.x - pos1.x), s.x = pos1.x < pos2.x ? 1 : -1;
+	d.y = abs(pos2.y - pos1.y), s.y = pos1.y < pos2.y ? 1 : -1; 
+	err = (d.x > d.y ? d.x : -d.y) / 2;
+	while(!(pos1.x == pos2.x && pos1.y == pos2.y))
 	{
 		put_pixel(stru, color, pos1.x, pos1.y);
-		if (pos1.x < pos2.x)
-			pos1.x++;
-		if (pos1.y < pos2.y)
-			pos1.y++;
-		if (pos1.x > pos2.x)
-			pos1.x--;
-		if (pos1.y > pos2.y)
-			pos1.y--;
+		e2 = err;
+		if (e2 > -d.x) 
+		{
+			err -= d.y;
+			pos1.x += s.x;
+		}
+		if (e2 < d.y) 
+		{
+			err += d.x;
+			pos1.y += s.y;
+		}
 	}
 }
 
@@ -82,27 +90,6 @@ void	draw_rectangle(t_stru *stru, t_rect rect, t_color color)
 		rect.dep.y++;
 	}
 }
-/* 
-void	draw_triangle(t_stru *stru, t_tri tri, t_color color)
-{
-	int rapport;
-	
-	while (tri.b.x != tri.c.x || tri.b.y != tri.c.y)
-	{
-		draw_line(stru, tri.a, tri.b, color);
-		rapport = (tri.b.x - tri.c.x) / (tri.b.y - tri.c.y);
-		printf("%d", rapport);
-		if (tri.b.x < tri.c.x)
-			tri.b.x += (1 * (1 + rapport));
-		if (tri.b.x > tri.c.x)
-			tri.b.x -= (1 * (1 + rapport));
-		if (tri.b.y > tri.c.y)
-			tri.b.y -= (1 * (1 + rapport));
-		if (tri.b.y < tri.c.y)
-			tri.b.y += (1 * (1 + rapport));
-	}
-}
- */
 
 void	draw_circle(t_stru *stru, t_vect coord, t_color color, int radius)
 {
