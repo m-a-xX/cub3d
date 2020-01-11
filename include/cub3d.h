@@ -6,7 +6,7 @@
 /*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/17 03:10:23 by mavileo           #+#    #+#             */
-/*   Updated: 2020/01/11 20:30:06 by mavileo          ###   ########.fr       */
+/*   Updated: 2020/01/12 00:39:33 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,8 @@ typedef struct	s_stru
 {
 	char	**map;
 	t_vect	pos;
-	t_vect	direction;
-	t_vect	stock_dir;
+	t_vect	orient;
+	t_vect	move;
 	t_vect	pixel_pos;
 	t_vect	res;
 	t_color	rgb_sol;
@@ -90,9 +90,9 @@ typedef struct	s_stru
 	int		dist_screen;
 	t_vect	len_sprite;
 	float	angle;
-	int		key_hook;
 	t_vect	res_rep;
 	t_vect	map_size;
+	char	begin_pos;
 }				t_stru;
 
 /* GNL */

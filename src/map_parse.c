@@ -6,7 +6,7 @@
 /*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/02 15:58:55 by mavileo           #+#    #+#             */
-/*   Updated: 2020/01/04 02:59:30 by mavileo          ###   ########.fr       */
+/*   Updated: 2020/01/11 20:58:51 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,18 +41,6 @@ int		alloc_matrix(char *map, t_stru *stru)
 	return (0);
 }
 
-void	departure_angle(t_stru *stru, char *map, int i)
-{
-	if (map[i] == 'N')
-		stru->angle = 90;
-	if (map[i] == 'S')
-		stru->angle = 270;
-	if (map[i] == 'E')
-		stru->angle = 0;
-	if (map[i] == 'W')
-		stru->angle = 180;
-}
-
 void	fill_map(t_stru *stru, char *map, int i)
 {
 	int x;
@@ -74,7 +62,7 @@ void	fill_map(t_stru *stru, char *map, int i)
 			{
 				stru->pos.x = x;
 				stru->pos.y = y;
-				departure_angle(stru, map, i);
+				stru->begin_pos = map[i];
 			}
 			stru->map[y][x++] = map[i];
 		}
