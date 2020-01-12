@@ -1,43 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   other_structs_funcs.c                              :+:      :+:    :+:   */
+/*   calculs_vects.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/01 01:12:49 by mavileo           #+#    #+#             */
-/*   Updated: 2020/01/12 00:59:57 by mavileo          ###   ########.fr       */
+/*   Created: 2020/01/12 00:58:30 by mavileo           #+#    #+#             */
+/*   Updated: 2020/01/12 01:00:37 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-t_color	create_color(int r, int b, int g)
+t_vect	mult_vects(t_vect v1, t_vect mult)
 {
-	t_color color;
+	t_vect res;
 
-	color.r = r;
-	color.g = g;
-	color.b = b;
-	return (color);
+	res.x = v1.x * mult.x;
+	res.y = v1.y * mult.y;
+	return (res);
 }
 
-t_vect	create_vect(int x, int y)
+t_vect	div_vects(t_vect v1, t_vect div)
 {
-	t_vect vect;
+	t_vect res;
 
-	vect.x = x;
-	vect.y = y;
-	return (vect);
+	res.x = v1.x / div.x;
+	res.y = v1.y / div.y;
+	return (res);
 }
 
-t_rect	create_rect(int x, int y, int vect_x, int vect_y)
+t_vect	add_vects(t_vect v1, t_vect v2)
 {
-	t_rect rect;
+	t_vect res;
 
-	rect.dep.x = x;
-	rect.dep.y = y;
-	rect.end.x = vect_x;
-	rect.end.y = vect_y;
-	return (rect);
+	res.x = v1.x + v2.x;
+	res.y = v1.y + v2.y;
+	return (res);
 }

@@ -6,7 +6,7 @@
 /*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/17 03:10:23 by mavileo           #+#    #+#             */
-/*   Updated: 2020/01/12 00:39:33 by mavileo          ###   ########.fr       */
+/*   Updated: 2020/01/12 01:04:31 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,13 +58,6 @@ typedef struct	s_rect
 	t_vect end;
 }				t_rect;
 
-typedef struct	s_tri
-{
-	t_vect a;
-	t_vect b;
-	t_vect c;
-}				t_tri;
-
 typedef struct	s_stru
 {
 	char	**map;
@@ -90,7 +83,6 @@ typedef struct	s_stru
 	int		dist_screen;
 	t_vect	len_sprite;
 	float	angle;
-	t_vect	res_rep;
 	t_vect	map_size;
 	char	begin_pos;
 }				t_stru;
@@ -169,14 +161,11 @@ int		check_map(t_stru *stru);
 int		check_dep(t_stru *stru);
 int		tab_to_matrix(t_stru *stru, char *map);
 void	draw_line(t_stru *stru, t_vect pos1, t_vect pos2, t_color color);
-t_tri	create_triangle(t_vect a, t_vect b, t_vect c);
-void	draw_triangle(t_stru *stru, t_tri tri, t_color color);
 void	fill_map(t_stru *stru, char *map, int i);
 int		alloc_matrix(char *map, t_stru *stru);
 void	departure_angle(t_stru *stru, char *map, int i);
 int		error_parsing(void);
 void	draw_circle(t_stru *stru, t_vect coord, t_color color, int radius);
-int		absolute(int n);
 float	calc_distance_vector(t_vect a, t_vect b);
 void	save_image(void);
 void	calcul_dist_screen(t_stru *stru);
@@ -187,7 +176,6 @@ double	d_pythagore(t_vect a, t_vect b);
 char	*ft_itoa_base(long nb, char *base);
 t_vect	mult_vects(t_vect v1, t_vect mult);
 t_vect	div_vects(t_vect v1, t_vect div);
-t_vect	adapt_to_res(t_vect original, t_vect len_sprite);
 t_vect	add_vects(t_vect v1, t_vect v2);
 int		draw_vect(t_stru *stru, t_vect vect, int len);
 int		key_hook(int keyhook, t_stru *stru);
@@ -197,5 +185,6 @@ int		expose_hook(t_stru *stru);
 int		loop_hook(t_stru *stru);
 int		exit_hook(t_stru *stru);
 int		init_mlx(t_stru *stru);
+int		orientation(t_stru *stru, int right);
 
 #endif

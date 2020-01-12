@@ -6,7 +6,7 @@
 /*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/02 15:58:55 by mavileo           #+#    #+#             */
-/*   Updated: 2020/01/11 20:58:51 by mavileo          ###   ########.fr       */
+/*   Updated: 2020/01/12 01:08:08 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,8 @@ void	fill_map(t_stru *stru, char *map, int i)
 		}
 		else if (map[i] != ' ')
 		{
-			if (map[i] == 'N' || map[i] == 'E' || map[i] == 'W' || map[i] == 'S')
+			if (map[i] == 'N' || map[i] == 'E' || map[i] == 'W' ||
+			map[i] == 'S')
 			{
 				stru->pos.x = x;
 				stru->pos.y = y;
@@ -77,7 +78,7 @@ int		check_dep(t_stru *stru)
 	char	c;
 	int		dep;
 
-	dep = 1;	
+	dep = 1;
 	j = 0;
 	while (stru->map[j])
 	{
@@ -98,7 +99,7 @@ int		check_map(t_stru *stru)
 {
 	int i;
 	int j;
-	
+
 	i = 0;
 	j = 0;
 	while (stru->map[0][i])
