@@ -6,7 +6,7 @@
 /*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/17 03:10:23 by mavileo           #+#    #+#             */
-/*   Updated: 2020/01/12 01:04:31 by mavileo          ###   ########.fr       */
+/*   Updated: 2020/01/12 21:00:55 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,13 @@
 # include <mlx.h>
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 42
+#  define BUFFER_SIZE 10000
 # endif
 
 # define RED_VALUE 2
 # define GREEN_VALUE 1
 # define BLUE_VALUE 0
-# define POV 60
+# define FOV 60
 # define RAY_LEN 200
 # define SPEED_MOOVE 200
 # define ANGLE_MOOVE 100
@@ -85,6 +85,7 @@ typedef struct	s_stru
 	float	angle;
 	t_vect	map_size;
 	char	begin_pos;
+	double	inter_rays;
 }				t_stru;
 
 /* GNL */
@@ -185,6 +186,9 @@ int		expose_hook(t_stru *stru);
 int		loop_hook(t_stru *stru);
 int		exit_hook(t_stru *stru);
 int		init_mlx(t_stru *stru);
-int		orientation(t_stru *stru, int right);
+int		rotation(t_stru *stru, int right);
+int		clear_window(t_stru *stru);
+t_vect	sub_vects(t_vect v1, t_vect v2);
+int		check_wall(t_stru *stru);
 
 #endif

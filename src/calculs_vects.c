@@ -6,7 +6,7 @@
 /*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/12 00:58:30 by mavileo           #+#    #+#             */
-/*   Updated: 2020/01/12 01:00:37 by mavileo          ###   ########.fr       */
+/*   Updated: 2020/01/12 20:24:10 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,14 @@ t_vect	add_vects(t_vect v1, t_vect v2)
 
 	res.x = v1.x + v2.x;
 	res.y = v1.y + v2.y;
+	return (res);
+}
+
+t_vect	sub_vects(t_vect v1, t_vect v2)
+{
+	t_vect res;
+
+	res.x = v1.x - v2.x;
+	res.y = v1.y - v2.y;
 	return (res);
 }

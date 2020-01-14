@@ -6,13 +6,13 @@
 /*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/12 00:56:47 by mavileo           #+#    #+#             */
-/*   Updated: 2020/01/12 00:57:07 by mavileo          ###   ########.fr       */
+/*   Updated: 2020/01/14 20:04:38 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-int		orientation(t_stru *stru, int right)
+int		rotation(t_stru *stru, int right)
 {
 	if (right)
 		stru->angle += 10;
@@ -27,16 +27,23 @@ int		orientation(t_stru *stru, int right)
 	return (0);
 }
 
+int		check_wall(t_stru *stru)
+{
+	t_vect p;
+
+	p = div_vects(stru->pixel_pos, stru->len_sprite);
+	if (stru->map[p.y][p.x] == '0' || ft_strchr("SNEW", stru->map[p.y][p.x]))
+		return (0);
+	return (1);
+}
+
 int		actualise_pos(t_stru *stru)
 {
 	stru->pixel_pos = add_vects(stru->pixel_pos, stru->move);
-	if (stru->pixel_pos.x < stru->len_sprite.x)
-		stru->pixel_pos.x -= stru->move.x;
-	if (stru->pixel_pos.y < stru->len_sprite.y)
-		stru->pixel_pos.y -= stru->move.y;
-	if (stru->pixel_pos.x > stru->res.x - stru->len_sprite.x)
-		stru->pixel_pos.x -= stru->move.x;
-	if (stru->pixel_pos.y > stru->res.y - stru->len_sprite.y)
-		stru->pixel_pos.y -= stru->move.y;
+	if (check_wall(stru))
+	{
+		stru->pixel_pos = sub_vects(stru->pixel_pos, stru->move);
+		return (1);
+	}
 	return (0);
 }

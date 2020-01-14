@@ -6,7 +6,7 @@
 /*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/11 20:28:21 by mavileo           #+#    #+#             */
-/*   Updated: 2020/01/11 20:28:51 by mavileo          ###   ########.fr       */
+/*   Updated: 2020/01/12 02:17:05 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,16 @@ int		init_mlx(t_stru *stru)
 	&(stru->sizeline), &(stru->endian));
 	calcul_dist_screen(stru);
 	calcul_sprite_len(stru);
+	return (0);
+}
+
+int		clear_window(t_stru *stru)
+{
+	t_color	black;
+	t_rect	rect;
+
+	rect = create_rect(0, 0, stru->res.x, stru->res.y);
+	black = create_color(0, 0, 0);
+	draw_rectangle(stru, rect, black);
 	return (0);
 }

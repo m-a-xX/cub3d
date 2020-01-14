@@ -6,7 +6,7 @@
 /*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/01 01:27:35 by mavileo           #+#    #+#             */
-/*   Updated: 2020/01/12 01:04:29 by mavileo          ###   ########.fr       */
+/*   Updated: 2020/01/12 01:55:47 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	calcul_dist_screen(t_stru *stru)
 {
-	stru->dist_screen = stru->res.x / tan_deg(POV / 2);
+	stru->dist_screen = stru->res.x / tan_deg(FOV / 2);
 }
 
 void	calcul_map_size(t_stru *stru)
