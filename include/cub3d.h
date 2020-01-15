@@ -6,7 +6,7 @@
 /*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/17 03:10:23 by mavileo           #+#    #+#             */
-/*   Updated: 2020/01/12 21:00:55 by mavileo          ###   ########.fr       */
+/*   Updated: 2020/01/15 13:13:04 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,10 +80,10 @@ typedef struct	s_stru
 	int		bpp;
 	int		sizeline;
 	int		endian;
-	int		dist_screen;
+	double	dist_screen;
 	t_vect	len_sprite;
-	float	angle;
 	t_vect	map_size;
+	float	angle;
 	char	begin_pos;
 	double	inter_rays;
 }				t_stru;
@@ -190,5 +190,7 @@ int		rotation(t_stru *stru, int right);
 int		clear_window(t_stru *stru);
 t_vect	sub_vects(t_vect v1, t_vect v2);
 int		check_wall(t_stru *stru);
+int		begin_pos(t_stru *stru);
+int		ft_printf(char *str, ...);
 
 #endif

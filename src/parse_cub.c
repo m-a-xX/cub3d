@@ -6,7 +6,7 @@
 /*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/17 03:09:19 by mavileo           #+#    #+#             */
-/*   Updated: 2020/01/12 21:23:16 by mavileo          ###   ########.fr       */
+/*   Updated: 2020/01/15 13:40:28 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,35 +37,6 @@ int		tab_to_matrix(t_stru *stru, char *map)
 	return (0);
 }
 
-int		begin_pos(t_stru *stru)
-{
-	if (stru->begin_pos == 'N')
-	{
-		stru->orient.x = 0;
-		stru->orient.y = -8;
-		stru->angle = 270;
-	}
-	else if (stru->begin_pos == 'S')
-	{
-		stru->orient.x = 0;
-		stru->orient.y = 8;
-		stru->angle = 90;
-	}
-	else if (stru->begin_pos == 'E')
-	{
-		stru->orient.x = 8;
-		stru->orient.y = 0;
-		stru->angle = 0;
-	}
-	else if (stru->begin_pos == 'W')
-	{
-		stru->orient.x = -8;
-		stru->orient.y = 0;
-		stru->angle = 180;
-	}
-	return (0);
-}
-
 int		parse_cub(int fd, t_stru *stru)
 {
 	char	*line;
@@ -89,6 +60,6 @@ int		parse_cub(int fd, t_stru *stru)
 	if ((tab_to_matrix(stru, map)) || check_stru(stru) || check_map(stru))
 		return (error_parsing());
 	stru->inter_rays = FOV / stru->res.x;
-	begin_pos(stru);
+	//begin_pos(stru);
 	return (0);
 }

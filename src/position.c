@@ -6,11 +6,40 @@
 /*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/12 00:56:47 by mavileo           #+#    #+#             */
-/*   Updated: 2020/01/14 20:04:38 by mavileo          ###   ########.fr       */
+/*   Updated: 2020/01/15 13:49:26 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
+
+int		begin_pos(t_stru *stru)
+{
+	if (stru->begin_pos == 'N')
+	{
+		stru->orient.x = 0;
+		stru->orient.y = -stru->len_sprite.y / 6;
+		stru->angle = 270;
+	}
+	else if (stru->begin_pos == 'S')
+	{
+		stru->orient.x = 0;
+		stru->orient.y = stru->len_sprite.y / 6;
+		stru->angle = 90;
+	}
+	else if (stru->begin_pos == 'E')
+	{
+		stru->orient.x = stru->len_sprite.x / 6;
+		stru->orient.y = 0;
+		stru->angle = 0;
+	}
+	else if (stru->begin_pos == 'W')
+	{
+		stru->orient.x = -stru->len_sprite.x / 6;
+		stru->orient.y = 0;
+		stru->angle = 180;
+	}
+	return (0);
+}
 
 int		rotation(t_stru *stru, int right)
 {
@@ -22,8 +51,14 @@ int		rotation(t_stru *stru, int right)
 		stru->angle = stru->angle - 360;
 	else if (stru->angle < 0)
 		stru->angle = 360 - abs((int)stru->angle);
-	stru->orient.x = cos(deg_to_rad(stru->angle)) * 8;
-	stru->orient.y = sin(deg_to_rad(stru->angle)) * 8;
+	ft_putnbr_fd(stru->angle, 1);
+	ft_putstr_fd("\n", 1);
+	ft_putnbr_fd(stru->orient.x, 1);
+	ft_putstr_fd("\n", 1);
+	ft_putnbr_fd(stru->orient.y, 1);
+	ft_putstr_fd("\n\n", 1);
+	stru->orient.x = cos(deg_to_rad(stru->angle)) * (stru->len_sprite.x);
+	stru->orient.y = sin(deg_to_rad(stru->angle)) * (stru->len_sprite.y);
 	return (0);
 }
 

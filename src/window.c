@@ -6,7 +6,7 @@
 /*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/02 10:53:18 by mavileo           #+#    #+#             */
-/*   Updated: 2020/01/14 20:06:19 by mavileo          ###   ########.fr       */
+/*   Updated: 2020/01/15 13:41:28 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,8 @@ int		cub3d(t_stru *stru)
 	t_color color;
 
 	init_mlx(stru);
+	begin_pos(stru);
+	stru->orient.y = -100;
 	color = create_color(255, 24, 255);
 	stru->pixel_pos = mult_vects(stru->pos, stru->len_sprite);
 	draw_circle(stru, stru->pixel_pos, color, 5);
