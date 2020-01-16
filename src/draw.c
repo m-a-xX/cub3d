@@ -6,7 +6,7 @@
 /*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/01 20:42:46 by mavileo           #+#    #+#             */
-/*   Updated: 2020/01/12 01:10:51 by mavileo          ###   ########.fr       */
+/*   Updated: 2020/01/15 22:29:58 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,14 +88,44 @@ void	draw_circle(t_stru *stru, t_vect coord, t_color color, int radius)
 
 int		draw_vect(t_stru *stru, t_vect vect, int len)
 {
-	t_vect	vect2;
+	t_vecf	vect2;
 	t_vect	pos2;
 	t_color color = create_color(255, 24, 255);
 
-	vect2 = create_vect(0, 0);
-	while (abs(vect2.x) < len && abs(vect2.y) < len)
-		vect2 = add_vects(vect2, vect);
-	pos2 = add_vects(stru->pixel_pos, vect2);
+	vect2 = create_vectf(vect.x, vect.y);
+	while (abs((int)vect2.x) < len && abs((int)vect2.y) < len)
+		vect2 = mult_vectf(vect2, create_vectf(1.01, 1.01));
+	while (abs((int)vect2.x) > len && abs((int)vect2.y) > len)
+		vect2 = mult_vectf(vect2, create_vectf(0.99, 0.99));
+	pos2 = add_vect_and_vectf(stru->pixel_pos, vect2);
 	draw_line(stru, stru->pixel_pos, pos2, color);
+	return (0);
+}
+
+int		draw_fov(t_stru *stru)
+{
+	double	i;
+	int		x;
+	int		y;
+	t_vect	orient;
+
+	i = stru->inter_rays;
+	orient = stru->orient;
+	orient = mult_vects(stru->orient, div_vects(stru->len_sprite,create_vect(6, 6)));	
+	while (i < 30)
+	{
+		x = cos(deg_to_rad(i)) * orient.x - sin(deg_to_rad(i)) * orient.y;
+		y = sin(deg_to_rad(i)) * orient.x + cos(deg_to_rad(i)) * orient.y;
+		draw_vect(stru, create_vect(x, y), 100);
+		if (i == stru->inter_rays)
+		{	ft_putnbr_fd(x, 1);
+			ft_putstr_fd(" : draw_fov x\n", 1);
+			ft_putnbr_fd(y, 1);
+			ft_putstr_fd(" : draw_fov y\n\n", 1);}
+		x = cos(deg_to_rad(-i)) * orient.x - sin(deg_to_rad(-i)) * orient.y;
+		y = sin(deg_to_rad(-i)) * orient.x + cos(deg_to_rad(-i)) * orient.y;
+		draw_vect(stru, create_vect(x, y), 100);
+		i += stru->inter_rays;
+	}
 	return (0);
 }

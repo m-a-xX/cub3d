@@ -6,7 +6,7 @@
 /*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/12 00:56:47 by mavileo           #+#    #+#             */
-/*   Updated: 2020/01/15 13:49:26 by mavileo          ###   ########.fr       */
+/*   Updated: 2020/01/15 14:28:17 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,24 +17,24 @@ int		begin_pos(t_stru *stru)
 	if (stru->begin_pos == 'N')
 	{
 		stru->orient.x = 0;
-		stru->orient.y = -stru->len_sprite.y / 6;
+		stru->orient.y = -(stru->len_sprite.y) / 6;
 		stru->angle = 270;
 	}
 	else if (stru->begin_pos == 'S')
 	{
 		stru->orient.x = 0;
-		stru->orient.y = stru->len_sprite.y / 6;
+		stru->orient.y = (stru->len_sprite.y) / 6;
 		stru->angle = 90;
 	}
 	else if (stru->begin_pos == 'E')
 	{
-		stru->orient.x = stru->len_sprite.x / 6;
+		stru->orient.x = (stru->len_sprite.x) / 6;
 		stru->orient.y = 0;
 		stru->angle = 0;
 	}
 	else if (stru->begin_pos == 'W')
 	{
-		stru->orient.x = -stru->len_sprite.x / 6;
+		stru->orient.x = -(stru->len_sprite.x) / 6;
 		stru->orient.y = 0;
 		stru->angle = 180;
 	}
@@ -57,8 +57,8 @@ int		rotation(t_stru *stru, int right)
 	ft_putstr_fd("\n", 1);
 	ft_putnbr_fd(stru->orient.y, 1);
 	ft_putstr_fd("\n\n", 1);
-	stru->orient.x = cos(deg_to_rad(stru->angle)) * (stru->len_sprite.x);
-	stru->orient.y = sin(deg_to_rad(stru->angle)) * (stru->len_sprite.y);
+	stru->orient.x = cos(deg_to_rad(stru->angle)) * (stru->len_sprite.x) / 6;
+	stru->orient.y = sin(deg_to_rad(stru->angle)) * (stru->len_sprite.y) / 6;
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/01 01:12:49 by mavileo           #+#    #+#             */
-/*   Updated: 2020/01/04 03:00:38 by mavileo          ###   ########.fr       */
+/*   Updated: 2020/01/15 22:12:58 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,13 @@ void	free_struct(t_stru *to_free)
 	if (to_free->path_sprite)
 		free(to_free->path_sprite);
 	free(to_free);
+}
+
+t_vecf	create_vectf(float x, float y)
+{
+	t_vecf res;
+	
+	res.x = x;
+	res.y = y;
+	return (res);
 }

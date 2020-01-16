@@ -6,31 +6,11 @@
 /*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/02 10:53:18 by mavileo           #+#    #+#             */
-/*   Updated: 2020/01/15 13:41:28 by mavileo          ###   ########.fr       */
+/*   Updated: 2020/01/15 22:29:33 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
-
-int		draw_fov(t_stru *stru)
-{
-	double	i;
-	int		x;
-	int		y;
-
-	i = 0.01;
-	while (i < 30)
-	{
-		x = cos(deg_to_rad(i)) * stru->orient.x - sin(deg_to_rad(i)) * stru->orient.y;
-		y = sin(deg_to_rad(i)) * stru->orient.x + cos(deg_to_rad(i)) * stru->orient.y;
-		draw_vect(stru, create_vect(x, y), 50);
-		x = cos(deg_to_rad(-i)) * stru->orient.x - sin(deg_to_rad(-i)) * stru->orient.y;
-		y = sin(deg_to_rad(-i)) * stru->orient.x + cos(deg_to_rad(-i)) * stru->orient.y;
-		draw_vect(stru, create_vect(x, y), 50);
-		i += 0.01;
-	}
-	return (0);
-}
 
 int		expose_hook(t_stru *stru)
 {
@@ -91,9 +71,8 @@ int		cub3d(t_stru *stru)
 
 	init_mlx(stru);
 	begin_pos(stru);
-	stru->orient.y = -100;
 	color = create_color(255, 24, 255);
-	stru->pixel_pos = mult_vects(stru->pos, stru->len_sprite);
+	stru->pixel_pos = mult_vect_and_vecf(stru->len_sprite, stru->pos);
 	draw_circle(stru, stru->pixel_pos, color, 5);
 	draw_vect(stru, stru->orient, 50);
 	draw_fov(stru);
