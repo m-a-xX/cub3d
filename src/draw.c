@@ -6,7 +6,7 @@
 /*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/01 20:42:46 by mavileo           #+#    #+#             */
-/*   Updated: 2020/01/15 22:29:58 by mavileo          ###   ########.fr       */
+/*   Updated: 2020/01/16 22:13:00 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,13 +90,21 @@ int		draw_vect(t_stru *stru, t_vect vect, int len)
 {
 	t_vecf	vect2;
 	t_vect	pos2;
+	t_vect	tmp;
 	t_color color = create_color(255, 24, 255);
 
 	vect2 = create_vectf(vect.x, vect.y);
+	tmp = add_vect_and_vectf(stru->pixel_pos, vect2);
 	while (abs((int)vect2.x) < len && abs((int)vect2.y) < len)
+	{
 		vect2 = mult_vectf(vect2, create_vectf(1.01, 1.01));
+		tmp = add_vect_and_vectf(stru->pixel_pos, vect2);
+	}
 	while (abs((int)vect2.x) > len && abs((int)vect2.y) > len)
+	{
 		vect2 = mult_vectf(vect2, create_vectf(0.99, 0.99));
+		tmp = add_vect_and_vectf(stru->pixel_pos, vect2);
+	}
 	pos2 = add_vect_and_vectf(stru->pixel_pos, vect2);
 	draw_line(stru, stru->pixel_pos, pos2, color);
 	return (0);
@@ -117,11 +125,6 @@ int		draw_fov(t_stru *stru)
 		x = cos(deg_to_rad(i)) * orient.x - sin(deg_to_rad(i)) * orient.y;
 		y = sin(deg_to_rad(i)) * orient.x + cos(deg_to_rad(i)) * orient.y;
 		draw_vect(stru, create_vect(x, y), 100);
-		if (i == stru->inter_rays)
-		{	ft_putnbr_fd(x, 1);
-			ft_putstr_fd(" : draw_fov x\n", 1);
-			ft_putnbr_fd(y, 1);
-			ft_putstr_fd(" : draw_fov y\n\n", 1);}
 		x = cos(deg_to_rad(-i)) * orient.x - sin(deg_to_rad(-i)) * orient.y;
 		y = sin(deg_to_rad(-i)) * orient.x + cos(deg_to_rad(-i)) * orient.y;
 		draw_vect(stru, create_vect(x, y), 100);

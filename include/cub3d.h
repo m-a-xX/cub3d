@@ -6,7 +6,7 @@
 /*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/17 03:10:23 by mavileo           #+#    #+#             */
-/*   Updated: 2020/01/15 22:28:55 by mavileo          ###   ########.fr       */
+/*   Updated: 2020/01/27 17:46:35 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,9 @@ typedef struct	s_stru
 	float	angle;
 	char	begin_pos;
 	double	inter_rays;
+	t_vect	plane;
+	int		w;
+	int		h;
 }				t_stru;
 
 /* GNL */
@@ -189,7 +192,7 @@ int		init_mlx(t_stru *stru);
 int		rotation(t_stru *stru, int right);
 int		clear_window(t_stru *stru);
 t_vect	sub_vects(t_vect v1, t_vect v2);
-int		check_wall(t_stru *stru);
+int		check_wall(t_stru *stru, t_vect *to_check);
 int		begin_pos(t_stru *stru);
 int		ft_printf(char *str, ...);
 t_vecf	mult_vectf(t_vecf v1, t_vecf mult);
@@ -197,5 +200,8 @@ int		draw_fov(t_stru *stru);
 t_vecf	create_vectf(float x, float y);
 t_vect	add_vect_and_vectf(t_vect v1, t_vecf v2);
 t_vect	mult_vect_and_vecf(t_vect v1, t_vecf mult);
+t_vect	horizontal_intersect(t_stru *stru, float angle);
+t_vect	vertical_intersect(t_stru *stru, float angle);
+void	p_value(int value, char *str);
 
 #endif

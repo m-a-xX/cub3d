@@ -1,4 +1,4 @@
-/* ************************************************************************** */
+/* /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   window.c                                           :+:      :+:    :+:   */
@@ -6,7 +6,7 @@
 /*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/02 10:53:18 by mavileo           #+#    #+#             */
-/*   Updated: 2020/01/15 22:29:33 by mavileo          ###   ########.fr       */
+/*   Updated: 2020/01/26 17:43:54 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ int		key_hook(int keyhook, t_stru *stru)
 	}
 	else
 		return (0);
+	//horizontal_intersect(stru, stru->angle);
 	actualise_pos(stru);
 	expose_hook(stru);
 	return (0);
@@ -81,3 +82,4 @@ int		cub3d(t_stru *stru)
 	mlx_loop(stru->mlx_ptr);
 	return (0);
 }
+ */

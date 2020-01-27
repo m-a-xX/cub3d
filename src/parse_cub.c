@@ -6,7 +6,7 @@
 /*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/17 03:09:19 by mavileo           #+#    #+#             */
-/*   Updated: 2020/01/15 14:52:03 by mavileo          ###   ########.fr       */
+/*   Updated: 2020/01/22 23:02:41 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,14 @@ int		tab_to_matrix(t_stru *stru, char *map)
 	int i;
 
 	if (!map || !*map)
+	{
 		stru->map = NULL;
-	if (!map || !*map)
 		return (1);
-	printf("%s\n", map);
+	}
 	while (*map == '\n')
 		map++;
 	if ((i = alloc_matrix(map, stru)))
 		return (1);
-	printf("|%s\n", map);
 	fill_map(stru, map, i);
 	return (0);
 }
@@ -60,6 +59,5 @@ int		parse_cub(int fd, t_stru *stru)
 	if ((tab_to_matrix(stru, map)) || check_stru(stru) || check_map(stru))
 		return (error_parsing());
 	stru->inter_rays = (double)FOV / (double)stru->res.x;
-	//begin_pos(stru);
 	return (0);
 }
