@@ -32,11 +32,13 @@ int		render(t_stru *stru, int k)
 		// trace le rendu
 		while (ray.x <= ray.w)
 		{
-			ray.camera_x = (2 * ray.x / ray.w) - 1;
-			ray.ray_pos = ray.pos;
+			ray.camera_x = (2 * ray.x / ray.w) - 1;// faire test avec plane et dir de depart
 			ray.ray_dir.x = ray.dir.x + ray.plane.x * ray.camera_x;
 			ray.ray_dir.y = ray.dir.y + ray.plane.y * ray.camera_x;
-			ray.delta_dist.x = sqrt(1 + (verif_div((ray.ray_dir.y * ray.ray_dir.y), (ray.ray_dir.x * ray.ray_dir.x))));
+			if (ray.x % 100 == 0){
+				printf("\nray_dir.x %f\nray_dir.y %f\nplane.x %f \nplane.y %f\n", ray.ray_dir.x, ray.ray_dir.y, ray.plane.x, ray.plane.y);
+				printf("dir.x %f\ndir.y %f\nray.camera_x %d\n", ray.dir.x, ray.dir.y, ray.camera_x);
+			}ray.delta_dist.x = sqrt(1 + (verif_div((ray.ray_dir.y * ray.ray_dir.y), (ray.ray_dir.x * ray.ray_dir.x))));
 			ray.delta_dist.y = sqrt(1 + (verif_div((ray.ray_dir.x * ray.ray_dir.x), (ray.ray_dir.y * ray.ray_dir.y))));
 			//calcule le vecteur de direction et la longueur entre deux segments
 			if (ray.ray_dir.x < 0)
@@ -63,7 +65,6 @@ int		render(t_stru *stru, int k)
 			// tant que le rayon ne rencontre pas de mur
 			while (!ray.hit)
 			{
-
 				//Passe à la case suivante sur .x ou Y
 				if (ray.side_dist.x < ray.side_dist.y)
 				{

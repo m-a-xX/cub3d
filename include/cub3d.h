@@ -64,16 +64,16 @@ typedef struct	s_ray
 	t_vect	map;// int case camera est dessus
 	t_vecf	dir;// double vecteur direction de 0 a 1
 	t_vecf	pos;// double position de la camera en unite de case
-	t_vecf	ray_pos;// double point de depart des rayons en unite de case
-	t_vect	ray_dir;// double vecteur direction du rayon de 0 a 1
-	t_vect	side_dist;// distance position de depart - mur en unite de case
-	t_vect	delta_dist;// distance entre intersections en unite de case
-	t_vect	step;// pas a faire pour passer d'une case a l'aure, +1 ou -1
+	t_vecf	ray_pos;// double point de depart des rayons en unite de case A VOIR
+	t_vecf	ray_dir;// double vecteur direction du rayon de 0 a 1 A VOIR
+	t_vecf	side_dist;// distance position de depart - mur en unite de case A VOIR
+	t_vecf	delta_dist;// distance entre intersections en unite de case A VOIR
+	t_vect	step;// pas a faire pour passer d'une case a l'aure, +1 ou -1 A VOIR
 	t_vecf	plane;// vecteur du plan de projection
 	int		x;// compteur colonne traitee
 	int		y;
 	int		camera_x;// position camera par rapport au centre (+ ou -)
-	int		perp_wall_dist;// distance corrigee position de depart - mur en unite de case
+	double	perp_wall_dist;// distance corrigee position de depart - mur en unite de case
 	int		w;// largeur projection
 	int		h;// hauteur projection
 	int		hit;// booleen touche un mur ou pas

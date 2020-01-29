@@ -75,13 +75,14 @@ t_ray	create_ray(t_stru *stru)
 
 	ray.x = 0;
 	ray.y = 0;
+	ray.map = div_vects(stru->pixel_pos, stru->len_sprite);
 	ray.dir.x = cos_deg(stru->angle);
 	ray.dir.y = sin_deg(stru->angle);
-	ray.plane.x = -ray.dir.y;
-	ray.plane.y = -ray.dir.x;
 	ray.pos.x = (double)stru->pixel_pos.x / (double)stru->len_sprite.x;
 	ray.pos.y = (double)stru->pixel_pos.y / (double)stru->len_sprite.y;
-	ray.map = div_vects(stru->pixel_pos, stru->len_sprite);
+	ray.ray_pos = ray.pos;
+	ray.plane.x = ray.dir.y;
+	ray.plane.y = -ray.dir.x;
 	ray.w = stru->res.x;
 	ray.h = stru->res.y;
 	return (ray);
