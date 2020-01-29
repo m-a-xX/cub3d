@@ -1,4 +1,4 @@
-/* /* ************************************************************************** */
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   window.c                                           :+:      :+:    :+:   */
@@ -12,16 +12,12 @@
 
 #include "../include/cub3d.h"
 
-int		expose_hook(t_stru *stru)
+int		expose_hook(t_stru *stru, int k)
 {
-	t_color color = create_color(255, 24, 255);
-	
+
 	//mlx_clear_window(stru->mlx_ptr, stru->win_ptr);
 	clear_window(stru);
-	draw_circle(stru, create_vect(stru->pixel_pos.x, stru->pixel_pos.y),
-	color, 5);
-	draw_vect(stru, stru->orient, 50);
-	draw_fov(stru);
+	render(stru, k);
 	mlx_put_image_to_window(stru->mlx_ptr, stru->win_ptr, stru->img_ptr, 0, 0);
 	return (0);
 }
@@ -62,24 +58,18 @@ int		key_hook(int keyhook, t_stru *stru)
 		return (0);
 	//horizontal_intersect(stru, stru->angle);
 	actualise_pos(stru);
-	expose_hook(stru);
+	expose_hook(stru, keyhook);
 	return (0);
 }
 
 int		cub3d(t_stru *stru)
 {
-	t_color color;
-
 	init_mlx(stru);
 	begin_pos(stru);
-	color = create_color(255, 24, 255);
 	stru->pixel_pos = mult_vect_and_vecf(stru->len_sprite, stru->pos);
-	draw_circle(stru, stru->pixel_pos, color, 5);
-	draw_vect(stru, stru->orient, 50);
-	draw_fov(stru);
+	render(stru, -1);
 	mlx_put_image_to_window(stru->mlx_ptr, stru->win_ptr, stru->img_ptr, 0, 0);
 	mlx_loop_hook(stru->mlx_ptr, loop_hook, stru);
 	mlx_loop(stru->mlx_ptr);
 	return (0);
 }
- */

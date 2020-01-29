@@ -17,7 +17,7 @@ double	calcul_height(t_stru *stru, t_vect intersect)
 	return (height);
 }
 
-t_vect	horizontal_intersecti(t_stru *stru, float angle)
+t_vect	horizontal_intersecti(t_stru *stru, double angle)
 {
 	t_vect	tmp;
 	t_vect	v;

@@ -6,158 +6,103 @@
 /*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/04 01:59:42 by mavileo           #+#    #+#             */
-/*   Updated: 2020/01/27 23:06:30 by mavileo          ###   ########.fr       */
+/*   Updated: 2020/01/29 01:00:57 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-t_vect	horizontal_intersect(t_stru *stru, float angle)
+double	verif_div(double n, double div)
 {
-	t_vect	tmp;
-	t_vect	v;
-	int		xa;
-	int		ya;
-	int		x1;
-	int		y1;
-	int		x2;
-	int		y2;
-
-	if (angle < 180 || (angle < -180 && angle > -360))
-	{
-		y1 = stru->map_size.y * (stru->pixel_pos.y / stru->map_size.y);
-		ya = -stru->len_sprite.y;
-	}
-	else
-	{
-		y1 = stru->map_size.y * (stru->pixel_pos.y / stru->map_size.y + 1);
-		ya = stru->len_sprite.y;
-	}
-	x1 = stru->pixel_pos.x + abs(y1 - stru->pixel_pos.y) / tan_deg(angle);
-	y2 = y1 + ya;
-	x2 = x1 + ya / tan_deg(angle);
-	xa = x2 - x1;
-	v = create_vect(x1, x2);
-	tmp = div_vects(v, stru->map_size);
-	while (stru->map[tmp.x][tmp.y] && stru->map[tmp.x][tmp.y] != '1' && stru->map[tmp.x][tmp.y] != '2')
-	{
-		v.x += xa;
-		v.y += ya;
-		tmp = div_vects(v, stru->map_size);
-	}
-	ft_putnbr_fd(v.x, 1);
-	ft_putstr_fd(" : x hor\n", 1);
-	ft_putnbr_fd(v.y, 1);
-	ft_putstr_fd(" : y hor\n", 1);
-	return (v);
+	if (div)
+		return (n / div);
+	return (0);
 }
 
-t_vect	horizontal_intersect(t_stru *stru, float angle)
+int		render(t_stru *stru, int k)
 {
-	t_vect	tmp;
-	t_vect	v;
-	int		xa;
-	int		ya;
-	int		x1;
-	int		y1;
-	int		x2;
-	int		y2;
+	static int	first = 1;
+	t_ray		ray;
 
-	if (angle < 180 || (angle < -180 && angle > -360))
-	{
-		y1 = stru->map_size.y * (stru->pixel_pos.y / stru->map_size.y);
-		ya = -stru->len_sprite.y;
-	}
-	else
-	{
-		y1 = stru->map_size.y * (stru->pixel_pos.y / stru->map_size.y + 1);
-		ya = stru->len_sprite.y;
-	}
-	x1 = stru->pixel_pos.x + abs(y1 - stru->pixel_pos.y) / tan_deg(angle);
-	y2 = y1 + ya;
-	x2 = x1 + ya / tan_deg(angle);
-	xa = x2 - x1;
-	v = create_vect(x1, x2);
-	tmp = div_vects(v, stru->map_size);
-	while (stru->map[tmp.x][tmp.y] && stru->map[tmp.x][tmp.y] != '1' && stru->map[tmp.x][tmp.y] != '2')
-	{
-		v.x += xa;
-		v.y += ya;
-		tmp = div_vects(v, stru->map_size);
-	}
-	ft_putnbr_fd(v.x, 1);
-	ft_putstr_fd(" : x hor\n", 1);
-	ft_putnbr_fd(v.y, 1);
-	ft_putstr_fd(" : y hor\n", 1);
-	return (v);
-}
-
-t_vect	vertical_intersect(t_stru *stru, float angle)
-{
-	t_vect	v;
-	int		xa;
-	int		ya;
-
-	if (angle > 90 && angle < 270)
-	{
-		v.x = (int)((stru->pixel_pos.x / stru->len_sprite.x / stru->len_sprite.x) * stru->len_sprite.x - 1);
-		xa = -stru->len_sprite.x;
-	}
-	else
-	{
-		v.x = (int)((stru->pixel_pos.x / stru->len_sprite.x / stru->len_sprite.x) * stru->len_sprite.x + stru->len_sprite.x);
-		xa = stru->len_sprite.x;
-	}
-	v.y = (int)(stru->pixel_pos.y / stru->len_sprite.y + (stru->pixel_pos.x / stru->len_sprite.x - v.x) * tan_deg(angle));
-	ya = stru->len_sprite.y * tan_deg(angle);
-	while (stru->map[v.x][v.y] && stru->map[v.x][v.y] != '1' && stru->map[v.x][v.y] != '2')
-	{
-		v.x = v.x + xa;
-		v.y = v.y + ya;
-	}
-	ft_putnbr_fd(v.x, 1);
-	ft_putstr_fd(" : x vert\n", 1);
-	ft_putnbr_fd(v.y, 1);
-	ft_putstr_fd(" : y vert\n", 1);
-	return (v);
-}
-
-int		render(int k)
-{
-	bool	first;
-	int		x;// position de départ du tracé de l'écran sur X
-	int		y;// position de départ du tracé de l'écran sur Y
-	t_vect	pos;
-	t_vect	dir;
-	t_vect	ray_pos;
-	t_vect	ray_dir;
-	int		camera_x;
-	int		w = 200;
-	int		h = 200;
-	t_vect	plane;
-	
-	plane.x = -stru->orient.y;
-	plane.y = -stru->orient.x;
-	ray_pos = stru->pos;
-	ray_dir.x = stru->orient.x + plane.x * camera_x;
-	ray_dir.y = stru->orient.y + plane.y * camera_x;
-	x = 0;
-	y = 0;
-	first = true;
+	ray = create_ray(stru);
 	// la fonction ne s’exécute que si l’écran a besoin d’être rafraîchit
-	if (k == 13 || k == 1 || k == 0 || k == 2 || k == 123 || k == 124 || first)
+	if (k == 13 || k == 1 || k == 2 || k == 123 || k == 124 || first)
 	{
-		first = false;// on a affiché une première fois
-		screen.lock();// bloque la mise à jour des bitmaps dans la zone de jeu
-		bouge();// modifie les paramètres
+		first = 0;// on a affiché une première fois
 		// trace le rendu
-		while (x <= w)
+		while (ray.x <= ray.w)
 		{
-			camera_x = (2 * x / w) - 1;
-			ray_pos.x = pos.x;
-			ray_pos.y = pos.y;
-			ray_dir = 
+			ray.camera_x = (2 * ray.x / ray.w) - 1;
+			ray.ray_pos = ray.pos;
+			ray.ray_dir.x = ray.dir.x + ray.plane.x * ray.camera_x;
+			ray.ray_dir.y = ray.dir.y + ray.plane.y * ray.camera_x;
+			ray.delta_dist.x = sqrt(1 + (verif_div((ray.ray_dir.y * ray.ray_dir.y), (ray.ray_dir.x * ray.ray_dir.x))));
+			ray.delta_dist.y = sqrt(1 + (verif_div((ray.ray_dir.x * ray.ray_dir.x), (ray.ray_dir.y * ray.ray_dir.y))));
+			//calcule le vecteur de direction et la longueur entre deux segments
+			if (ray.ray_dir.x < 0)
+			{
+				ray.step.x = -1;// vecteur de direction
+				ray.side_dist.x = (ray.ray_pos.x - ray.map.x) * ray.delta_dist.x;// distance
+			}
+			else
+			{
+				ray.step.x = 1;
+				ray.side_dist.x = (ray.map.x + 1.0 - ray.ray_pos.x) * ray.delta_dist.x;
+			}
+			if (ray.ray_dir.y < 0)
+			{
+				ray.step.y = -1;
+				ray.side_dist.y = (ray.ray_pos.y - ray.map.y) * ray.delta_dist.y;
+			}
+			else
+			{
+				ray.step.y = 1;
+				ray.side_dist.y = (ray.map.y + 1.0 - ray.ray_pos.y) * ray.delta_dist.y;
+			}
+
+			// tant que le rayon ne rencontre pas de mur
+			while (!ray.hit)
+			{
+
+				//Passe à la case suivante sur .x ou Y
+				if (ray.side_dist.x < ray.side_dist.y)
+				{
+					ray.side_dist.x += ray.delta_dist.x;// agrandis le rayon
+					ray.map.x += ray.step.x;// prochaine case ou case précédente sur .x
+					ray.side = 0;// orientation du mur
+				}
+				else
+				{
+					ray.side_dist.y += ray.delta_dist.y;// agrandis le rayon
+					ray.map.y += ray.step.y;// prochaine case ou case précédente sur Y
+					ray.side = 1;// orientation du mur
+				}
+				// si le rayon rencontre un mur
+				if (stru->map[ray.map.x][ray.map.y] > 0)
+					ray.hit = 1;// stoppe la boucle
+			}
+			// Calcule la distance corrigée pour la projection
+			if (!ray.side)
+				ray.perp_wall_dist = abs((int)((ray.map.x - ray.ray_pos.x + verif_div((1.0 - ray.step.x) / 2.0, ray.ray_dir.x))));
+			else
+				ray.perp_wall_dist = abs((int)((ray.map.y - ray.ray_pos.y + verif_div((1.0 - ray.step.y) / 2.0, ray.ray_dir.y))));
+			//Calcule la hauteur de la ligne à tracer
+			ray.height_line = abs((int)verif_div(ray.h, ray.perp_wall_dist));
+
+			//Calcule les pixels max haut et max bas de la colonne à tracer
+			ray.draw_start = (int)-ray.height_line / 2 + (int)ray.h / 2;
+			ray.draw_end = (int)ray.height_line / 2 + (int)ray.h / 2;
+			// limite les zones de tracé à l'écran uniquement
+			if (ray.draw_start < 0)
+				ray.draw_start = 0;
+			if (ray.draw_end >= ray.h)
+				ray.draw_end = ray.h - 1;
+			ray.color = create_color(245, 12, 35);
+			if (ray.side)
+				ray.color = create_color(245, 52, 114);
+			draw_line(stru, create_vect(ray.x, ray.draw_start), create_vect(ray.x, ray.draw_end), ray.color);
+			ray.x++;
 		}
-		screen.unlock();// débloque la mise à jour des bitmaps dans l'écran de jeu
 	}
+	return (0);
 }

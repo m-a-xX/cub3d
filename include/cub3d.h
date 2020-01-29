@@ -6,7 +6,7 @@
 /*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/17 03:10:23 by mavileo           #+#    #+#             */
-/*   Updated: 2020/01/27 17:46:35 by mavileo          ###   ########.fr       */
+/*   Updated: 2020/01/29 01:00:57 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ typedef struct	s_color
 
 typedef struct	s_vecf
 {
-	float x;
-	float y;
+	double x;
+	double y;
 }				t_vecf;
 
 typedef struct	s_vect
@@ -57,6 +57,31 @@ typedef struct	s_rect
 	t_vect dep;
 	t_vect end;
 }				t_rect;
+
+typedef struct	s_ray
+{
+	t_color	color;
+	t_vect	map;// int case camera est dessus
+	t_vecf	dir;// double vecteur direction de 0 a 1
+	t_vecf	pos;// double position de la camera en unite de case
+	t_vecf	ray_pos;// double point de depart des rayons en unite de case
+	t_vect	ray_dir;// double vecteur direction du rayon de 0 a 1
+	t_vect	side_dist;// distance position de depart - mur en unite de case
+	t_vect	delta_dist;// distance entre intersections en unite de case
+	t_vect	step;// pas a faire pour passer d'une case a l'aure, +1 ou -1
+	t_vecf	plane;// vecteur du plan de projection
+	int		x;// compteur colonne traitee
+	int		y;
+	int		camera_x;// position camera par rapport au centre (+ ou -)
+	int		perp_wall_dist;// distance corrigee position de depart - mur en unite de case
+	int		w;// largeur projection
+	int		h;// hauteur projection
+	int		hit;// booleen touche un mur ou pas
+	int		height_line;// hauteur de la ligne a tracer
+	int		draw_start;// pixel min ligne
+	int		draw_end;// pixel max ligne
+	int		side;// bool orientation mur (1 si mur oriente gauche droite)
+}				t_ray;
 
 typedef struct	s_stru
 {
@@ -83,7 +108,7 @@ typedef struct	s_stru
 	double	dist_screen;
 	t_vect	len_sprite;
 	t_vect	map_size;
-	float	angle;
+	double	angle;
 	char	begin_pos;
 	double	inter_rays;
 	t_vect	plane;
@@ -170,7 +195,7 @@ int		alloc_matrix(char *map, t_stru *stru);
 void	departure_angle(t_stru *stru, char *map, int i);
 int		error_parsing(void);
 void	draw_circle(t_stru *stru, t_vect coord, t_color color, int radius);
-float	calc_distance_vector(t_vect a, t_vect b);
+double	calc_distance_vector(t_vect a, t_vect b);
 void	save_image(void);
 void	calcul_dist_screen(t_stru *stru);
 void	calcul_map_size(t_stru *stru);
@@ -185,7 +210,7 @@ int		draw_vect(t_stru *stru, t_vect vect, int len);
 int		key_hook(int keyhook, t_stru *stru);
 int		actualise_pos(t_stru *stru);
 int		draw_vect(t_stru *stru, t_vect vect, int len);
-int		expose_hook(t_stru *stru);
+int		expose_hook(t_stru *stru, int k);
 int		loop_hook(t_stru *stru);
 int		exit_hook(t_stru *stru);
 int		init_mlx(t_stru *stru);
@@ -197,11 +222,13 @@ int		begin_pos(t_stru *stru);
 int		ft_printf(char *str, ...);
 t_vecf	mult_vectf(t_vecf v1, t_vecf mult);
 int		draw_fov(t_stru *stru);
-t_vecf	create_vectf(float x, float y);
+t_vecf	create_vectf(double x, double y);
 t_vect	add_vect_and_vectf(t_vect v1, t_vecf v2);
 t_vect	mult_vect_and_vecf(t_vect v1, t_vecf mult);
-t_vect	horizontal_intersect(t_stru *stru, float angle);
-t_vect	vertical_intersect(t_stru *stru, float angle);
+t_vect	horizontal_intersect(t_stru *stru, double angle);
+t_vect	vertical_intersect(t_stru *stru, double angle);
 void	p_value(int value, char *str);
+t_ray	create_ray(t_stru *stru);
+int		render(t_stru *stru, int k);
 
 #endif

@@ -55,8 +55,8 @@ int		rotation(t_stru *stru, int right)
 	//ft_putstr_fd("\n", 1);
 	//p_value(stru->orient.x, " : orient x\n");
 	//p_value(stru->orient.y, " : orient y\n");
-	stru->orient.x = cos(deg_to_rad(stru->angle)) * (stru->len_sprite.x) / 6 * -1;
-	stru->orient.y = sin(deg_to_rad(stru->angle)) * (stru->len_sprite.y) / 6 * -1;
+	stru->orient.x = cos_deg(stru->angle) * (stru->len_sprite.x) / 6 * -1;
+	stru->orient.y = sin_deg(stru->angle) * (stru->len_sprite.y) / 6 * -1;
 	//vertical_intersect(stru, stru->angle);
 	//horizontal_intersect(stru, stru->angle);
 	return (0);

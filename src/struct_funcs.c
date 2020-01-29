@@ -6,7 +6,7 @@
 /*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/01 01:12:49 by mavileo           #+#    #+#             */
-/*   Updated: 2020/01/15 22:12:58 by mavileo          ###   ########.fr       */
+/*   Updated: 2020/01/27 23:42:56 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,29 @@ void	free_struct(t_stru *to_free)
 	free(to_free);
 }
 
-t_vecf	create_vectf(float x, float y)
+t_vecf	create_vectf(double x, double y)
 {
 	t_vecf res;
-	
+
 	res.x = x;
 	res.y = y;
 	return (res);
+}
+
+t_ray	create_ray(t_stru *stru)
+{
+	t_ray ray;
+
+	ray.x = 0;
+	ray.y = 0;
+	ray.dir.x = cos_deg(stru->angle);
+	ray.dir.y = sin_deg(stru->angle);
+	ray.plane.x = -ray.dir.y;
+	ray.plane.y = -ray.dir.x;
+	ray.pos.x = (double)stru->pixel_pos.x / (double)stru->len_sprite.x;
+	ray.pos.y = (double)stru->pixel_pos.y / (double)stru->len_sprite.y;
+	ray.map = div_vects(stru->pixel_pos, stru->len_sprite);
+	ray.w = stru->res.x;
+	ray.h = stru->res.y;
+	return (ray);
 }
