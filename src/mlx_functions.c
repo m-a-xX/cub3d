@@ -6,18 +6,11 @@
 /*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/11 20:28:21 by mavileo           #+#    #+#             */
-/*   Updated: 2020/05/07 00:03:27 by mavileo          ###   ########.fr       */
+/*   Updated: 2020/05/07 00:22:28 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
-# define LEFT 97
-# define RIGHT 100
-# define DOWN 115
-# define UP 119# define ARROW_LEFT 65361
-# define ARROW_RIGHT 65363
-# define ARROW_DOWN 65364
-# define ARROW_UP 65362# define ESC 65307
 
 int		exit_hook(t_stru *stru)
 {
