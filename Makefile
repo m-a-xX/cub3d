@@ -1,8 +1,10 @@
 CC=clang
 CFLAGS=-Wall -Wextra -Werror
 EXEC=cub3d
-SRCS=	src/main.c		\
-		
+SRCS=	src/main.c			\
+		src/mlx_funcs.c		\
+		src/structs_funcs.c	\
+
 OBJ= $(SRCS:.c=.o)
 
 all: $(EXEC)
