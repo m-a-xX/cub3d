@@ -6,7 +6,7 @@
 /*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/07 00:18:35 by mavileo           #+#    #+#             */
-/*   Updated: 2020/05/07 02:15:46 by mavileo          ###   ########.fr       */
+/*   Updated: 2020/05/07 04:37:28 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include "../lib/mlx/mlx.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 #include <math.h>
 
 # define RED_VALUE 2
@@ -25,10 +26,17 @@
 # define LEFT 97
 # define RIGHT 100
 # define DOWN 115
-# define UP 119# define ARROW_LEFT 65361
+# define UP 119
+# define ARROW_LEFT 65361
 # define ARROW_RIGHT 65363
 # define ARROW_DOWN 65364
-# define ARROW_UP 65362# define ESC 65307
+# define ARROW_UP 65362
+# define ESC 65307
+
+# define KEYPRESS_EVENT 2
+# define KEYPRESS_MASK 1
+# define KEYRELEASE_EVENT 3
+# define KEYRELEASE_MASK 2
 
 typedef struct	s_stru
 {
@@ -56,6 +64,8 @@ typedef struct	s_stru
 	double	sideDistY;
 	double	deltaDistX;
 	double	deltaDistY;
+	double	moveSpeed;
+	double	rotSpeed;
 	int		mapX;
 	int		mapY;
 	int		stepX;
@@ -89,6 +99,9 @@ void	free_struct(t_stru *to_free);
 t_color	create_color(int r, int b, int g);
 void	raycast(t_stru *stru);
 void	put_pixel(t_stru *stru, t_color color, int x, int y);
+int		loop_hook(t_stru *stru);
+int		key_hook(int keyhook, t_stru *stru);
+int		exit_hook(t_stru *stru);
 
 
 #endif

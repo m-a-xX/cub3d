@@ -6,7 +6,7 @@
 /*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/07 02:00:18 by mavileo           #+#    #+#             */
-/*   Updated: 2020/05/07 02:16:21 by mavileo          ###   ########.fr       */
+/*   Updated: 2020/05/07 04:40:44 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,4 +144,59 @@ void	raycast(t_stru *stru)
 		draw_column(stru, x);
 		x++;
 	}
+}
+
+void	clear(t_stru *stru)
+{
+	int x;
+	int y;
+
+	x = 0;
+	while (x < stru->screenWidth)
+	{
+		y = 0;
+		while (y < stru->screenHeight)
+			put_pixel(stru, create_color(0,0,0), x, y++);
+		x++;
+	}
+	mlx_put_image_to_window(stru->mlx_ptr, stru->win_ptr, stru->img_ptr, 0, 0);
+}
+
+int		key_hook(int keyhook, t_stru *stru)
+{
+	write(1, "keyy_hook\n", 10);
+	printf("%d\n", keyhook);
+	if (keyhook == UP)
+	{
+		if(worldMap[(int)(stru->posX + stru->dirX * stru->moveSpeed)][(int)(stru->posY)] == 0) stru->posX += stru->dirX * stru->moveSpeed;
+		if(worldMap[(int)(stru->posX)][(int)(stru->posY + stru->dirY * stru->moveSpeed)] == 0) stru->posY += stru->dirY * stru->moveSpeed;
+	}
+	if (keyhook == DOWN)
+	{
+		if(worldMap[(int)(stru->posX - stru->dirX * stru->moveSpeed)][(int)(stru->posY)] == 0) stru->posX -= stru->dirX * stru->moveSpeed;
+		if(worldMap[(int)(stru->posX)][(int)(stru->posY - stru->dirY * stru->moveSpeed)] == 0) stru->posY -= stru->dirY * stru->moveSpeed;
+	}
+	if (keyhook == ARROW_RIGHT)
+	{
+		double oldDirX;
+		oldDirX = stru->dirX;
+		stru->dirX = stru->dirX * cos(-stru->rotSpeed) - stru->dirY * sin(-stru->rotSpeed);
+		stru->dirY = oldDirX * sin(-stru->rotSpeed) + stru->dirY * cos(-stru->rotSpeed);
+		double oldPlaneX = stru->planeX;
+		stru->planeX = stru->planeX * cos(-stru->rotSpeed) - stru->planeY * sin(-stru->rotSpeed);
+		stru->planeY = oldPlaneX * sin(-stru->rotSpeed) + stru->planeY * cos(-stru->rotSpeed);
+	}
+	if (keyhook == ARROW_LEFT)
+	{
+		double oldDirX = stru->dirX;
+		stru->dirX = stru->dirX * cos(stru->rotSpeed) - stru->dirY * sin(stru->rotSpeed);
+		stru->dirY = oldDirX * sin(stru->rotSpeed) + stru->dirY * cos(stru->rotSpeed);
+		double oldPlaneX = stru->planeX;
+		stru->planeX = stru->planeX * cos(stru->rotSpeed) - stru->planeY * sin(stru->rotSpeed);
+		stru->planeY = oldPlaneX * sin(stru->rotSpeed) + stru->planeY * cos(stru->rotSpeed);
+	}
+	clear(stru);
+	raycast(stru);
+	mlx_put_image_to_window(stru->mlx_ptr, stru->win_ptr, stru->img_ptr, 0, 0);
+	return (0);	clear(stru);
 }

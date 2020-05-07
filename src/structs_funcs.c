@@ -6,7 +6,7 @@
 /*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/01 01:12:49 by mavileo           #+#    #+#             */
-/*   Updated: 2020/05/07 00:47:46 by mavileo          ###   ########.fr       */
+/*   Updated: 2020/05/07 02:27:06 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ t_stru	create_struct(void)
 	to_create.img_ptr = NULL;
 	to_create.win_ptr = NULL;
 	to_create.pixels = NULL;
+	to_create.moveSpeed = 0.3;
+	to_create.rotSpeed = 0.5;
 	return (to_create);
 }
 
