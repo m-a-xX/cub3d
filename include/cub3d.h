@@ -6,7 +6,7 @@
 /*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/07 00:18:35 by mavileo           #+#    #+#             */
-/*   Updated: 2020/05/07 00:54:58 by mavileo          ###   ########.fr       */
+/*   Updated: 2020/05/07 02:15:46 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,8 @@ t_stru	create_struct(void);
 t_stru	*malloc_struct(void);
 void	free_struct(t_stru *to_free);
 t_color	create_color(int r, int b, int g);
+void	raycast(t_stru *stru);
+void	put_pixel(t_stru *stru, t_color color, int x, int y);
 
 
 #endif

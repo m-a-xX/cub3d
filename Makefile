@@ -4,6 +4,8 @@ EXEC=cub3d
 SRCS=	src/main.c			\
 		src/mlx_funcs.c		\
 		src/structs_funcs.c	\
+		src/raycast.c		\
+		src/print.c			\
 
 OBJ= $(SRCS:.c=.o)
 
@@ -22,3 +24,5 @@ clean:
 
 fclean: clean
 	rm -rf $(EXEC)
+
+re: fclean all
