@@ -6,7 +6,7 @@
 /*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/06 23:12:15 by user42            #+#    #+#             */
-/*   Updated: 2020/05/07 04:39:51 by mavileo          ###   ########.fr       */
+/*   Updated: 2020/05/08 17:33:26 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int             cub3d(t_stru *stru)
 {
 	stru->posX = 22;
-	stru->posY = 12;
+	stru->posY = 11;
 
 	stru->screenHeight = 400;
 	stru->screenWidth = 600;
@@ -25,14 +25,15 @@ int             cub3d(t_stru *stru)
 
 	stru->dirX = -1;
 	stru->dirY = 0;
+	stru->moveSpeed = 0.1;
+	stru->rotSpeed = 0.1;
+	
 
-	stru->moveSpeed = 0.2;
-	stru->rotSpeed = 0.2;
 	init_mlx(stru);
 	raycast(stru);
 	mlx_put_image_to_window(stru->mlx_ptr, stru->win_ptr, stru->img_ptr, 0, 0);
-	mlx_key_hook(stru->win_ptr, key_hook, stru);
-	mlx_loop_hook(stru->mlx_ptr, loop_hook, stru);
+	mlx_hook(stru->win_ptr, 2, 1L<<0, key_hook, stru);
+	mlx_hook(stru->win_ptr, 17, 0, exit_hook, stru);
 	mlx_loop(stru->mlx_ptr);
 	return (0);
 }
