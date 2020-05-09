@@ -6,7 +6,7 @@
 /*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/07 00:18:35 by mavileo           #+#    #+#             */
-/*   Updated: 2020/05/07 05:52:22 by mavileo          ###   ########.fr       */
+/*   Updated: 2020/05/09 03:51:03 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,16 @@
 #define CUB3D_H
 
 #include "../lib/mlx/mlx.h"
+#include "../lib/libft/libft.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include <math.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+
+# define BUFFER_SIZE 10
 
 # define RED_VALUE 2
 # define GREEN_VALUE 1
@@ -38,42 +44,52 @@
 # define KEYRELEASE_EVENT 3
 # define KEYRELEASE_MASK 2
 
+typedef struct  s_color
+{
+	int r;
+	int g;
+	int b;
+}				t_color;
+
 typedef struct	s_stru
 {
 	char	**map;
-	char	*pathNorth;
-	char	*pathSouth;
-	char	*pathEst;
-	char	*pathWest;
-	char	*pathSprite;
-	int		mapHeight;
-	int		mapWidth;
-	int		screenHeight;
-	int		screenWidth;
-	double	posX;
-	double	posY;
-	double	dirX;
-	double	dirY;
-	double	planeX;
-	double	planeY;
-	double	cameraX;
+	char	*path_north;
+	char	*path_south;
+	char	*path_est;
+	char	*path_west;
+	char	*path_sprite;
+	t_color	rgb_sol;
+	t_color	rgb_plafond;
+	int		map_height;
+	int		map_width;
+	int		screen_height;
+	int		screen_width;
+	char	begin_dir;
+	double	pos_x;
+	double	pos_y;
+	double	dir_x;
+	double	dir_y;
+	double	plane_x;
+	double	plane_y;
+	double	camera_x;
 	double	cameraY;
-	double	rayDirX;
-	double	rayDirY;
-	double	sideDistX;
-	double	sideDistY;
-	double	deltaDistX;
-	double	deltaDistY;
-	double	moveSpeed;
-	double	rotSpeed;
-	int		mapX;
-	int		mapY;
+	double	raydir_x;
+	double	raydir_y;
+	double	side_dist_x;
+	double	side_dist_y;
+	double	delta_dist_x;
+	double	delta_dist_y;
+	double	move_speed;
+	double	rot_speed;
+	int		map_x;
+	int		map_y;
 	int		stepX;
 	int		stepY;
 	int		hit;
 	int		side;
-	double	perpWallDist;
-	int		lineHeight;
+	double	perp_wall_dist;
+	int		line_height;
 	int		drawStart;
 	int		drawEnd;
 	void	*mlx_ptr;
@@ -85,13 +101,17 @@ typedef struct	s_stru
 	int		endian;
 }				t_stru;
 
-typedef struct  s_color
-{
-	int r;
-	int g;
-	int b;
-}				t_color;
+/* GNL */
+int             get_next_line(int fd, char **line);
+int             ft_search_nl(char *str);
+char    *ft_strjoin_free(char *s1, char *s2, int c);
+void    *ft_memset(void *s, int c, size_t n);
+void    *ft_calloc(size_t nb, size_t size);
+int             ft_len_line(const char *stock);
+int             ft_loop(char **stock, int fd, char *buffer);
+int             ft_atoi(const char *nb);
 
+/* CUB3D */
 int		init_mlx(t_stru *stru);
 t_stru	create_struct(void);
 t_stru	*malloc_struct(void);
@@ -102,6 +122,16 @@ void	put_pixel(t_stru *stru, t_color color, int x, int y);
 int		loop_hook(t_stru *stru);
 int		key_hook(int keyhook, t_stru *stru);
 int		exit_hook(t_stru *stru);
+char	*strjoin_free_nl(char *s1, char *s2);
+int		check_stru(t_stru *stru);
+int		analyse_line(char *line, t_stru *stru, int i);
+int		alloc_matrix(char *map, t_stru *stru);
+void	fill_map(t_stru *stru, char *map, int i);
+int		check_map(t_stru *stru);
+int		parse_cub(int fd, t_stru *stru);
+void	print_pos(t_stru *stru);
+void	clear(t_stru *stru);
+void	draw_line(t_stru *stru, int pos1X, int pos1Y, int pos2X, int pos2Y, t_color color);
 
 
 #endif
