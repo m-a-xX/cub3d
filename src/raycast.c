@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mavileo@student.42.fr <mavileo@student.    +#+  +:+       +#+        */
+/*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/07 02:00:18 by mavileo           #+#    #+#             */
-/*   Updated: 2020/05/24 18:26:19 by mavileo@stu      ###   ########.fr       */
+/*   Updated: 2020/05/24 23:13:51 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,31 @@ void	draw_column(t_stru *stru, int x)
 		put_pixel(stru, color, x, stru->drawStart++);
 }
 
+void	top_floor(t_stru *stru)
+{
+	int		x;
+	int		y;
+	t_color	floor;
+	t_color	top;
+	
+	y = 0;
+	floor = create_color(125, 125, 65);
+	top = create_color(23, 245, 112);
+	while (y <= stru->screen_height)
+	{
+		x = 0;
+		while (x <= stru->screen_width)
+		{
+			if (y <= stru->screen_height / 2)
+				put_pixel(stru, top, x, y);
+			else
+				put_pixel(stru, floor, x, y);
+			x++;
+		}
+		y++;
+	}
+}
+
 void	raycast(t_stru *stru)
 {
 	int x;
@@ -101,6 +126,7 @@ void	raycast(t_stru *stru)
 	x = 0;
 	int oldS = 0, S = 0;
 	print_pos(stru);
+	top_floor(stru);
 	while (x < stru->screen_width)
 	{
 		oldS = S;
