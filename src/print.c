@@ -6,7 +6,7 @@
 /*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/07 02:08:09 by mavileo           #+#    #+#             */
-/*   Updated: 2020/05/25 00:37:13 by mavileo          ###   ########.fr       */
+/*   Updated: 2020/05/25 01:28:16 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,33 +71,31 @@ void	draw_circle(t_stru *stru, int coord_x, int coord_y, int radius)
 	}
 }
 
-void	draw_line(t_stru *stru, int pos1_x, int pos1_y, int pos2_x, int pos2_y, t_color color)
+void	draw_line(t_stru *stru, t_vect pos1, t_vect pos2, t_color color)
 {
-	int		d_x;
-	int		d_y;
-	int		s_x;
-	int		s_y;
+	t_vect	d;
+	t_vect	s;
 	int		err;
 	int		e2;
 
-	d_x = abs(pos2_x - pos1_x);
-	s_x = pos1_x < pos2_x ? 1 : -1;
-	d_y = abs(pos2_y - pos1_y);
-	s_y = pos1_y < pos2_y ? 1 : -1; 
-	err = (d_x > d_y ? d_x : -d_y) / 2;
-	while (!(pos1_x == pos2_x && pos1_y == pos2_y))
+	d.x = abs(pos2.x - pos1.x);
+	s.x = pos1.x < pos2.x ? 1 : -1;
+	d.y = abs(pos2.y - pos1.y);
+	s.y = pos1.y < pos2.y ? 1 : -1;
+	err = (d.x > d.y ? d.x : -d.y) / 2;
+	while (!(pos1.x == pos2.x && pos1.y == pos2.y))
 	{
-		put_pixel(stru, color, pos1_x, pos1_y);
+		put_pixel(stru, color, pos1.x, pos1.y);
 		e2 = err;
-		if (e2 > -d_x)
+		if (e2 > -d.x)
 		{
-			err -= d_y;
-			pos1_x += s_x;
+			err -= d.y;
+			pos1.x += s.x;
 		}
-		if (e2 < d_y)
+		if (e2 < d.y)
 		{
-			err += d_x;
-			pos1_y += s_y;
+			err += d.x;
+			pos1.y += s.y;
 		}
 	}
 }

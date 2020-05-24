@@ -6,7 +6,7 @@
 /*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/01 01:12:49 by mavileo           #+#    #+#             */
-/*   Updated: 2020/05/25 00:29:21 by mavileo          ###   ########.fr       */
+/*   Updated: 2020/05/25 01:28:08 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,4 +66,13 @@ t_color	create_color(int r, int b, int g)
 	color.g = g;
 	color.b = b;
 	return (color);
+}
+
+t_vect	create_vect(int x, int y)
+{
+	t_vect vect;
+
+	vect.x = x;
+	vect.y = y;
+	return (vect);
 }

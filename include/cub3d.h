@@ -6,7 +6,7 @@
 /*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/07 00:18:35 by mavileo           #+#    #+#             */
-/*   Updated: 2020/05/25 01:16:36 by mavileo          ###   ########.fr       */
+/*   Updated: 2020/05/25 01:29:33 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,12 @@
 # define KEYPRESS_MASK 1
 # define KEYRELEASE_EVENT 3
 # define KEYRELEASE_MASK 2
+
+typedef struct  s_vect
+{
+	int x;
+	int y;
+}				t_vect;
 
 typedef struct  s_color
 {
@@ -131,7 +137,7 @@ int		check_map(t_stru *stru);
 int		parse_cub(int fd, t_stru *stru);
 void	print_pos(t_stru *stru);
 void	clear(t_stru *stru);
-void	draw_line(t_stru *stru, int pos1_x, int pos1_y, int pos2_x, int pos2_y, t_color color);
+void	draw_line(t_stru *stru, t_vect pos1, t_vect pos2, t_color color);
 void	print_struct(t_stru *stru);
 void	print_ray(t_stru *stru);
 void	draw_circle(t_stru *stru, int coord_x, int coord_y, int radius);
@@ -141,5 +147,6 @@ void	vertical_move(int keyhook, t_stru *stru);
 void	horizontal_move(int keyhook, t_stru *stru);
 void	rotation_right(int keyhook, t_stru *stru);
 void	rotation_left(int keyhook, t_stru *stru);
+t_vect	create_vect(int x, int y);
 
 #endif

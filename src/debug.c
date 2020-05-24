@@ -6,7 +6,7 @@
 /*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/24 18:19:55 by mavileo           #+#    #+#             */
-/*   Updated: 2020/05/25 00:51:48 by mavileo          ###   ########.fr       */
+/*   Updated: 2020/05/25 01:27:32 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,8 @@ void	print_struct(t_stru *stru)
 
 void	print_ray(t_stru *stru)
 {
-	draw_line(stru, stru->pos_x * 5, stru->pos_y * 5, stru->pos_x * 5 + \
-	(stru->raydir_x * 20), stru->pos_y * 5 + (stru->raydir_y * 20), \
+	draw_line(stru, create_vect(stru->pos_x * 5, stru->pos_y * 5),
+	create_vect(stru->pos_x * 5 +
+	(stru->raydir_x * 20), stru->pos_y * 5 + (stru->raydir_y * 20)),
 	create_color(244, 143, 228));
 }
