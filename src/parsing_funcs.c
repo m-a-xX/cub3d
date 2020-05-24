@@ -6,7 +6,7 @@
 /*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/17 07:36:11 by mavileo           #+#    #+#             */
-/*   Updated: 2020/05/09 03:51:03 by mavileo          ###   ########.fr       */
+/*   Updated: 2020/05/25 01:16:36 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,17 +40,17 @@ t_color	get_rgb(char *line, int i)
 
 int		check_stru(t_stru *stru)
 {
-	if (stru->rgb_sol.r > 255 || stru->rgb_sol.r < 0)
+	if (stru->rgb_floor.r > 255 || stru->rgb_floor.r < 0)
 		return (1);
-	if (stru->rgb_sol.g > 255 || stru->rgb_sol.g < 0)
+	if (stru->rgb_floor.g > 255 || stru->rgb_floor.g < 0)
 		return (1);
-	if (stru->rgb_sol.b > 255 || stru->rgb_sol.b < 0)
+	if (stru->rgb_floor.b > 255 || stru->rgb_floor.b < 0)
 		return (1);
-	if (stru->rgb_plafond.r > 255 || stru->rgb_plafond.r < 0)
+	if (stru->rgb_top.r > 255 || stru->rgb_top.r < 0)
 		return (1);
-	if (stru->rgb_plafond.g > 255 || stru->rgb_plafond.g < 0)
+	if (stru->rgb_top.g > 255 || stru->rgb_top.g < 0)
 		return (1);
-	if (stru->rgb_plafond.b > 255 || stru->rgb_plafond.b < 0)
+	if (stru->rgb_top.b > 255 || stru->rgb_top.b < 0)
 		return (1);
 	if (!stru->map)
 		return (1);
@@ -94,9 +94,9 @@ int		analyse_line(char *line, t_stru *stru, int i)
 	if (line[i] == 'S' && count++ >= 0)
 		stru->path_sprite = get_path(line, i + 1);
 	if (line[i] == 'F' && count++ >= 0)
-		stru->rgb_sol = get_rgb(line, i);
+		stru->rgb_floor = get_rgb(line, i);
 	if (line[i] == 'C' && count++ >= 0)
-		stru->rgb_plafond = get_rgb(line, i);
+		stru->rgb_top = get_rgb(line, i);
 	if (line[i] == 'R' && count++ >= 0)
 		res(i, stru, line);
 	return (count);

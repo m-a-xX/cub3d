@@ -6,7 +6,7 @@
 /*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/07 00:18:35 by mavileo           #+#    #+#             */
-/*   Updated: 2020/05/25 01:14:23 by mavileo          ###   ########.fr       */
+/*   Updated: 2020/05/25 01:16:36 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,8 @@ typedef struct	s_stru
 	char	*path_est;
 	char	*path_west;
 	char	*path_sprite;
-	t_color	rgb_sol;
-	t_color	rgb_plafond;
+	t_color	rgb_floor;
+	t_color	rgb_top;
 	int		map_height;
 	int		map_width;
 	int		screen_height;

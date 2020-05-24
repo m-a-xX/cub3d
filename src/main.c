@@ -6,7 +6,7 @@
 /*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/06 23:12:15 by user42            #+#    #+#             */
-/*   Updated: 2020/05/25 00:45:05 by mavileo          ###   ########.fr       */
+/*   Updated: 2020/05/25 01:19:29 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int		cub3d(t_stru *stru)
 {
-	print_struct(stru);
 	init_mlx(stru);
 	raycast(stru);
 	mlx_put_image_to_window(stru->mlx_ptr, stru->win_ptr, stru->img_ptr, 0, 0);

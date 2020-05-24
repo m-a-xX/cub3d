@@ -6,7 +6,7 @@
 /*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/07 02:00:18 by mavileo           #+#    #+#             */
-/*   Updated: 2020/05/25 01:06:55 by mavileo          ###   ########.fr       */
+/*   Updated: 2020/05/25 01:17:12 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,21 +53,17 @@ void	top_floor(t_stru *stru)
 {
 	int		x;
 	int		y;
-	t_color	floor;
-	t_color	top;
 
 	y = 0;
-	floor = create_color(125, 125, 65);
-	top = create_color(23, 245, 112);
 	while (y <= stru->screen_height)
 	{
 		x = 0;
 		while (x <= stru->screen_width)
 		{
 			if (y <= stru->screen_height / 2)
-				put_pixel(stru, top, x, y);
+				put_pixel(stru, stru->rgb_top, x, y);
 			else
-				put_pixel(stru, floor, x, y);
+				put_pixel(stru, stru->rgb_floor, x, y);
 			x++;
 		}
 		y++;
