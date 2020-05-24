@@ -26,8 +26,8 @@ t_stru	create_struct(void)
 	to_create.img_ptr = NULL;
 	to_create.win_ptr = NULL;
 	to_create.pixels = NULL;
-	to_create.move_speed = 0.3;
-	to_create.rot_speed = 0.5;
+	to_create.move_speed = 0.1;
+	to_create.rot_speed = 0.1;
 	return (to_create);
 }
 

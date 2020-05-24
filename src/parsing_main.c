@@ -81,7 +81,7 @@ int		begin_plane(t_stru *stru)
 	else if (stru->begin_dir == 'W')
 	{
 		stru->plane_x = 0;
-		stru->plane_y = 0.66;
+		stru->plane_y = -0.66;
 	}
 	return (0);
 }

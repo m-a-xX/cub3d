@@ -12,22 +12,37 @@
 
 #include "../include/cub3d.h"
 
+void	print_map(t_stru *stru)
+{
+	printf("stru->pos_x %f\n", stru->pos_x);
+	printf("stru->pos_y %f\n", stru->pos_y);
+	printf("stru->screen_height %d\n", stru->screen_height);
+	printf("stru->screen_width %d\n", stru->screen_width);
+	printf("stru->map_height %d\n", stru->map_height);
+	printf("stru->map_width %d\n", stru->map_width);
+	printf("stru->dir_x %f\n", stru->dir_x);
+	printf("stru->dir_y %f\n", stru->dir_y);
+	printf("stru->move_speed %f\n", stru->move_speed);
+	printf("stru->rot_speed %f\n", stru->rot_speed);
+	printf("stru->plane_x %f\n", stru->plane_x);
+	printf("stru->plane_y %f\n", stru->plane_y);
+	int x = 0, y = 0;
+	while (stru->map[y])
+	{
+		x = 0;
+		while (stru->map[y][x])
+		{
+			printf("%c", stru->map[y][x]);
+			x++;
+		}
+		printf("\n");
+		y++;
+	}
+}
+
 int             cub3d(t_stru *stru)
 {
- 	stru->pos_x = 22;
-	stru->pos_y = 11;
-
-	stru->screen_height = 400;
-	stru->screen_width = 600;
-
-	stru->map_height = 11;
-	stru->map_width = 11;
-
-	stru->dir_x = -1;
-	stru->dir_y = 0;
-	stru->move_speed = 0.1;
-	stru->rot_speed = 0.1;
-
+	print_map(stru);
 	init_mlx(stru);
 	raycast(stru);
 	mlx_put_image_to_window(stru->mlx_ptr, stru->win_ptr, stru->img_ptr, 0, 0);
@@ -39,17 +54,17 @@ int             cub3d(t_stru *stru)
 
 int             main(int ac, char **av)
 {
-        int             fd;
-        t_stru  *stru;
+	int		fd;
+	t_stru	*stru;
 
-        if ((ac != 2 && ac != 3) || (!(stru = malloc_struct())))
-                return (1);
-        //if (av[2] && ft_strncmp(av[2], "-save", ft_strlen(av[2])))
-                //save_image();
-        fd = open(av[1], O_RDONLY);
-        if (parse_cub(fd, stru))
-                return (1);
-        cub3d(stru);
-        free_struct(stru);
-        return (0);
+	if ((ac != 2 && ac != 3) || (!(stru = malloc_struct())))
+		return (1);
+	//if (av[2] && ft_strncmp(av[2], "-save", ft_strlen(av[2])))
+		//save_image();
+	fd = open(av[1], O_RDONLY);
+	if (parse_cub(fd, stru))
+		return (1);
+	cub3d(stru);
+	free_struct(stru);
+	return (0);
 }

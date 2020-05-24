@@ -12,20 +12,27 @@
 
 #include "../include/cub3d.h"
 
+int		verify_move(char c)
+{
+	if (c == '0' || c == 'N' || c == 'S' || c == 'E' || c == 'W')
+		return (1);
+	return (0);
+}
+
 void	vertical_move(int keyhook, t_stru *stru)
 {
 	if (keyhook == UP)
 	{
-		if (stru->map[(int)(stru->pos_x + stru->dir_x * stru->move_speed)][(int)(stru->pos_y)] == '0')
+		if (verify_move(stru->map[(int)(stru->pos_x + stru->dir_x * stru->move_speed)][(int)(stru->pos_y)]))
 			stru->pos_x += stru->dir_x * stru->move_speed;
-		if (stru->map[(int)(stru->pos_x)][(int)(stru->pos_y + stru->dir_y * stru->move_speed)] == '0')
+		if (verify_move(stru->map[(int)(stru->pos_x)][(int)(stru->pos_y + stru->dir_y * stru->move_speed)]))
 			stru->pos_y += stru->dir_y * stru->move_speed;
 	}
 	else if (keyhook == DOWN)
 	{
-		if (stru->map[(int)(stru->pos_x - stru->dir_x * stru->move_speed)][(int)(stru->pos_y)] == '0')
+		if (verify_move(stru->map[(int)(stru->pos_x - stru->dir_x * stru->move_speed)][(int)(stru->pos_y)]))
 			stru->pos_x -= stru->dir_x * stru->move_speed;
-		if (stru->map[(int)(stru->pos_x)][(int)(stru->pos_y - stru->dir_y * stru->move_speed)] == '0')
+		if (verify_move(stru->map[(int)(stru->pos_x)][(int)(stru->pos_y - stru->dir_y * stru->move_speed)]))
 			stru->pos_y -= stru->dir_y * stru->move_speed;
 	}
 }
@@ -34,16 +41,16 @@ void	horizontal_move(int keyhook, t_stru *stru)
 {
 	if (keyhook == LEFT)
 	{
-		if (stru->map[(int)(stru->pos_x - stru->plane_x  * stru->rot_speed)][(int)(stru->pos_y)] == '0')
+		if (verify_move(stru->map[(int)(stru->pos_x - stru->plane_x  * stru->rot_speed)][(int)(stru->pos_y)]))
 			stru->pos_x -= stru->plane_x * stru->rot_speed;
-		if (stru->map[(int)(stru->pos_x)][(int)(stru->pos_y - stru->plane_y * stru->rot_speed)] == '0')
+		if (verify_move(stru->map[(int)(stru->pos_x)][(int)(stru->pos_y - stru->plane_y * stru->rot_speed)]))
 			stru->pos_y -= stru->plane_y * stru->rot_speed;
 	}
 	else if (keyhook == RIGHT)
 	{
-		if (stru->map[(int)(stru->pos_x + stru->plane_x  * stru->rot_speed)][(int)(stru->pos_y)] == '0')
+		if (verify_move(stru->map[(int)(stru->pos_x + stru->plane_x  * stru->rot_speed)][(int)(stru->pos_y)]))
 			stru->pos_x += stru->plane_x * stru->rot_speed;
-		if (stru->map[(int)(stru->pos_x)][(int)(stru->pos_y + stru->plane_y * stru->rot_speed)] == '0')
+		if (verify_move(stru->map[(int)(stru->pos_x)][(int)(stru->pos_y + stru->plane_y * stru->rot_speed)]))
 			stru->pos_y += stru->plane_y * stru->rot_speed;
 	}
 }
@@ -53,7 +60,7 @@ void	rotation(int keyhook, t_stru *stru)
 	double olddir_x;
 	double oldplane_x;
 
-	if (keyhook ==ARROW_LEFT )
+	if (keyhook == ARROW_LEFT)
 	{
 		olddir_x = stru->dir_x;
 		stru->dir_x = stru->dir_x * cos(-stru->rot_speed) - stru->dir_y * sin(-stru->rot_speed);

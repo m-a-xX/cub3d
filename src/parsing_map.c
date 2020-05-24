@@ -12,6 +12,13 @@
 
 #include "../include/cub3d.h"
 
+void	end(int x, int y, int i, t_stru *stru)
+{
+	stru->map[i] = NULL;
+	stru->map_height = y;
+	stru->map_width = x;
+}
+
 int		alloc_matrix(char *map, t_stru *stru)
 {
 	int i;
@@ -34,10 +41,10 @@ int		alloc_matrix(char *map, t_stru *stru)
 	while (map[x] && map[x] != '\n')
 		x++;
 	i = 0;
-	while (i < y)
+	while (i < y && !(stru->map_height == y) && !(stru->map_width == x))
 		if (!(stru->map[i++] = malloc(sizeof(char) * (x + 1))))
 			return (1);
-	stru->map[i] = NULL;
+	end(x, y, i, stru);
 	return (0);
 }
 

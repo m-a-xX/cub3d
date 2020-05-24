@@ -103,13 +103,13 @@ void	draw_line(t_stru *stru, int pos1X, int pos1Y, int pos2X, int pos2Y, t_color
 
 void	print_pos(t_stru *stru)
 {
-	int x = 5*24, y = 5*24;
+	int x = 5*15, y = 5*10;
 	while (x >= 0)
 	{
-		y = 5*24;
+		y = 5*10;
 		while (y >= 0)
 		{
-			if (stru->map[x/5][y/5] > '0')
+			if (stru->map[y/5][x/5] > '0')
 				put_pixel(stru, create_color(255,255,255), x, y--);
 			else
 				put_pixel(stru, create_color(0,0,0), x, y--);

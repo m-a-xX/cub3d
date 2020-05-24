@@ -52,7 +52,7 @@ void	dda(t_stru *stru)
 			stru->map_y += stru->stepY;
 			stru->side = 1;
 		}
-		if (stru->map[stru->map_x][stru->map_y] > '0')
+		if (stru->map[stru->map_x][stru->map_y] > '0' && stru->map[stru->map_x][stru->map_y] < '9')
 			stru->hit = 1;
 	}
 }
@@ -79,10 +79,10 @@ void	draw_column(t_stru *stru, int x)
 	switch(stru->map[stru->map_x][stru->map_y])
 	{
 		case '1':	color = create_color(25, 65, 112);	break;
-		case '2':	color = create_color(25, 0, 112);	break;
-		case '3':	color = create_color(150, 54, 35);	 break;
+		case '2':	color = create_color(255, 0, 0);	break;
+		case '3':	color = create_color(0, 0, 255);	 break;
 		case '4':	color = create_color(2, 65, 200);	break;
-		default: color = create_color(0, 65, 112); break;
+		default: color = create_color(5, 5, 5); break;
 	}
 	if (stru->side == 1)
 	{
@@ -99,8 +99,6 @@ void	raycast(t_stru *stru)
 	int x;
 
 	x = 0;
-	stru->plane_x = 0;
-	stru->plane_y = 0.66;
 	int oldS = 0, S = 0;
 	print_pos(stru);
 	while (x < stru->screen_width)
