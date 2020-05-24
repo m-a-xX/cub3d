@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mavileo@student.42.fr <mavileo@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/07 00:18:35 by mavileo           #+#    #+#             */
-/*   Updated: 2020/05/09 03:51:03 by mavileo          ###   ########.fr       */
+/*   Updated: 2020/05/24 18:25:08 by mavileo@stu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,9 @@ int		parse_cub(int fd, t_stru *stru);
 void	print_pos(t_stru *stru);
 void	clear(t_stru *stru);
 void	draw_line(t_stru *stru, int pos1X, int pos1Y, int pos2X, int pos2Y, t_color color);
+void	print_struct(t_stru *stru);
+void	print_ray(t_stru *stru);
+void	draw_circle(t_stru *stru, int coordX, int coordY, t_color color, int radius);
 
 
 #endif

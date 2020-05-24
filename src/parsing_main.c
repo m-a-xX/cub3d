@@ -65,12 +65,12 @@ int		begin_plane(t_stru *stru)
 {
 	if (stru->begin_dir == 'N')
 	{
-		stru->plane_x = -0.66;
+		stru->plane_x = 0.66;
 		stru->plane_y = 0;
 	}
 	else if (stru->begin_dir == 'S')
 	{
-		stru->plane_x = 0.66;
+		stru->plane_x = -0.66;
 		stru->plane_y = 0;
 	}
 	else if (stru->begin_dir == 'E')

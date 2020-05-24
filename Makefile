@@ -13,6 +13,7 @@ SRCS=	src/main.c					\
 		src/get_next_line_utils.c	\
 		src/strjoin_free_nl.c		\
 		src/move.c					\
+		src/debug.c					\
 
 OBJ= $(SRCS:.c=.o)
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mavileo@student.42.fr <mavileo@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/07 02:00:18 by mavileo           #+#    #+#             */
-/*   Updated: 2020/05/09 03:53:09 by mavileo          ###   ########.fr       */
+/*   Updated: 2020/05/24 18:26:19 by mavileo@stu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	dda(t_stru *stru)
 			stru->map_y += stru->stepY;
 			stru->side = 1;
 		}
-		if (stru->map[stru->map_x][stru->map_y] > '0' && stru->map[stru->map_x][stru->map_y] < '9')
+		if (stru->map[stru->map_y][stru->map_x] > '0' && stru->map[stru->map_y][stru->map_x] < '9')
 			stru->hit = 1;
 	}
 }
@@ -76,7 +76,7 @@ void	draw_column(t_stru *stru, int x)
 {
 	t_color color;
 	
-	switch(stru->map[stru->map_x][stru->map_y])
+	switch(stru->map[stru->map_y][stru->map_x])
 	{
 		case '1':	color = create_color(25, 65, 112);	break;
 		case '2':	color = create_color(255, 0, 0);	break;
@@ -116,8 +116,7 @@ void	raycast(t_stru *stru)
 		calcul__height_column(stru);
 		draw_column(stru, x);
 		S = stru->side;
-		//draw_line(stru, stru->pos_x*5, stru->pos_y*5, stru->pos_x*5 + go_to(stru->raydir_x, 20), stru->pos_y*5 + go_to(stru->raydir_y, 20), create_color(255,255,255));
-		draw_line(stru, stru->pos_x*5, stru->pos_y*5, stru->pos_x*5 + (stru->raydir_x * 20), stru->pos_y*5 + (stru->raydir_y * 20), create_color(244,143,228));
+		print_ray(stru);
 		if (x == 200 || x == 400)
 		{
 			printf("x %d\nperp_wall_dist %f\nline_height %d\nraydir_x %f\nraydir_y %f\n\n", x, stru->perp_wall_dist, stru->line_height, stru->raydir_x, stru->raydir_y);

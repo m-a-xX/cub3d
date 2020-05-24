@@ -82,8 +82,6 @@ void	rotation(int keyhook, t_stru *stru)
 
 int		key_hook(int keyhook, t_stru *stru)
 {
-	printf("%d\n", keyhook);
-	printf("%f %f\n", stru->pos_x, stru->pos_y);
 	if (keyhook == ESC)
 		exit_hook(stru);
 	vertical_move(keyhook, stru);

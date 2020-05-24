@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mavileo@student.42.fr <mavileo@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/07 02:08:09 by mavileo           #+#    #+#             */
-/*   Updated: 2020/05/09 03:51:03 by mavileo          ###   ########.fr       */
+/*   Updated: 2020/05/24 18:20:21 by mavileo@stu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,22 +99,4 @@ void	draw_line(t_stru *stru, int pos1X, int pos1Y, int pos2X, int pos2Y, t_color
 			pos1Y += sY;
 		}
 	}
-}
-
-void	print_pos(t_stru *stru)
-{
-	int x = 5*15, y = 5*10;
-	while (x >= 0)
-	{
-		y = 5*10;
-		while (y >= 0)
-		{
-			if (stru->map[y/5][x/5] > '0')
-				put_pixel(stru, create_color(255,255,255), x, y--);
-			else
-				put_pixel(stru, create_color(0,0,0), x, y--);
-		}
-		x--;
-	}
-	draw_circle(stru, stru->pos_x*5, stru->pos_y*5, create_color(255,255,255), 5);
 }

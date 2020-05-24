@@ -3,46 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mavileo@student.42.fr <mavileo@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/06 23:12:15 by user42            #+#    #+#             */
-/*   Updated: 2020/05/09 03:51:03 by mavileo          ###   ########.fr       */
+/*   Updated: 2020/05/24 18:24:22 by mavileo@stu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-void	print_map(t_stru *stru)
+int		cub3d(t_stru *stru)
 {
-	printf("stru->pos_x %f\n", stru->pos_x);
-	printf("stru->pos_y %f\n", stru->pos_y);
-	printf("stru->screen_height %d\n", stru->screen_height);
-	printf("stru->screen_width %d\n", stru->screen_width);
-	printf("stru->map_height %d\n", stru->map_height);
-	printf("stru->map_width %d\n", stru->map_width);
-	printf("stru->dir_x %f\n", stru->dir_x);
-	printf("stru->dir_y %f\n", stru->dir_y);
-	printf("stru->move_speed %f\n", stru->move_speed);
-	printf("stru->rot_speed %f\n", stru->rot_speed);
-	printf("stru->plane_x %f\n", stru->plane_x);
-	printf("stru->plane_y %f\n", stru->plane_y);
-	int x = 0, y = 0;
-	while (stru->map[y])
-	{
-		x = 0;
-		while (stru->map[y][x])
-		{
-			printf("%c", stru->map[y][x]);
-			x++;
-		}
-		printf("\n");
-		y++;
-	}
-}
-
-int             cub3d(t_stru *stru)
-{
-	print_map(stru);
+	print_struct(stru);
 	init_mlx(stru);
 	raycast(stru);
 	mlx_put_image_to_window(stru->mlx_ptr, stru->win_ptr, stru->img_ptr, 0, 0);
@@ -52,7 +24,7 @@ int             cub3d(t_stru *stru)
 	return (0);
 }
 
-int             main(int ac, char **av)
+int		main(int ac, char **av)
 {
 	int		fd;
 	t_stru	*stru;
