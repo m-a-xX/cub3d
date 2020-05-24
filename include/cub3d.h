@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mavileo@student.42.fr <mavileo@student.    +#+  +:+       +#+        */
+/*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/07 00:18:35 by mavileo           #+#    #+#             */
-/*   Updated: 2020/05/24 18:25:08 by mavileo@stu      ###   ########.fr       */
+/*   Updated: 2020/05/25 01:14:23 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,15 +126,20 @@ char	*strjoin_free_nl(char *s1, char *s2);
 int		check_stru(t_stru *stru);
 int		analyse_line(char *line, t_stru *stru, int i);
 int		alloc_matrix(char *map, t_stru *stru);
-void	fill_map(t_stru *stru, char *map, int i);
+void	fill_map(t_stru *stru, char *map, int i, int x);
 int		check_map(t_stru *stru);
 int		parse_cub(int fd, t_stru *stru);
 void	print_pos(t_stru *stru);
 void	clear(t_stru *stru);
-void	draw_line(t_stru *stru, int pos1X, int pos1Y, int pos2X, int pos2Y, t_color color);
+void	draw_line(t_stru *stru, int pos1_x, int pos1_y, int pos2_x, int pos2_y, t_color color);
 void	print_struct(t_stru *stru);
 void	print_ray(t_stru *stru);
-void	draw_circle(t_stru *stru, int coordX, int coordY, t_color color, int radius);
-
+void	draw_circle(t_stru *stru, int coord_x, int coord_y, int radius);
+void	dda(t_stru *stru);
+int		verify_move(char c);
+void	vertical_move(int keyhook, t_stru *stru);
+void	horizontal_move(int keyhook, t_stru *stru);
+void	rotation_right(int keyhook, t_stru *stru);
+void	rotation_left(int keyhook, t_stru *stru);
 
 #endif

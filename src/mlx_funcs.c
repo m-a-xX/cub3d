@@ -6,7 +6,7 @@
 /*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/11 20:28:21 by mavileo           #+#    #+#             */
-/*   Updated: 2020/05/09 03:51:03 by mavileo          ###   ########.fr       */
+/*   Updated: 2020/05/25 01:12:28 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,23 @@ int		init_mlx(t_stru *stru)
 	stru->mlx_ptr = mlx_init();
 	stru->win_ptr = mlx_new_window(stru->mlx_ptr, stru->screen_width,
 	stru->screen_height, "cub3d");
-	stru->img_ptr = mlx_new_image(stru->mlx_ptr, stru->screen_width, stru->screen_height);
+	stru->img_ptr = mlx_new_image(stru->mlx_ptr, stru->screen_width,
+					stru->screen_height);
 	stru->pixels = mlx_get_data_addr(stru->img_ptr, &(stru->bpp),
 	&(stru->sizeline), &(stru->endian));
+	return (0);
+}
+
+int		key_hook(int keyhook, t_stru *stru)
+{
+	if (keyhook == ESC)
+		exit_hook(stru);
+	vertical_move(keyhook, stru);
+	horizontal_move(keyhook, stru);
+	rotation_left(keyhook, stru);
+	rotation_right(keyhook, stru);
+	clear(stru);
+	raycast(stru);
+	mlx_put_image_to_window(stru->mlx_ptr, stru->win_ptr, stru->img_ptr, 0, 0);
 	return (0);
 }

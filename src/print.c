@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mavileo@student.42.fr <mavileo@student.    +#+  +:+       +#+        */
+/*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/07 02:08:09 by mavileo           #+#    #+#             */
-/*   Updated: 2020/05/24 18:20:21 by mavileo@stu      ###   ########.fr       */
+/*   Updated: 2020/05/25 00:37:13 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	clear(t_stru *stru)
 	{
 		y = 0;
 		while (y < stru->screen_height)
-			put_pixel(stru, create_color(0,0,0), x, y++);
+			put_pixel(stru, create_color(0, 0, 0), x, y++);
 		x++;
 	}
 	mlx_put_image_to_window(stru->mlx_ptr, stru->win_ptr, stru->img_ptr, 0, 0);
@@ -42,61 +42,62 @@ void	put_pixel(t_stru *stru, t_color color, int x, int y)
 	stru->pixels[rel_pixel_index + BLUE_VALUE] = color.b;
 }
 
-double	d_pythagore(int aX, int bX, int aY, int bY)
+double	d_pythagore(int a_x, int b_x, int a_y, int b_y)
 {
-	return (sqrt(pow((double)(bX - aX), 2) + pow((double)(bY - aY), 2)));
+	return (sqrt(pow((double)(b_x - a_x), 2) + pow((double)(b_y - a_y), 2)));
 }
 
-void	draw_circle(t_stru *stru, int coordX, int coordY, t_color color, int radius)
+void	draw_circle(t_stru *stru, int coord_x, int coord_y, int radius)
 {
-	int		actualX;
-	int		actualY;
+	int		actual_x;
+	int		actual_y;
 	int		target_x;
 	int		target_y;
 
-	target_x = coordX + radius;
-	target_y = coordY + radius;
-	actualX = coordX - radius;
-	while (actualX < target_x)
+	target_x = coord_x + radius;
+	target_y = coord_y + radius;
+	actual_x = coord_x - radius;
+	while (actual_x < target_x)
 	{
-		actualY = coordY - radius;
-		while (actualY < target_y)
+		actual_y = coord_y - radius;
+		while (actual_y < target_y)
 		{
-			if (d_pythagore(coordX, actualX, coordY, actualY) <= radius)
-				put_pixel(stru, color, actualX, actualY);
-			actualY++;
+			if (d_pythagore(coord_x, actual_x, coord_y, actual_y) <= radius)
+				put_pixel(stru, create_color(255, 255, 255), actual_x,
+				actual_y);
+			actual_y++;
 		}
-		actualX++;
+		actual_x++;
 	}
 }
 
-void	draw_line(t_stru *stru, int pos1X, int pos1Y, int pos2X, int pos2Y, t_color color)
+void	draw_line(t_stru *stru, int pos1_x, int pos1_y, int pos2_x, int pos2_y, t_color color)
 {
-	int		dX;
-	int		dY;
-	int		sX;
-	int		sY;
+	int		d_x;
+	int		d_y;
+	int		s_x;
+	int		s_y;
 	int		err;
 	int		e2;
 
-	dX = abs(pos2X - pos1X);
-	sX = pos1X < pos2X ? 1 : -1;
-	dY = abs(pos2Y - pos1Y);
-	sY = pos1Y < pos2Y ? 1 : -1; 
-	err = (dX > dY ? dX : -dY) / 2;
-	while (!(pos1X == pos2X && pos1Y == pos2Y))
+	d_x = abs(pos2_x - pos1_x);
+	s_x = pos1_x < pos2_x ? 1 : -1;
+	d_y = abs(pos2_y - pos1_y);
+	s_y = pos1_y < pos2_y ? 1 : -1; 
+	err = (d_x > d_y ? d_x : -d_y) / 2;
+	while (!(pos1_x == pos2_x && pos1_y == pos2_y))
 	{
-		put_pixel(stru, color, pos1X, pos1Y);
+		put_pixel(stru, color, pos1_x, pos1_y);
 		e2 = err;
-		if (e2 > -dX)
+		if (e2 > -d_x)
 		{
-			err -= dY;
-			pos1X += sX;
+			err -= d_y;
+			pos1_x += s_x;
 		}
-		if (e2 < dY)
+		if (e2 < d_y)
 		{
-			err += dX;
-			pos1Y += sY;
+			err += d_x;
+			pos1_y += s_y;
 		}
 	}
 }

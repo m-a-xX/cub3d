@@ -6,7 +6,7 @@
 /*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/02 15:58:55 by mavileo           #+#    #+#             */
-/*   Updated: 2020/05/09 03:49:56 by mavileo          ###   ########.fr       */
+/*   Updated: 2020/05/25 01:10:35 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,10 @@ int		alloc_matrix(char *map, t_stru *stru)
 	return (0);
 }
 
-void	fill_map(t_stru *stru, char *map, int i)
+void	fill_map(t_stru *stru, char *map, int i, int x)
 {
-	int x;
 	int y;
 
-	x = 0;
 	y = 0;
 	while (map[i])
 	{

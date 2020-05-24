@@ -6,7 +6,7 @@
 /*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/17 03:09:19 by mavileo           #+#    #+#             */
-/*   Updated: 2020/05/09 03:49:56 by mavileo          ###   ########.fr       */
+/*   Updated: 2020/05/25 01:10:39 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int		tab_to_matrix(t_stru *stru, char *map)
 		map++;
 	if ((i = alloc_matrix(map, stru)))
 		return (1);
-	fill_map(stru, map, i);
+	fill_map(stru, map, i, 0);
 	return (0);
 }
 

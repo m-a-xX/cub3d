@@ -14,6 +14,7 @@ SRCS=	src/main.c					\
 		src/strjoin_free_nl.c		\
 		src/move.c					\
 		src/debug.c					\
+		src/dda.c					\
 
 OBJ= $(SRCS:.c=.o)
 
