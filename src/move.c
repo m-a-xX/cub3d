@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mavileo@student.42.fr <mavileo@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/08 16:30:36 by mavileo           #+#    #+#             */
-/*   Updated: 2020/05/09 03:44:53 by mavileo          ###   ########.fr       */
+/*   Updated: 2020/05/24 22:58:47 by mavileo@stu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,16 @@ void	vertical_move(int keyhook, t_stru *stru)
 {
 	if (keyhook == UP)
 	{
-		if (verify_move(stru->map[(int)(stru->pos_x + stru->dir_x * stru->move_speed)][(int)(stru->pos_y)]))
+		if (verify_move(stru->map[(int)(stru->pos_y)][(int)(stru->pos_x + stru->dir_x * stru->move_speed)]))
 			stru->pos_x += stru->dir_x * stru->move_speed;
-		if (verify_move(stru->map[(int)(stru->pos_x)][(int)(stru->pos_y + stru->dir_y * stru->move_speed)]))
+		if (verify_move(stru->map[(int)(stru->pos_y + stru->dir_y * stru->move_speed)][(int)(stru->pos_x)]))
 			stru->pos_y += stru->dir_y * stru->move_speed;
 	}
 	else if (keyhook == DOWN)
 	{
-		if (verify_move(stru->map[(int)(stru->pos_x - stru->dir_x * stru->move_speed)][(int)(stru->pos_y)]))
+		if (verify_move(stru->map[(int)(stru->pos_y)][(int)(stru->pos_x - stru->dir_x * stru->move_speed)]))
 			stru->pos_x -= stru->dir_x * stru->move_speed;
-		if (verify_move(stru->map[(int)(stru->pos_x)][(int)(stru->pos_y - stru->dir_y * stru->move_speed)]))
+		if (verify_move(stru->map[(int)(stru->pos_y - stru->dir_y * stru->move_speed)][(int)(stru->pos_x)]))
 			stru->pos_y -= stru->dir_y * stru->move_speed;
 	}
 }
@@ -41,16 +41,16 @@ void	horizontal_move(int keyhook, t_stru *stru)
 {
 	if (keyhook == LEFT)
 	{
-		if (verify_move(stru->map[(int)(stru->pos_x - stru->plane_x  * stru->rot_speed)][(int)(stru->pos_y)]))
+		if (verify_move(stru->map[(int)(stru->pos_y)][(int)(stru->pos_x - stru->plane_x  * stru->rot_speed)]))
 			stru->pos_x -= stru->plane_x * stru->rot_speed;
-		if (verify_move(stru->map[(int)(stru->pos_x)][(int)(stru->pos_y - stru->plane_y * stru->rot_speed)]))
+		if (verify_move(stru->map[(int)(stru->pos_y - stru->plane_y * stru->rot_speed)][(int)(stru->pos_x)]))
 			stru->pos_y -= stru->plane_y * stru->rot_speed;
 	}
 	else if (keyhook == RIGHT)
 	{
-		if (verify_move(stru->map[(int)(stru->pos_x + stru->plane_x  * stru->rot_speed)][(int)(stru->pos_y)]))
+		if (verify_move(stru->map[(int)(stru->pos_y)][(int)(stru->pos_x + stru->plane_x  * stru->rot_speed)]))
 			stru->pos_x += stru->plane_x * stru->rot_speed;
-		if (verify_move(stru->map[(int)(stru->pos_x)][(int)(stru->pos_y + stru->plane_y * stru->rot_speed)]))
+		if (verify_move(stru->map[(int)(stru->pos_y + stru->plane_y * stru->rot_speed)][(int)(stru->pos_x)]))
 			stru->pos_y += stru->plane_y * stru->rot_speed;
 	}
 }
