@@ -6,7 +6,7 @@
 /*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/07 02:00:18 by mavileo           #+#    #+#             */
-/*   Updated: 2020/05/25 01:17:12 by mavileo          ###   ########.fr       */
+/*   Updated: 2020/05/27 00:00:03 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,34 +21,55 @@ void	calcul__height_column(t_stru *stru)
 		stru->perp_wall_dist = (stru->map_y - stru->pos_y +
 								(1 - stru->stepY) / 2) / stru->raydir_y;
 	stru->line_height = (int)(stru->screen_height / stru->perp_wall_dist);
-	stru->drawStart = -stru->line_height / 2 + stru->screen_height / 2;
-	if (stru->drawStart < 0)
-		stru->drawStart = 0;
-	stru->drawEnd = stru->line_height / 2 + stru->screen_height / 2;
-	if (stru->drawEnd >= stru->screen_height)
-		stru->drawEnd = stru->screen_height - 1;
+	stru->draw_start = -stru->line_height / 2 + stru->screen_height / 2;
+	if (stru->draw_start < 0)
+		stru->draw_start = 0;
+	stru->draw_end = stru->line_height / 2 + stru->screen_height / 2;
+	if (stru->draw_end >= stru->screen_height)
+		stru->draw_end = stru->screen_height - 1;
 }
 
 void	draw_column(t_stru *stru, int x)
 {
-	t_color color;
+	double	wall_x;
+	int		texWidth = 255;
+	int		texHeight = 255;
+	int		texX;
+	int pixel_index;
+	int rel_pixel_index;
 
-	if (stru->map[stru->map_y][stru->map_x] == '1')
-		color = create_color(25, 65, 112);
-	else if (stru->map[stru->map_y][stru->map_x] == '2')
-		color = create_color(255, 0, 0);
-	else if (stru->map[stru->map_y][stru->map_x] == '3')
-		color = create_color(0, 0, 255);
-	if (stru->side == 1)
+	if (stru->side == 0)
+		wall_x = stru->map_y + stru->perp_wall_dist * stru->raydir_y;
+	else
+		wall_x = stru->map_x + stru->perp_wall_dist * stru->raydir_x;
+	wall_x -= floor((wall_x));
+	texX = (int)(wall_x * (double)(texWidth));
+	if (stru->side == 0 && stru->raydir_x > 0)
+		texX = texWidth - texX - 1;
+    if (stru->side == 1 && stru->raydir_y < 0)
+		texX = texWidth - texX - 1;
+	double step = 1.0 * texHeight / stru->line_height;
+	// Starting texture coordinate
+	double texPos = (stru->draw_start - stru->screen_height / 2 + stru->line_height / 2) * step;
+	//printf("%d\n%d\n%d\n\n", x, stru->draw_start, x+ stru->draw_start * stru->screen_width);
+	//printf("%d\n", stru->screen_width * ((int)texPos & (texHeight - 1)) * 4 + texX);
+	//printf("okkkk\n");
+	for (int y = stru->draw_start; y < stru->draw_end; y++)
 	{
-		color.r = color.r / 2;
-		color.g = color.g / 2;
-		color.b = color.b / 2;
+		pixel_index = x + (y * stru->screen_width);
+		rel_pixel_index = pixel_index * 4;
+		int texY = (int)texPos & (texHeight - 1);
+		texPos += step;
+		int color = stru->img[0].pixels[texHeight * texY + texX];
+		//stru->pixels[pixel_index] = color;
+		stru->pixels[rel_pixel_index + 0] = (color >> 24) & 0xFF;
+		stru->pixels[rel_pixel_index + 1] = (color >> 16) & 0xFF;
+		stru->pixels[rel_pixel_index + 2] = (color >> 8) & 0xFF;
+		stru->pixels[rel_pixel_index + 3] = color & 0xFF;
+		//make color darker for y-sides: R, G and B byte each divided through two with a "shift" and an "and"
+		//if (side == 1) color = (color >> 1) & 8355711;
 	}
-	while (stru->drawStart <= stru->drawEnd)
-		put_pixel(stru, color, x, stru->drawStart++);
 }
-
 void	top_floor(t_stru *stru)
 {
 	int		x;

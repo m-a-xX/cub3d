@@ -6,7 +6,7 @@
 /*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/07 00:18:35 by mavileo           #+#    #+#             */
-/*   Updated: 2020/05/25 01:29:33 by mavileo          ###   ########.fr       */
+/*   Updated: 2020/05/26 23:51:12 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,15 @@ typedef struct  s_color
 	int b;
 }				t_color;
 
+typedef struct	s_img
+{
+	char					*pixels;
+	int						bpp;
+	int						sizeline;
+	int						endian;
+	void					*img_ptr;
+}				t_img;
+
 typedef struct	s_stru
 {
 	char	**map;
@@ -96,8 +105,8 @@ typedef struct	s_stru
 	int		side;
 	double	perp_wall_dist;
 	int		line_height;
-	int		drawStart;
-	int		drawEnd;
+	int		draw_start;
+	int		draw_end;
 	void	*mlx_ptr;
 	void	*win_ptr;
 	void	*img_ptr;
@@ -105,6 +114,7 @@ typedef struct	s_stru
 	int		bpp;
 	int		sizeline;
 	int		endian;
+	t_img	img[5];
 }				t_stru;
 
 /* GNL */
