@@ -1,13 +1,13 @@
 
-SO ./path_to_the_south_texture
+SO ./textures/wall2.xpm
 
 
-NO ./path_to_the_north_texture
+NO ./textures/wall1.xpm
 
 
 
-WE ./path_to_the_west_texture
-EA ./path_to_the_east_texture
+WE ./textures/wall4.xpm
+EA ./textures/wall3.xpm
 
 F 165,42,42
 

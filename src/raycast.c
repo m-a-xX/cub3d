@@ -6,13 +6,13 @@
 /*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/07 02:00:18 by mavileo           #+#    #+#             */
-/*   Updated: 2020/05/27 00:00:03 by mavileo          ###   ########.fr       */
+/*   Updated: 2020/06/01 00:53:46 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-void	calcul__height_column(t_stru *stru)
+void	calcul_height_column(t_stru *stru)
 {
 	if (stru->side == 0)
 		stru->perp_wall_dist = (stru->map_x - stru->pos_x +
@@ -32,44 +32,58 @@ void	calcul__height_column(t_stru *stru)
 void	draw_column(t_stru *stru, int x)
 {
 	double	wall_x;
-	int		texWidth = 255;
-	int		texHeight = 255;
 	int		texX;
+	int		tex_num;
 	int pixel_index;
-	int rel_pixel_index;
 
 	if (stru->side == 0)
 		wall_x = stru->map_y + stru->perp_wall_dist * stru->raydir_y;
 	else
 		wall_x = stru->map_x + stru->perp_wall_dist * stru->raydir_x;
+	if (stru->side == 0)
+		tex_num = 1;
+	else
+		tex_num = 0;
 	wall_x -= floor((wall_x));
-	texX = (int)(wall_x * (double)(texWidth));
+	texX = (int)(wall_x * (double)(stru->img[tex_num].width));
 	if (stru->side == 0 && stru->raydir_x > 0)
-		texX = texWidth - texX - 1;
+		texX = stru->img[tex_num].width - texX - 1;
     if (stru->side == 1 && stru->raydir_y < 0)
-		texX = texWidth - texX - 1;
-	double step = 1.0 * texHeight / stru->line_height;
+		texX = stru->img[tex_num].width - texX - 1;
+	double step = 1.0 * stru->img[tex_num].height / stru->line_height;
 	// Starting texture coordinate
 	double texPos = (stru->draw_start - stru->screen_height / 2 + stru->line_height / 2) * step;
 	//printf("%d\n%d\n%d\n\n", x, stru->draw_start, x+ stru->draw_start * stru->screen_width);
-	//printf("%d\n", stru->screen_width * ((int)texPos & (texHeight - 1)) * 4 + texX);
+	//printf("%d\n", stru->screen_width * ((int)texPos & (stru->img[tex_num].height - 1)) * 4 + texX);
 	//printf("okkkk\n");
 	for (int y = stru->draw_start; y < stru->draw_end; y++)
 	{
-		pixel_index = x + (y * stru->screen_width);
-		rel_pixel_index = pixel_index * 4;
-		int texY = (int)texPos & (texHeight - 1);
+		//int h = y / (stru->img[tex_num].height / stru->line_height);
+		//int h = y / (stru->line_height / stru->img[tex_num].height - 1);
+		//int w = x / (stru->img[tex_num].height - 1 / stru->line_height);
+		pixel_index = (x + (y * stru->screen_width)) * 4;
+		int texY = (int)texPos;
 		texPos += step;
-		int color = stru->img[0].pixels[texHeight * texY + texX];
-		//stru->pixels[pixel_index] = color;
-		stru->pixels[rel_pixel_index + 0] = (color >> 24) & 0xFF;
-		stru->pixels[rel_pixel_index + 1] = (color >> 16) & 0xFF;
-		stru->pixels[rel_pixel_index + 2] = (color >> 8) & 0xFF;
-		stru->pixels[rel_pixel_index + 3] = color & 0xFF;
+		char color[4];
+		int i = 0;
+		//if (x == 200 && y == 200)
+			//printf("%d\n", w * 4 + 4 * stru->img[tex_num].width * h + i);
+		while (i < 4)
+		{
+			color[i] = stru->img[tex_num].pixels[texX * 4 + 4 * stru->img[tex_num].width * texY + i];
+			i++;
+		}
+		i = 0;
+		while (i < 4)
+		{
+			stru->pixels[pixel_index + i] = color[i];
+			i++;
+		}
 		//make color darker for y-sides: R, G and B byte each divided through two with a "shift" and an "and"
 		//if (side == 1) color = (color >> 1) & 8355711;
 	}
 }
+
 void	top_floor(t_stru *stru)
 {
 	int		x;
@@ -113,7 +127,7 @@ void	raycast(t_stru *stru)
 		stru->hit = 0;
 		stru->stepX = -1;
 		dda(stru);
-		calcul__height_column(stru);
+		calcul_height_column(stru);
 		draw_column(stru, x);
 		s = stru->side;
 		print_ray(stru);

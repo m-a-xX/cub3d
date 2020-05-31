@@ -6,7 +6,7 @@
 /*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/07 00:18:35 by mavileo           #+#    #+#             */
-/*   Updated: 2020/05/26 23:51:12 by mavileo          ###   ########.fr       */
+/*   Updated: 2020/05/28 01:54:28 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ typedef struct  s_color
 typedef struct	s_img
 {
 	char					*pixels;
+	int						width;
+	int						height;
 	int						bpp;
 	int						sizeline;
 	int						endian;
@@ -158,5 +160,6 @@ void	horizontal_move(int keyhook, t_stru *stru);
 void	rotation_right(int keyhook, t_stru *stru);
 void	rotation_left(int keyhook, t_stru *stru);
 t_vect	create_vect(int x, int y);
+int		init_textures(t_stru *stru);
 
 #endif

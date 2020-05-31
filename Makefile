@@ -15,6 +15,7 @@ SRCS=	src/main.c					\
 		src/move.c					\
 		src/debug.c					\
 		src/dda.c					\
+		src/textures.c				\
 
 OBJ= $(SRCS:.c=.o)
 

@@ -6,7 +6,7 @@
 /*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/24 18:19:55 by mavileo           #+#    #+#             */
-/*   Updated: 2020/05/25 01:27:32 by mavileo          ###   ########.fr       */
+/*   Updated: 2020/05/27 19:41:30 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,14 @@ void	print_pos(t_stru *stru)
 	int x;
 	int y;
 
-	x = 5 * stru->map_width;
-	y = 5 * stru->map_height;
+	x = 5 * stru->map_width - 1;
+	y = 5 * stru->map_height - 1;
 	while (x >= 0)
 	{
-		y = 5 * 10;
+		y = 5 * stru->map_height - 1;
 		while (y >= 0)
 		{
-			if (stru->map[y / 5][x / 5] > '0')
+			if (stru->map[y / 5][x / 5] > '0' && stru->map[y / 5][x / 5] < '9')
 				put_pixel(stru, create_color(255, 255, 255), x, y--);
 			else
 				put_pixel(stru, create_color(0, 0, 0), x, y--);
