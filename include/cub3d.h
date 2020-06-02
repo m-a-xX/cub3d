@@ -6,7 +6,7 @@
 /*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/07 00:18:35 by mavileo           #+#    #+#             */
-/*   Updated: 2020/06/02 02:10:11 by mavileo          ###   ########.fr       */
+/*   Updated: 2020/06/02 05:49:23 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,5 +174,6 @@ void	rotation_right(int keyhook, t_stru *stru);
 void	rotation_left(int keyhook, t_stru *stru);
 t_vect	create_vect(int x, int y);
 int		init_textures(t_stru *stru);
+int		alloc_matrix(char *map, t_stru *stru);
 
 #endif

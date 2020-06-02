@@ -6,7 +6,7 @@
 /*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/25 00:59:17 by mavileo           #+#    #+#             */
-/*   Updated: 2020/05/25 01:03:11 by mavileo          ###   ########.fr       */
+/*   Updated: 2020/06/02 03:31:58 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,9 @@ void	dda(t_stru *stru)
 			stru->map_y += stru->stepY;
 			stru->side = 1;
 		}
-		if (stru->map[stru->map_y][stru->map_x] > '0' &&
-			stru->map[stru->map_y][stru->map_x] < '9')
+		if (stru->map[stru->map_y][stru->map_x] == '1')
 			stru->hit = 1;
+		if (stru->map[stru->map_y][stru->map_x] == '2')
+			stru->hit = 2;
 	}
 }

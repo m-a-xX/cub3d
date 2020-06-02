@@ -16,6 +16,7 @@ SRCS=	src/main.c					\
 		src/debug.c					\
 		src/dda.c					\
 		src/textures.c				\
+		src/map_allocation.c		\
 
 OBJ= $(SRCS:.c=.o)
 

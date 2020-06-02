@@ -6,7 +6,7 @@
 /*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/07 02:00:18 by mavileo           #+#    #+#             */
-/*   Updated: 2020/06/02 02:24:46 by mavileo          ###   ########.fr       */
+/*   Updated: 2020/06/02 03:32:03 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,6 @@ void	loop(t_stru *stru, t_texture_column *col, int x)
 		while (++i < 4)
 			stru->pixels[col->pixel_index + i] = col->color[i];
 		col->y++;
-		//make col->color darker for y-sides: R, G and B byte each divided through two with a "shift" and an "and"
-		//if (side == 1) col->color = (col->color >> 1) & 8355711;
 	}
 }
 
@@ -58,13 +56,15 @@ void	draw_column(t_stru *stru, int x)
 	if (!(col = malloc(sizeof(t_texture_column))))
 		return ;
 	col->wall_x = (stru->side == 0) ? stru->map_y + stru->perp_wall_dist *
-	stru->raydir_y : stru->map_x + stru->perp_wall_dist * stru->raydir_x;
+		stru->raydir_y : stru->map_x + stru->perp_wall_dist * stru->raydir_x;
+	col->wall_x -= floor((col->wall_x));
 	col->tex_num = (stru->side == 0) ? 1 : 0;
-	if (stru->side == 1)
+	if (stru->hit == 2)
+		col->tex_num = 4;
+	else if (stru->side == 1)
 		col->tex_num = (stru->raydir_y > 0) ? 1 : 0; 
 	else
-		col->tex_num = (stru->raydir_x > 0) ? 2 : 3; 
-	col->wall_x -= floor((col->wall_x));
+		col->tex_num = (stru->raydir_x > 0) ? 2 : 3;
 	col->tex_x = (int)(col->wall_x * (double)(stru->img[col->tex_num].width));
 	if ((stru->side == 0 && stru->raydir_x > 0) || (stru->side == 1 &&
 		stru->raydir_y < 0))

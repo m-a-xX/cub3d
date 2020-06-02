@@ -6,47 +6,11 @@
 /*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/02 15:58:55 by mavileo           #+#    #+#             */
-/*   Updated: 2020/05/25 01:10:35 by mavileo          ###   ########.fr       */
+/*   Updated: 2020/06/02 05:49:33 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
-
-void	end(int x, int y, int i, t_stru *stru)
-{
-	stru->map[i] = NULL;
-	stru->map_height = y;
-	stru->map_width = x;
-}
-
-int		alloc_matrix(char *map, t_stru *stru)
-{
-	int i;
-	int x;
-	int y;
-
-	i = 0;
-	x = 0;
-	y = 0;
-	if (!(stru->map = calloc(1, 1)))
-		return (1);
-	while (map[i])
-	{
-		if (map[i] == '\n')
-			y++;
-		i++;
-	}
-	if (!(stru->map = malloc(sizeof(char *) * (y + 1))))
-		return (1);
-	while (map[x] && map[x] != '\n')
-		x++;
-	i = 0;
-	while (i < y && !(stru->map_height == y) && !(stru->map_width == x))
-		if (!(stru->map[i++] = malloc(sizeof(char) * (x + 1))))
-			return (1);
-	end(x, y, i, stru);
-	return (0);
-}
 
 void	fill_map(t_stru *stru, char *map, int i, int x)
 {
@@ -61,7 +25,7 @@ void	fill_map(t_stru *stru, char *map, int i, int x)
 			y++;
 			x = 0;
 		}
-		else if (map[i] != ' ')
+		else
 		{
 			if (map[i] == 'N' || map[i] == 'E' || map[i] == 'W' ||
 			map[i] == 'S')
@@ -100,6 +64,58 @@ int		check_dep(t_stru *stru)
 	return (dep);
 }
 
+int		check_spaces(t_stru *stru)
+{
+	int x;
+	int y;
+
+	x = 0;
+	y = 0;
+	while (stru->map[y])
+	{
+		x = 0;
+		while (stru->map[y][x])
+		{
+			if (stru->map[y][x] == ' ' && x > 0 && stru->map[y][x - 1] != ' ' && stru->map[y][x - 1] != '1')
+				return (1);
+			if (stru->map[y][x] == ' ' && x < stru->map_width - 1 && stru->map[y][x + 1] != ' ' && stru->map[y][x + 1] != '1')
+				return (1);
+			if (stru->map[y][x] == ' ' && y < stru->map_height - 1 && stru->map[y + 1][x] != ' ' && stru->map[y + 1][x] != '1')
+				return (1);
+			if (stru->map[y][x] == ' ' && y > 0 && stru->map[y - 1][x] != ' ' && stru->map[y - 1][x] != '1')
+				return (1);
+			if (stru->map[y][x + 1] == 0 && stru->map[y][x] != '1')
+				return (1);
+			x++;
+		}
+		y++;
+	}
+	return (0);
+}
+
+void	spaces_to_wall(t_stru *stru)
+{
+	int x;
+	int y;
+
+	x = 0;
+	y = 0;
+	while (stru->map[y])
+	{
+		x = 0;
+		while (stru->map[y][x])
+		{
+			if (stru->map[y][x] == ' ')
+				stru->map[y][x] = '1';
+			x++;
+		}
+		while (x < stru->map_width - 1)
+			stru->map[y][x++] = '1';
+		stru->map[y][x] = 0;
+		y++;
+	}
+}
+
 int		check_map(t_stru *stru)
 {
 	int i;
@@ -107,6 +123,9 @@ int		check_map(t_stru *stru)
 
 	i = 0;
 	j = 0;
+	if (check_spaces(stru))
+		return (1);
+	spaces_to_wall(stru);
 	while (stru->map[0][i])
 		if (stru->map[0][i++] != '1')
 			return (1);

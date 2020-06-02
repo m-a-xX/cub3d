@@ -6,7 +6,7 @@
 /*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/27 23:19:38 by mavileo           #+#    #+#             */
-/*   Updated: 2020/05/28 02:09:33 by mavileo          ###   ########.fr       */
+/*   Updated: 2020/06/02 02:41:11 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	get_data(t_stru *stru)
 	int i;
 
 	i = 0;
-	while (i < 4)
+	while (i < 5)
 	{
 		stru->img[i].pixels = mlx_get_data_addr(stru->img[i].img_ptr,
 		&(stru->img[i].bpp), &(stru->img[i].sizeline), &(stru->img[i].endian));
@@ -39,6 +39,9 @@ void	get_ptrs(t_stru *stru)
 	stru->img[3].img_ptr = mlx_xpm_file_to_image(stru->mlx_ptr,
 							stru->path_west, &stru->img[3].width,
 							&stru->img[3].height);
+	stru->img[4].img_ptr = mlx_xpm_file_to_image(stru->mlx_ptr,
+							stru->path_sprite, &stru->img[4].width,
+							&stru->img[4].height);
 }
 
 void	init_dimensions(t_stru *stru)
@@ -51,6 +54,8 @@ void	init_dimensions(t_stru *stru)
 	stru->img[2].height = 341;
 	stru->img[3].width = 290;
 	stru->img[3].height = 174;
+	stru->img[4].width = 1280;
+	stru->img[4].height = 720;
 }
 
 int		init_textures(t_stru *stru)
