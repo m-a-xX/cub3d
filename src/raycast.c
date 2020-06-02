@@ -6,7 +6,7 @@
 /*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/07 02:00:18 by mavileo           #+#    #+#             */
-/*   Updated: 2020/06/01 00:53:46 by mavileo          ###   ########.fr       */
+/*   Updated: 2020/06/02 02:24:46 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,59 +29,52 @@ void	calcul_height_column(t_stru *stru)
 		stru->draw_end = stru->screen_height - 1;
 }
 
+void	loop(t_stru *stru, t_texture_column *col, int x)
+{
+	int					i;
+
+	while (col->y < stru->draw_end)
+	{
+		col->pixel_index = (x + (col->y * stru->screen_width)) * 4;
+		col->tex_y = (int)col->tex_pos;
+		col->tex_pos += col->step;
+		i = -1;
+		while (++i < 4)
+			col->color[i] = stru->img[col->tex_num].pixels[col->tex_x * 4 +
+			4 * stru->img[col->tex_num].width * col->tex_y + i];
+		i = -1;
+		while (++i < 4)
+			stru->pixels[col->pixel_index + i] = col->color[i];
+		col->y++;
+		//make col->color darker for y-sides: R, G and B byte each divided through two with a "shift" and an "and"
+		//if (side == 1) col->color = (col->color >> 1) & 8355711;
+	}
+}
+
 void	draw_column(t_stru *stru, int x)
 {
-	double	wall_x;
-	int		texX;
-	int		tex_num;
-	int pixel_index;
+	t_texture_column	*col;
 
-	if (stru->side == 0)
-		wall_x = stru->map_y + stru->perp_wall_dist * stru->raydir_y;
+	if (!(col = malloc(sizeof(t_texture_column))))
+		return ;
+	col->wall_x = (stru->side == 0) ? stru->map_y + stru->perp_wall_dist *
+	stru->raydir_y : stru->map_x + stru->perp_wall_dist * stru->raydir_x;
+	col->tex_num = (stru->side == 0) ? 1 : 0;
+	if (stru->side == 1)
+		col->tex_num = (stru->raydir_y > 0) ? 1 : 0; 
 	else
-		wall_x = stru->map_x + stru->perp_wall_dist * stru->raydir_x;
-	if (stru->side == 0)
-		tex_num = 1;
-	else
-		tex_num = 0;
-	wall_x -= floor((wall_x));
-	texX = (int)(wall_x * (double)(stru->img[tex_num].width));
-	if (stru->side == 0 && stru->raydir_x > 0)
-		texX = stru->img[tex_num].width - texX - 1;
-    if (stru->side == 1 && stru->raydir_y < 0)
-		texX = stru->img[tex_num].width - texX - 1;
-	double step = 1.0 * stru->img[tex_num].height / stru->line_height;
-	// Starting texture coordinate
-	double texPos = (stru->draw_start - stru->screen_height / 2 + stru->line_height / 2) * step;
-	//printf("%d\n%d\n%d\n\n", x, stru->draw_start, x+ stru->draw_start * stru->screen_width);
-	//printf("%d\n", stru->screen_width * ((int)texPos & (stru->img[tex_num].height - 1)) * 4 + texX);
-	//printf("okkkk\n");
-	for (int y = stru->draw_start; y < stru->draw_end; y++)
-	{
-		//int h = y / (stru->img[tex_num].height / stru->line_height);
-		//int h = y / (stru->line_height / stru->img[tex_num].height - 1);
-		//int w = x / (stru->img[tex_num].height - 1 / stru->line_height);
-		pixel_index = (x + (y * stru->screen_width)) * 4;
-		int texY = (int)texPos;
-		texPos += step;
-		char color[4];
-		int i = 0;
-		//if (x == 200 && y == 200)
-			//printf("%d\n", w * 4 + 4 * stru->img[tex_num].width * h + i);
-		while (i < 4)
-		{
-			color[i] = stru->img[tex_num].pixels[texX * 4 + 4 * stru->img[tex_num].width * texY + i];
-			i++;
-		}
-		i = 0;
-		while (i < 4)
-		{
-			stru->pixels[pixel_index + i] = color[i];
-			i++;
-		}
-		//make color darker for y-sides: R, G and B byte each divided through two with a "shift" and an "and"
-		//if (side == 1) color = (color >> 1) & 8355711;
-	}
+		col->tex_num = (stru->raydir_x > 0) ? 2 : 3; 
+	col->wall_x -= floor((col->wall_x));
+	col->tex_x = (int)(col->wall_x * (double)(stru->img[col->tex_num].width));
+	if ((stru->side == 0 && stru->raydir_x > 0) || (stru->side == 1 &&
+		stru->raydir_y < 0))
+		col->tex_x = stru->img[col->tex_num].width - col->tex_x - 1;
+	col->step = 1.0 * stru->img[col->tex_num].height / stru->line_height;
+	col->tex_pos =	(stru->draw_start - stru->screen_height / 2 +
+				stru->line_height / 2) * col->step;
+	col->y = stru->draw_start;
+	loop(stru, col, x);
+
 }
 
 void	top_floor(t_stru *stru)

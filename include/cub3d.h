@@ -6,7 +6,7 @@
 /*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/07 00:18:35 by mavileo           #+#    #+#             */
-/*   Updated: 2020/05/28 01:54:28 by mavileo          ###   ########.fr       */
+/*   Updated: 2020/06/02 02:10:11 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,19 @@ typedef struct	s_img
 	int						endian;
 	void					*img_ptr;
 }				t_img;
+
+typedef struct	s_texture_column
+{
+	double	wall_x;
+	int		tex_x;
+	int		tex_num;
+	int		pixel_index;
+	double	step;
+	double	tex_pos;
+	int		y;
+	int		tex_y;
+	char	color[4];
+}				t_texture_column;
 
 typedef struct	s_stru
 {
