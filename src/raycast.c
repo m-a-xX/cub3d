@@ -6,7 +6,7 @@
 /*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/07 02:00:18 by mavileo           #+#    #+#             */
-/*   Updated: 2020/06/05 05:28:16 by mavileo          ###   ########.fr       */
+/*   Updated: 2020/06/05 05:40:57 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	draw_column(t_stru *stru, int x)
 	if (stru->hit == 2)
 		col->tex_num = 4;
 	else if (stru->side == 1)
-		col->tex_num = (stru->raydir_y > 0) ? 1 : 0; 
+		col->tex_num = (stru->raydir_y > 0) ? 1 : 0;
 	else
 		col->tex_num = (stru->raydir_x > 0) ? 2 : 3;
 	col->tex_x = (int)(col->wall_x * (double)(stru->img[col->tex_num].width));
@@ -70,8 +70,8 @@ void	draw_column(t_stru *stru, int x)
 		stru->raydir_y < 0))
 		col->tex_x = stru->img[col->tex_num].width - col->tex_x - 1;
 	col->step = 1.0 * stru->img[col->tex_num].height / stru->line_height;
-	col->tex_pos =	(stru->draw_start - stru->screen_height / 2 +
-				stru->line_height / 2) * col->step;
+	col->tex_pos = (stru->draw_start - stru->screen_height /
+					2 + stru->line_height / 2) * col->step;
 	col->y = stru->draw_start;
 	loop(stru, col, x);
 }

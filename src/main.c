@@ -6,7 +6,7 @@
 /*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/06 23:12:15 by user42            #+#    #+#             */
-/*   Updated: 2020/05/28 03:04:25 by mavileo          ###   ########.fr       */
+/*   Updated: 2020/06/05 05:39:32 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,8 @@ int		cub3d(t_stru *stru)
 {
 	init_mlx(stru);
 	init_textures(stru);
-
 	raycast(stru);
 	mlx_put_image_to_window(stru->mlx_ptr, stru->win_ptr, stru->img_ptr, 0, 0);
-	//mlx_put_image_to_window(stru->mlx_ptr, stru->win_ptr, stru->img[3].img_ptr, 150, 150);
 	mlx_hook(stru->win_ptr, 2, 1L << 0, key_hook, stru);
 	mlx_hook(stru->win_ptr, 17, 1L << 17, exit_hook, stru);
 	mlx_loop(stru->mlx_ptr);

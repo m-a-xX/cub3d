@@ -6,7 +6,7 @@
 /*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/11 20:28:21 by mavileo           #+#    #+#             */
-/*   Updated: 2020/05/26 03:54:41 by mavileo          ###   ########.fr       */
+/*   Updated: 2020/06/05 05:38:45 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,5 @@ int		key_hook(int keyhook, t_stru *stru)
 	clear(stru);
 	raycast(stru);
 	mlx_put_image_to_window(stru->mlx_ptr, stru->win_ptr, stru->img_ptr, 0, 0);
-	//mlx_put_image_to_window(stru->mlx_ptr, stru->win_ptr, stru->img[0].img_ptr, 100, 100);
 	return (0);
 }

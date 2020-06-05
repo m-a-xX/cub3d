@@ -6,7 +6,7 @@
 /*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/02 15:58:55 by mavileo           #+#    #+#             */
-/*   Updated: 2020/06/02 05:49:33 by mavileo          ###   ########.fr       */
+/*   Updated: 2020/06/05 05:44:13 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,26 +69,26 @@ int		check_spaces(t_stru *stru)
 	int x;
 	int y;
 
-	x = 0;
-	y = 0;
-	while (stru->map[y])
+	y = -1;
+	while (stru->map[++y])
 	{
-		x = 0;
-		while (stru->map[y][x])
+		x = -1;
+		while (stru->map[y][++x])
 		{
-			if (stru->map[y][x] == ' ' && x > 0 && stru->map[y][x - 1] != ' ' && stru->map[y][x - 1] != '1')
+			if (stru->map[y][x] == ' ' && x > 0 && stru->map[y][x - 1]
+				!= ' ' && stru->map[y][x - 1] != '1')
 				return (1);
-			if (stru->map[y][x] == ' ' && x < stru->map_width - 1 && stru->map[y][x + 1] != ' ' && stru->map[y][x + 1] != '1')
+			if (stru->map[y][x] == ' ' && x < stru->map_width - 1 &&
+				stru->map[y][x + 1] != ' ' && stru->map[y][x + 1] != '1')
 				return (1);
-			if (stru->map[y][x] == ' ' && y < stru->map_height - 1 && stru->map[y + 1][x] != ' ' && stru->map[y + 1][x] != '1')
+			if (stru->map[y][x] == ' ' && y < stru->map_height - 1 &&
+				stru->map[y + 1][x] != ' ' && stru->map[y + 1][x] != '1')
 				return (1);
-			if (stru->map[y][x] == ' ' && y > 0 && stru->map[y - 1][x] != ' ' && stru->map[y - 1][x] != '1')
+			if ((stru->map[y][x] == ' ' && y > 0 && stru->map[y - 1][x] != ' '
+				&& stru->map[y - 1][x] != '1') || (stru->map[y][x + 1] == 0 &&
+				stru->map[y][x] != '1'))
 				return (1);
-			if (stru->map[y][x + 1] == 0 && stru->map[y][x] != '1')
-				return (1);
-			x++;
 		}
-		y++;
 	}
 	return (0);
 }
