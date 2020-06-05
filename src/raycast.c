@@ -6,7 +6,7 @@
 /*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/07 02:00:18 by mavileo           #+#    #+#             */
-/*   Updated: 2020/06/02 03:32:03 by mavileo          ###   ########.fr       */
+/*   Updated: 2020/06/05 05:28:16 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,8 @@ void	draw_column(t_stru *stru, int x)
 
 	if (!(col = malloc(sizeof(t_texture_column))))
 		return ;
-	col->wall_x = (stru->side == 0) ? stru->map_y + stru->perp_wall_dist *
-		stru->raydir_y : stru->map_x + stru->perp_wall_dist * stru->raydir_x;
+	col->wall_x = (stru->side == 0) ? stru->pos_y + stru->perp_wall_dist *
+		stru->raydir_y : stru->pos_x + stru->perp_wall_dist * stru->raydir_x;
 	col->wall_x -= floor((col->wall_x));
 	col->tex_num = (stru->side == 0) ? 1 : 0;
 	if (stru->hit == 2)
@@ -74,7 +74,6 @@ void	draw_column(t_stru *stru, int x)
 				stru->line_height / 2) * col->step;
 	col->y = stru->draw_start;
 	loop(stru, col, x);
-
 }
 
 void	top_floor(t_stru *stru)
