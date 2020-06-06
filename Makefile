@@ -1,6 +1,6 @@
 CC=clang
 CFLAGS=-Wall -Wextra -Werror
-EXEC=cub3d
+EXEC=Cub3D
 SRCS=	src/main.c					\
 		src/mlx_funcs.c				\
 		src/structs_funcs.c			\
@@ -17,12 +17,13 @@ SRCS=	src/main.c					\
 		src/dda.c					\
 		src/textures.c				\
 		src/map_allocation.c		\
+		src/save.c					\
 
 OBJ= $(SRCS:.c=.o)
 
 all: $(EXEC)
 
-cub3d: $(OBJ)
+$(EXEC): $(OBJ)
 	$(CC) -o $@ $^ $(LDFLAGS) lib/mlx/libmlx.a lib/libft/libft.a -lm -lbsd -lX11 -lXext
 
 %.o: %.c

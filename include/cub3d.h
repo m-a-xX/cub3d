@@ -6,7 +6,7 @@
 /*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/07 00:18:35 by mavileo           #+#    #+#             */
-/*   Updated: 2020/06/02 05:49:23 by mavileo          ###   ########.fr       */
+/*   Updated: 2020/06/06 21:56:37 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,17 @@ typedef struct	s_texture_column
 	char	color[4];
 }				t_texture_column;
 
+typedef struct		s_save
+{
+	int			fd;
+	int			size;
+	int			zero;
+	int			offset_begin;
+	int			header_bytes;
+	int			plane;
+	int			bpp;
+}					t_save;
+
 typedef struct	s_stru
 {
 	char	**map;
@@ -129,6 +140,7 @@ typedef struct	s_stru
 	int		bpp;
 	int		sizeline;
 	int		endian;
+	int		save;
 	t_img	img[5];
 }				t_stru;
 
@@ -175,5 +187,6 @@ void	rotation_left(int keyhook, t_stru *stru);
 t_vect	create_vect(int x, int y);
 int		init_textures(t_stru *stru);
 int		alloc_matrix(char *map, t_stru *stru);
+void	save(t_stru *stru);
 
 #endif

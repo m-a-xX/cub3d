@@ -6,16 +6,48 @@
 /*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/17 03:09:19 by mavileo           #+#    #+#             */
-/*   Updated: 2020/05/25 01:10:39 by mavileo          ###   ########.fr       */
+/*   Updated: 2020/06/06 22:20:06 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-int		error_parsing(void)
+int		error_parsing(int i)
 {
-	ft_putstr_fd("Error\nUn problème est survenu lors du parsing.\n\
-Merci de vérifier la validité du ficher .cub", 1);
+	if (i == 0)
+	{
+		ft_putstr_fd("Error\nUn problème est survenu lors du parsing.\n\
+Merci de vérifier la validité du ficher .cub et de son contenu\n", 1);
+		return (1);
+	}
+	if (i == 1)
+	{
+		ft_putstr_fd("Error\nUn ou plusieurs parametres presents dans le\
+ fichier .cub sont incorrects\n", 1);
+		return (1);
+	}
+	if (i == 2)
+	{
+		ft_putstr_fd("Error\nThere are at least one missing parameter in\
+ the .cub file\n", 1);
+		return (1);
+	}
+	if (i == 3)
+	{
+		ft_putstr_fd("Error\nCan't create the map\n", 1);
+		return (1);
+	}
+	if (i == 4)
+	{
+		ft_putstr_fd("Error\nOne or some parameters passed in the .cub file\
+ are invalids\n", 1);
+		return (1);
+	}
+	if (i == 5)
+	{
+		ft_putstr_fd("Error\nCheck the map passed in the .cub file\n", 1);
+		return (1);
+	}
 	return (1);
 }
 
@@ -63,6 +95,7 @@ int		begin_dir(t_stru *stru)
 
 int		begin_plane(t_stru *stru)
 {
+	begin_dir(stru);
 	if (stru->begin_dir == 'N')
 	{
 		stru->plane_x = 0.66;
@@ -102,14 +135,15 @@ int		parse_cub(int fd, t_stru *stru)
 		free(line);
 	}
 	if (count < 9)
-		ft_putstr_fd("Error\n", 1);
-	if (count < 9)
-		return (1);
+		return (error_parsing(2));
 	while (get_next_line(fd, &line) > 0)
 		map = strjoin_free_nl(map, line);
-	if ((tab_to_matrix(stru, map)) || check_stru(stru) || check_map(stru))
-		return (error_parsing());
-	begin_dir(stru);
+	if (tab_to_matrix(stru, map))
+		return (error_parsing(3));
+	if (check_stru(stru))
+		return (error_parsing(4));
+	if (check_map(stru))
+		return (error_parsing(5));
 	begin_plane(stru);
 	return (0);
 }

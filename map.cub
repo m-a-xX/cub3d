@@ -4,15 +4,15 @@ SO ./textures/wall2.xpm
 
 NO ./textures/wall1.xpm
 
-
-
 WE ./textures/wall4.xpm
+
+
 EA ./textures/wall3.xpm
 
-F 165,42,42
 
 R 1000 600
 
+F 165,42,42
 
 S ./textures/rsq8.xpm
 C 135,206,235
