@@ -6,7 +6,7 @@
 /*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/02 05:49:02 by mavileo           #+#    #+#             */
-/*   Updated: 2020/06/02 05:49:12 by mavileo          ###   ########.fr       */
+/*   Updated: 2020/06/06 23:34:19 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,6 @@ int		alloc_matrix(char *map, t_stru *stru)
 	int x;
 	int y;
 
-	if (!(stru->map = calloc(1, 1)))
-		return (1);
 	if ((y = alloc_y(map, stru)) == -1)
 		return (1);
 	if ((x = alloc_x(map, stru, y)) == -1)

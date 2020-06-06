@@ -6,27 +6,11 @@
 /*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/07 02:08:09 by mavileo           #+#    #+#             */
-/*   Updated: 2020/05/27 03:10:32 by mavileo          ###   ########.fr       */
+/*   Updated: 2020/06/06 23:06:06 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
-
-void	clear(t_stru *stru)
-{
-	int x;
-	int y;
-
-	x = 0;
-	while (x < stru->screen_width)
-	{
-		y = 0;
-		while (y < stru->screen_height)
-			put_pixel(stru, create_color(0, 0, 0), x, y++);
-		x++;
-	}
-	mlx_put_image_to_window(stru->mlx_ptr, stru->win_ptr, stru->img_ptr, 0, 0);
-}
 
 void	put_pixel(t_stru *stru, t_color color, int x, int y)
 {

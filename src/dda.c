@@ -6,7 +6,7 @@
 /*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/25 00:59:17 by mavileo           #+#    #+#             */
-/*   Updated: 2020/06/02 03:31:58 by mavileo          ###   ########.fr       */
+/*   Updated: 2020/06/07 00:25:23 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,18 +41,18 @@ void	dda_init(t_stru *stru)
 		stru->side_dist_x = (stru->pos_x - stru->map_x) * stru->delta_dist_x;
 	else
 	{
-		stru->stepX = 1;
+		stru->step_x = 1;
 		stru->side_dist_x = (stru->map_x + 1.0 - stru->pos_x) *
 							stru->delta_dist_x;
 	}
 	if (stru->raydir_y < 0)
 	{
-		stru->stepY = -1;
+		stru->step_y = -1;
 		stru->side_dist_y = (stru->pos_y - stru->map_y) * stru->delta_dist_y;
 	}
 	else
 	{
-		stru->stepY = 1;
+		stru->step_y = 1;
 		stru->side_dist_y = (stru->map_y + 1.0 - stru->pos_y) *
 							stru->delta_dist_y;
 	}
@@ -66,13 +66,13 @@ void	dda(t_stru *stru)
 		if (stru->side_dist_x < stru->side_dist_y)
 		{
 			stru->side_dist_x += stru->delta_dist_x;
-			stru->map_x += stru->stepX;
+			stru->map_x += stru->step_x;
 			stru->side = 0;
 		}
 		else
 		{
 			stru->side_dist_y += stru->delta_dist_y;
-			stru->map_y += stru->stepY;
+			stru->map_y += stru->step_y;
 			stru->side = 1;
 		}
 		if (stru->map[stru->map_y][stru->map_x] == '1')

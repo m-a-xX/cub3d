@@ -6,7 +6,7 @@
 /*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/17 03:09:19 by mavileo           #+#    #+#             */
-/*   Updated: 2020/06/06 22:20:06 by mavileo          ###   ########.fr       */
+/*   Updated: 2020/06/07 00:27:33 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,10 @@
 
 int		error_parsing(int i)
 {
-	if (i == 0)
-	{
-		ft_putstr_fd("Error\nUn problème est survenu lors du parsing.\n\
-Merci de vérifier la validité du ficher .cub et de son contenu\n", 1);
-		return (1);
-	}
-	if (i == 1)
-	{
-		ft_putstr_fd("Error\nUn ou plusieurs parametres presents dans le\
- fichier .cub sont incorrects\n", 1);
-		return (1);
-	}
 	if (i == 2)
 	{
-		ft_putstr_fd("Error\nThere are at least one missing parameter in\
- the .cub file\n", 1);
+		ft_putstr_fd("Error\nThere are at least one missing parameter in \
+the .cub file\n", 1);
 		return (1);
 	}
 	if (i == 3)
@@ -39,8 +27,8 @@ Merci de vérifier la validité du ficher .cub et de son contenu\n", 1);
 	}
 	if (i == 4)
 	{
-		ft_putstr_fd("Error\nOne or some parameters passed in the .cub file\
- are invalids\n", 1);
+		ft_putstr_fd("Error\nOne or some parameters passed in the .cub file \
+are invalids\n", 1);
 		return (1);
 	}
 	if (i == 5)

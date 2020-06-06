@@ -6,7 +6,7 @@
 /*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/07 02:00:18 by mavileo           #+#    #+#             */
-/*   Updated: 2020/06/05 05:40:57 by mavileo          ###   ########.fr       */
+/*   Updated: 2020/06/07 00:25:23 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@ void	calcul_height_column(t_stru *stru)
 {
 	if (stru->side == 0)
 		stru->perp_wall_dist = (stru->map_x - stru->pos_x +
-								(1 - stru->stepX) / 2) / stru->raydir_x;
+								(1 - stru->step_x) / 2) / stru->raydir_x;
 	else
 		stru->perp_wall_dist = (stru->map_y - stru->pos_y +
-								(1 - stru->stepY) / 2) / stru->raydir_y;
+								(1 - stru->step_y) / 2) / stru->raydir_y;
 	stru->line_height = (int)(stru->screen_height / stru->perp_wall_dist);
 	stru->draw_start = -stru->line_height / 2 + stru->screen_height / 2;
 	if (stru->draw_start < 0)
@@ -74,6 +74,7 @@ void	draw_column(t_stru *stru, int x)
 					2 + stru->line_height / 2) * col->step;
 	col->y = stru->draw_start;
 	loop(stru, col, x);
+	free(col);
 }
 
 void	top_floor(t_stru *stru)
@@ -117,7 +118,7 @@ void	raycast(t_stru *stru)
 		stru->map_x = (int)(stru->pos_x);
 		stru->map_y = (int)(stru->pos_y);
 		stru->hit = 0;
-		stru->stepX = -1;
+		stru->step_x = -1;
 		dda(stru);
 		calcul_height_column(stru);
 		draw_column(stru, x);
