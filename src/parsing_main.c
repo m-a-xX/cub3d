@@ -6,7 +6,7 @@
 /*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/17 03:09:19 by mavileo           #+#    #+#             */
-/*   Updated: 2020/06/07 00:27:33 by mavileo          ###   ########.fr       */
+/*   Updated: 2020/06/07 02:03:20 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,18 +116,17 @@ int		parse_cub(int fd, t_stru *stru)
 
 	i = 0;
 	count = 0;
-	map = NULL;
-	while (count <= 8 && get_next_line(fd, &line) > 0)
+	while (count <= 7 && get_next_line(fd, &line) > 0)
 	{
 		count = analyse_line(line, stru, i);
 		free(line);
 	}
-	if (count < 9)
+	if (count < 8)
 		return (error_parsing(2));
-	while (get_next_line(fd, &line) > 0)
-		map = strjoin_free_nl(map, line);
+	map = map_to_str(fd);
 	if (tab_to_matrix(stru, map))
 		return (error_parsing(3));
+	free(map);
 	if (check_stru(stru))
 		return (error_parsing(4));
 	if (check_map(stru))

@@ -6,7 +6,7 @@
 /*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/17 07:36:11 by mavileo           #+#    #+#             */
-/*   Updated: 2020/05/25 01:16:36 by mavileo          ###   ########.fr       */
+/*   Updated: 2020/06/07 01:55:49 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,15 +84,15 @@ int		analyse_line(char *line, t_stru *stru, int i)
 	while (line[i] && line[i] == ' ')
 		i++;
 	if (line[i] == 'N' && line[i + 1] == 'O' && count++ >= 0)
-		stru->path_north = get_path(line, i + 2);
+		stru->path_north = get_path(line, i + 3);
 	if (line[i] == 'S' && line[i + 1] == 'O' && count++ >= 0)
-		stru->path_south = get_path(line, i + 2);
+		stru->path_south = get_path(line, i + 3);
 	if (line[i] == 'W' && line[i + 1] == 'E' && count++ >= 0)
-		stru->path_west = get_path(line, i + 2);
+		stru->path_west = get_path(line, i + 3);
 	if (line[i] == 'E' && line[i + 1] == 'A' && count++ >= 0)
-		stru->path_est = get_path(line, i + 2);
-	if (line[i] == 'S' && count++ >= 0)
-		stru->path_sprite = get_path(line, i + 1);
+		stru->path_est = get_path(line, i + 3);
+	if (line[i] == 'S' && line[i + 1] == ' ' && count++ >= 0)
+		stru->path_sprite = get_path(line, i + 2);
 	if (line[i] == 'F' && count++ >= 0)
 		stru->rgb_floor = get_rgb(line, i);
 	if (line[i] == 'C' && count++ >= 0)

@@ -6,7 +6,7 @@
 /*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/27 23:19:38 by mavileo           #+#    #+#             */
-/*   Updated: 2020/06/02 02:41:11 by mavileo          ###   ########.fr       */
+/*   Updated: 2020/06/07 01:47:27 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	get_ptrs(t_stru *stru)
 	stru->img[4].img_ptr = mlx_xpm_file_to_image(stru->mlx_ptr,
 							stru->path_sprite, &stru->img[4].width,
 							&stru->img[4].height);
+	free(stru->path_sprite);
 }
 
 void	init_dimensions(t_stru *stru)

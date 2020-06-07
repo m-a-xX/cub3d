@@ -6,7 +6,7 @@
 /*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/01 01:12:49 by mavileo           #+#    #+#             */
-/*   Updated: 2020/06/06 23:36:36 by mavileo          ###   ########.fr       */
+/*   Updated: 2020/06/07 01:44:01 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,20 +42,28 @@ t_stru	*malloc_struct(void)
 	return (to_malloc);
 }
 
-void	free_struct(t_stru *to_free)
+void	free_struct(t_stru *to_free, int end)
 {
 	int y;
 
 	y = 0;
-	mlx_destroy_window(to_free->mlx_ptr, to_free->win_ptr);
-	while (y <= to_free->map_height)
-		free(to_free->map[y++]);
-	free(to_free->map);
-	free(to_free->path_north);
-	free(to_free->path_est);
-	free(to_free->path_south);
-	free(to_free->path_west);
-	free(to_free->path_sprite);
+	if (end)
+		destroy_ptrs(to_free);
+	if (to_free->map)
+	{
+		while (y <= to_free->map_height)
+			free(to_free->map[y++]);
+	}
+	if (to_free->map)
+		free(to_free->map);
+	if (to_free->path_north)
+		free(to_free->path_north);
+	if (to_free->path_est)
+		free(to_free->path_est);
+	if (to_free->path_south)
+		free(to_free->path_south);
+	if (to_free->path_west)
+		free(to_free->path_west);
 	free(to_free);
 }
 

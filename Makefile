@@ -11,7 +11,6 @@ SRCS=	src/main.c					\
 		src/parsing_main.c			\
 		src/get_next_line.c			\
 		src/get_next_line_utils.c	\
-		src/strjoin_free_nl.c		\
 		src/move.c					\
 		src/debug.c					\
 		src/dda.c					\

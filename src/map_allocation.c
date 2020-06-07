@@ -6,11 +6,32 @@
 /*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/02 05:49:02 by mavileo           #+#    #+#             */
-/*   Updated: 2020/06/06 23:34:19 by mavileo          ###   ########.fr       */
+/*   Updated: 2020/06/07 02:03:10 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
+
+char	*map_to_str(int fd)
+{
+	char	*map;
+	char	*tmp;
+	char	*line;
+
+	map = NULL;
+	while (get_next_line(fd, &line) > 0)
+	{
+		tmp = map;
+		map = ft_strjoin(map, line);
+		free(tmp);
+		tmp = map;
+		map = ft_strjoin(map, "\n");
+		free(tmp);
+		free(line);
+	}
+	free(line);
+	return (map);
+}
 
 void	end(int x, int y, t_stru *stru)
 {

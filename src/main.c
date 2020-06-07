@@ -6,7 +6,7 @@
 /*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/06 23:12:15 by user42            #+#    #+#             */
-/*   Updated: 2020/06/06 21:33:04 by mavileo          ###   ########.fr       */
+/*   Updated: 2020/06/07 01:40:21 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,11 @@ int		main(int ac, char **av)
 	}
 	fd = open(av[1], O_RDONLY);
 	if (parse_cub(fd, stru))
+	{
+		free_struct(stru, 0);
 		return (1);
+	}
 	cub3d(stru);
-	free_struct(stru);
+	free_struct(stru, 1);
 	return (0);
 }

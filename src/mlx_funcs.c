@@ -6,7 +6,7 @@
 /*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/11 20:28:21 by mavileo           #+#    #+#             */
-/*   Updated: 2020/06/06 23:05:57 by mavileo          ###   ########.fr       */
+/*   Updated: 2020/06/07 01:57:33 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int		exit_hook(t_stru *stru)
 {
-	free(stru);
+	free_struct(stru, 1);
 	stru = NULL;
 	exit(0);
 }
@@ -44,4 +44,22 @@ int		key_hook(int keyhook, t_stru *stru)
 	raycast(stru);
 	mlx_put_image_to_window(stru->mlx_ptr, stru->win_ptr, stru->img_ptr, 0, 0);
 	return (0);
+}
+
+void	destroy_ptrs(t_stru *stru)
+{
+	if (stru->img_ptr)
+		mlx_destroy_image(stru->mlx_ptr, stru->img_ptr);
+	if (stru->img[0].img_ptr)
+		mlx_destroy_image(stru->mlx_ptr, stru->img[0].img_ptr);
+	if (stru->img[1].img_ptr)
+		mlx_destroy_image(stru->mlx_ptr, stru->img[1].img_ptr);
+	if (stru->img[2].img_ptr)
+		mlx_destroy_image(stru->mlx_ptr, stru->img[2].img_ptr);
+	if (stru->img[3].img_ptr)
+		mlx_destroy_image(stru->mlx_ptr, stru->img[3].img_ptr);
+	if (stru->img[4].img_ptr)
+		mlx_destroy_image(stru->mlx_ptr, stru->img[4].img_ptr);
+	if (stru->win_ptr)
+		mlx_destroy_window(stru->mlx_ptr, stru->win_ptr);
 }

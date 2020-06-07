@@ -6,7 +6,7 @@
 /*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/07 00:20:16 by mavileo           #+#    #+#             */
-/*   Updated: 2020/06/07 00:26:28 by mavileo          ###   ########.fr       */
+/*   Updated: 2020/06/07 02:03:31 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,7 +155,7 @@ int				ft_atoi(const char *nb);
 int				init_mlx(t_stru *stru);
 t_stru			create_struct(void);
 t_stru			*malloc_struct(void);
-void			free_struct(t_stru *to_free);
+void			free_struct(t_stru *to_free, int end);
 t_color			create_color(int r, int b, int g);
 void			raycast(t_stru *stru);
 void			put_pixel(t_stru *stru, t_color color, int x, int y);
@@ -185,5 +185,7 @@ t_vect			create_vect(int x, int y);
 int				init_textures(t_stru *stru);
 int				alloc_matrix(char *map, t_stru *stru);
 void			save(t_stru *stru);
+void			destroy_ptrs(t_stru *stru);
+char			*map_to_str(int fd);
 
 #endif
