@@ -6,7 +6,7 @@
 /*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/07 00:20:16 by mavileo           #+#    #+#             */
-/*   Updated: 2020/06/07 02:03:31 by mavileo          ###   ########.fr       */
+/*   Updated: 2020/06/07 02:15:10 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,5 +187,6 @@ int				alloc_matrix(char *map, t_stru *stru);
 void			save(t_stru *stru);
 void			destroy_ptrs(t_stru *stru);
 char			*map_to_str(int fd);
+int				check_save(char **av, t_stru *stru);
 
 #endif

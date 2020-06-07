@@ -6,7 +6,7 @@
 /*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/06 23:12:15 by user42            #+#    #+#             */
-/*   Updated: 2020/06/07 01:40:21 by mavileo          ###   ########.fr       */
+/*   Updated: 2020/06/07 02:14:50 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,17 +36,14 @@ int		main(int ac, char **av)
 
 	if ((ac != 2 && ac != 3) || (!(stru = malloc_struct())))
 		return (1);
-	if (av[2])
-	{
-		if (!ft_strncmp(av[2], "--save", 6))
-			stru->save = 1;
-		else
-		{
-			ft_putstr_fd("Error\nUnknown second argument\n", 1);
-			return (1);
-		}
-	}
+	if (check_save(av, stru))
+		return (1);
 	fd = open(av[1], O_RDONLY);
+	if (fd == -1)
+	{
+		ft_putstr_fd("Error\nCan't open .cub file\n", 1);
+		return (1);
+	}
 	if (parse_cub(fd, stru))
 	{
 		free_struct(stru, 0);

@@ -6,11 +6,26 @@
 /*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/06 20:52:21 by mavileo           #+#    #+#             */
-/*   Updated: 2020/06/06 22:05:09 by mavileo          ###   ########.fr       */
+/*   Updated: 2020/06/07 02:15:00 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
+
+int		check_save(char **av, t_stru *stru)
+{
+	if (av[2])
+	{
+		if (!ft_strncmp(av[2], "--save", 6))
+			stru->save = 1;
+		else
+		{
+			ft_putstr_fd("Error\nUnknown second argument\n", 1);
+			return (1);
+		}
+	}
+	return (0);
+}
 
 void	bpm_init(t_stru *stru, t_save *save)
 {
