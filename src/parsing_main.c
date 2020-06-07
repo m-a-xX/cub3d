@@ -6,7 +6,7 @@
 /*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/17 03:09:19 by mavileo           #+#    #+#             */
-/*   Updated: 2020/06/07 02:15:45 by mavileo          ###   ########.fr       */
+/*   Updated: 2020/06/07 10:16:13 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,23 +18,22 @@ int		error_parsing(int i)
 	{
 		ft_putstr_fd("Error\nThere are at least one missing parameter in \
 the .cub file\n", 1);
-		return (1);
 	}
 	if (i == 3)
 	{
 		ft_putstr_fd("Error\nCan't create the map\n", 1);
-		return (1);
 	}
 	if (i == 4)
 	{
 		ft_putstr_fd("Error\nOne or some parameters passed in the .cub file \
 are invalids\n", 1);
-		return (1);
 	}
 	if (i == 5)
-	{
 		ft_putstr_fd("Error\nCheck the map passed in the .cub file\n", 1);
-		return (1);
+	if (i == 6)
+	{
+		ft_putstr_fd("Error\nCheck arguments passed in the .cub file\n", 1);
+		return (-1);
 	}
 	return (1);
 }
@@ -110,27 +109,22 @@ int		begin_plane(t_stru *stru)
 int		parse_cub(int fd, t_stru *stru)
 {
 	char	*line;
-	char	*map;
 	int		count;
 	int		i;
+	int		ret;
 
 	i = 0;
 	count = 0;
 	while (count <= 7 && get_next_line(fd, &line) > 0)
 	{
+		if (count == -1)
+			return (1);
 		count = analyse_line(line, stru, i);
 		free(line);
 	}
 	if (count < 8)
 		return (error_parsing(2));
-	map = map_to_str(fd);
-	if (tab_to_matrix(stru, map))
-		return (error_parsing(3));
-	free(map);
-	if (check_stru(stru))
-		return (error_parsing(4));
-	if (check_map(stru))
-		return (error_parsing(5));
-	begin_plane(stru);
+	if ((ret = map_and_check(stru, fd)))
+		return (ret);
 	return (0);
 }

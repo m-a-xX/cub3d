@@ -6,7 +6,7 @@
 /*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/01 01:12:49 by mavileo           #+#    #+#             */
-/*   Updated: 2020/06/07 01:44:01 by mavileo          ###   ########.fr       */
+/*   Updated: 2020/06/07 09:29:40 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ void	free_struct(t_stru *to_free, int end)
 		free(to_free->path_south);
 	if (to_free->path_west)
 		free(to_free->path_west);
+	if (to_free->path_sprite)
+		free(to_free->path_sprite);
 	free(to_free);
 }
 

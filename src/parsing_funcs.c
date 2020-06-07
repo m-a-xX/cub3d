@@ -6,7 +6,7 @@
 /*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/17 07:36:11 by mavileo           #+#    #+#             */
-/*   Updated: 2020/06/07 01:55:49 by mavileo          ###   ########.fr       */
+/*   Updated: 2020/06/07 09:58:57 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,12 +75,18 @@ void	res(int i, t_stru *stru, char *line)
 	while (line[i] && ft_isdigit(line[i]))
 		i++;
 	stru->screen_height = ft_atoi(line + i);
+	if (stru->screen_width > 1800)
+		stru->screen_width = 1800;
+	if (stru->screen_height > 900)
+		stru->screen_height = 900;
 }
 
 int		analyse_line(char *line, t_stru *stru, int i)
 {
 	static int	count = 0;
 
+	if (check_keys(line, i))
+		return (error_parsing(6));
 	while (line[i] && line[i] == ' ')
 		i++;
 	if (line[i] == 'N' && line[i + 1] == 'O' && count++ >= 0)

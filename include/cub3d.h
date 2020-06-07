@@ -6,7 +6,7 @@
 /*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/07 00:20:16 by mavileo           #+#    #+#             */
-/*   Updated: 2020/06/07 02:15:10 by mavileo          ###   ########.fr       */
+/*   Updated: 2020/06/07 09:56:34 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,5 +188,10 @@ void			save(t_stru *stru);
 void			destroy_ptrs(t_stru *stru);
 char			*map_to_str(int fd);
 int				check_save(char **av, t_stru *stru);
+int				check_keys(char *line, int i);
+int				error_parsing(int i);
+int				map_and_check(t_stru *stru, int fd);
+int				begin_plane(t_stru *stru);
+int				tab_to_matrix(t_stru *stru, char *map);
 
 #endif

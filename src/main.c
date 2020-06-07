@@ -6,7 +6,7 @@
 /*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/06 23:12:15 by user42            #+#    #+#             */
-/*   Updated: 2020/06/07 02:14:50 by mavileo          ###   ########.fr       */
+/*   Updated: 2020/06/07 10:23:33 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,11 @@
 int		cub3d(t_stru *stru)
 {
 	init_mlx(stru);
-	init_textures(stru);
+	if (init_textures(stru))
+	{
+		ft_putstr_fd("Error\nTextures can't be loaded\n", 1);
+		return (1);
+	}
 	raycast(stru);
 	if (stru->save)
 	{
@@ -28,7 +32,17 @@ int		cub3d(t_stru *stru)
 	mlx_loop(stru->mlx_ptr);
 	return (0);
 }
+int		open_cub_file(char **av)
+{
+	int i;
 
+	if (!av[1] || !*av[1])
+		return (-1);
+	i = ft_strlen(av[1]) - 4;
+	if (ft_strncmp(av[1] + i, ".cub", 4))
+		return (-1);
+	return (open(av[1], O_RDONLY));
+}
 int		main(int ac, char **av)
 {
 	int		fd;
@@ -38,10 +52,9 @@ int		main(int ac, char **av)
 		return (1);
 	if (check_save(av, stru))
 		return (1);
-	fd = open(av[1], O_RDONLY);
-	if (fd == -1)
+	if ((fd = open_cub_file(av)) == -1)
 	{
-		ft_putstr_fd("Error\nCan't open .cub file\n", 1);
+		ft_putstr_fd("Error\nCan't open the settings file\n", 1);
 		return (1);
 	}
 	if (parse_cub(fd, stru))

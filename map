@@ -3,6 +3,7 @@ SO ./textures/wall2.xpm
 
 
 NO ./textures/wall1.xpm
+NO ./textures/wall1.xpm
 
 WE ./textures/wall4.xpm
 

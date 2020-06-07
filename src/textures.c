@@ -6,13 +6,13 @@
 /*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/27 23:19:38 by mavileo           #+#    #+#             */
-/*   Updated: 2020/06/07 01:47:27 by mavileo          ###   ########.fr       */
+/*   Updated: 2020/06/07 09:33:27 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-void	get_data(t_stru *stru)
+int		get_data(t_stru *stru)
 {
 	int i;
 
@@ -23,10 +23,18 @@ void	get_data(t_stru *stru)
 		&(stru->img[i].bpp), &(stru->img[i].sizeline), &(stru->img[i].endian));
 		i++;
 	}
+	i = 0;
+	while (i < 5)
+		if (!stru->img[i++].pixels)
+			return (1);
+	return (0);
 }
 
-void	get_ptrs(t_stru *stru)
+int		get_ptrs(t_stru *stru)
 {
+	int i;
+
+	i = 0;
 	stru->img[0].img_ptr = mlx_xpm_file_to_image(stru->mlx_ptr,
 							stru->path_north, &stru->img[0].width,
 							&stru->img[0].height);
@@ -42,7 +50,10 @@ void	get_ptrs(t_stru *stru)
 	stru->img[4].img_ptr = mlx_xpm_file_to_image(stru->mlx_ptr,
 							stru->path_sprite, &stru->img[4].width,
 							&stru->img[4].height);
-	free(stru->path_sprite);
+	while (i < 5)
+		if (!stru->img[i++].img_ptr)
+			return (1);
+	return (0);
 }
 
 void	init_dimensions(t_stru *stru)
@@ -62,7 +73,9 @@ void	init_dimensions(t_stru *stru)
 int		init_textures(t_stru *stru)
 {
 	init_dimensions(stru);
-	get_ptrs(stru);
-	get_data(stru);
+	if (get_ptrs(stru))
+		return (1);
+	if (get_data(stru))
+		return (1);
 	return (0);
 }
