@@ -10,7 +10,7 @@ WE ./textures/wall4.xpm
 EA ./textures/wall3.xpm
 
 
-R 4000 4000
+R 600 400
 
 F 165,42,42
 

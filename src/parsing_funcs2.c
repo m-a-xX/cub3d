@@ -6,7 +6,7 @@
 /*   By: mavileo <mavileo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/07 09:39:18 by mavileo           #+#    #+#             */
-/*   Updated: 2020/06/07 10:07:48 by mavileo          ###   ########.fr       */
+/*   Updated: 2020/06/10 02:48:00 by mavileo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,10 @@
 
 int		check_keys(char *line, int i)
 {
-	static int	keys[8] = {0,0,0,0,0,0,0};
+	static int	keys[8] = {0, 0, 0, 0, 0, 0, 0};
 	int			j;
 
 	j = 0;
-
 	if (line[i] == 'S' && line[i + 1] == 'O' && line[i + 2] == ' ')
 		keys[0]++;
 	if (line[i] == 'N' && line[i + 1] == 'O' && line[i + 2] == ' ')

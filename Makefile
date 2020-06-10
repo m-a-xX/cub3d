@@ -1,6 +1,6 @@
 CC=clang
 CFLAGS=-Wall -Wextra -Werror
-EXEC=Cub3D
+EXEC=cub3D
 SRCS=	src/main.c					\
 		src/mlx_funcs.c				\
 		src/structs_funcs.c			\
